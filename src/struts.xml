@@ -16,6 +16,9 @@
 
 		</action>
 
+		<action name = "subjectsAction" class="org.iiitb.action.subjects.SubjectsAction">
+		    <result name="success">subjects/subjects.jsp</result>
+		</action>
 
 
 	</package>

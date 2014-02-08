@@ -8,59 +8,42 @@
 <title>Subjects Page</title>
 </head>
 <body>
-	<div>
-		<span>Show Enrolled Courses</span>
-		<table border="1">
-			<thead>
-				<tr>
-					<td>Subject Code</td>
-					<td>Subject</td>
-					<td>Faculty Name</td>
-					<td>Semester</td>
-					<td>Enrolled</td>
-					<td>Grade</td>
-				</tr>
-			</thead>
-			<tbody>
-				<s:iterator value="subjectInfoList" status="subject">
+	<form action="subjectsAction">
+		<div>
+			<div>
+				<s:select list="subjectDisplayList" name="subjectDisplayChoice"></s:select>
+			</div>
+			<div>
+				<s:submit />
+			</div>
+		</div>
+		<div>
+			<span>Show Enrolled Courses</span>
+			<table border="1">
+				<thead>
 					<tr>
-						<td><s:property value="subjectCode" /></td>
-						<td><s:property value="subjectName" /></td>
-						<td><s:property value="facultyName" /></td>
-						<td><s:property value="semester" /></td>
-						<td><s:property value="enrolled" /></td>
-						<td><s:property value="grade" /></td>
+						<td>Subject Code</td>
+						<td>Subject</td>
+						<td>Faculty Name</td>
+						<td>Semester</td>
+						<td>Enrolled</td>
+						<td>Grade</td>
 					</tr>
-				</s:iterator>
-			</tbody>
-		</table>
-	</div>
-	<div>
-		<span>Show All Courses</span>
-		<table border="1">
-			<thead>
-				<tr>
-					<td>Subject Code</td>
-					<td>Subject</td>
-					<td>Faculty Name</td>
-					<td>Semester</td>
-					<td>Enrolled</td>
-					<td>Grade</td>
-				</tr>
-			</thead>
-			<tbody>
-				<s:iterator value="selectedSubjectInfoList" status="subject">
-					<tr>
-						<td><s:property value="subjectCode" /></td>
-						<td><s:property value="subjectName" /></td>
-						<td><s:property value="facultyName" /></td>
-						<td><s:property value="semester" /></td>
-						<td><s:property value="enrolled" /></td>
-						<td><s:property value="grade" /></td>
-					</tr>
-				</s:iterator>
-			</tbody>
-		</table>
-	</div>
+				</thead>
+				<tbody>
+					<s:iterator value="subjectInfoList" status="subject">
+						<tr>
+							<td><s:property value="subjectCode" /></td>
+							<td><s:property value="subjectName" /></td>
+							<td><s:property value="facultyName" /></td>
+							<td><s:property value="semester" /></td>
+							<td><s:property value="enrolled" /></td>
+							<td><s:property value="grade" /></td>
+						</tr>
+					</s:iterator>
+				</tbody>
+			</table>
+		</div>
+	</form>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package org.iiitb.action.subjects;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.iiitb.action.dao.CourseDAO;
@@ -16,24 +17,33 @@ public class SubjectsAction extends ActionSupport {
    */
   private static final long serialVersionUID = 3193702317572110684L;
 
+  private static final String SHOW_ALL_COURSES = "Show All Courses";
+  private static final String SHOW_ENROLLED_COURSES = "Show Enrolled Courses";
   private List<SubjectInfo> subjectInfoList;
-  private List<SubjectInfo> selectedSubjectInfoList;
+  private List<String> subjectDisplayList;
+  private String subjectDisplayChoice;
   private CourseDAO courseDAO = new CourseDAOImpl();
 
   {
-    Connection connection = ConnectionPool.getConnection();
-    subjectInfoList = courseDAO.getAllCourses(connection, 2);
-    selectedSubjectInfoList = courseDAO.getEnrolledCourses(connection, 2);
-    ConnectionPool.freeConnection(connection);
+    subjectDisplayList = new ArrayList<String>();
+    subjectDisplayList.add(SHOW_ALL_COURSES);
+    subjectDisplayList.add(SHOW_ENROLLED_COURSES);
   }
 
-  public List<SubjectInfo> getSelectedSubjectInfoList() {
-    return selectedSubjectInfoList;
+  public List<String> getSubjectDisplayList() {
+    return subjectDisplayList;
   }
 
-  public void setSelectedSubjectInfoList(
-      List<SubjectInfo> selectedSubjectInfoList) {
-    this.selectedSubjectInfoList = selectedSubjectInfoList;
+  public void setSubjectDisplayList(List<String> subjectDisplayList) {
+    this.subjectDisplayList = subjectDisplayList;
+  }
+
+  public String getSubjectDisplayChoice() {
+    return subjectDisplayChoice;
+  }
+
+  public void setSubjectDisplayChoice(String subjectDisplayChoice) {
+    this.subjectDisplayChoice = subjectDisplayChoice;
   }
 
   public List<SubjectInfo> getSubjectInfoList() {
@@ -45,6 +55,15 @@ public class SubjectsAction extends ActionSupport {
   }
 
   public String execute() {
+    Connection connection = ConnectionPool.getConnection();
+    if (null == subjectDisplayChoice
+        || subjectDisplayChoice.equals(SHOW_ALL_COURSES)) {
+      subjectInfoList = courseDAO.getAllCourses(connection, 2);
+    } else {
+      subjectInfoList = courseDAO.getEnrolledCourses(connection, 2);
+    }
+
+    ConnectionPool.freeConnection(connection);
     return SUCCESS;
   }
 

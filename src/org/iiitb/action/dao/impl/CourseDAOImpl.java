@@ -56,6 +56,44 @@ public class CourseDAOImpl implements CourseDAO {
       + "        student.user_id = ?) STUDENT_SELECTION ON STUDENT_SELECTION.course_id = SUBJECTS_AVAILABLE.course_id "
       + "ORDER BY subject_code;";
 
+  private static final String ENROLLED_COURSE_QUERY = "SELECT  "
+      + "    course.course_id, " + "    student.user_id as student_id, "
+      + "    student.name as student_name, " + "    grade.name as grade_name, "
+      + "    course.code as subject_code, "
+      + "    course.name as subject_name, "
+      + "    teacher.name as faculty_name, "
+      + "    semester.term as semester_term " + "FROM " + "    COURSE course "
+      + "        LEFT OUTER JOIN "
+      + "    FACULTY faculty ON course.faculty_id = faculty.faculty_id "
+      + "        LEFT OUTER JOIN "
+      + "    USER teacher ON faculty.faculty_id = teacher.user_id "
+      + "        LEFT OUTER JOIN "
+      + "    RESULT result ON result.course_id = course.course_id "
+      + "        LEFT OUTER JOIN "
+      + "    USER student ON student.user_id = result.student_id "
+      + "        LEFT OUTER JOIN "
+      + "    GRADE grade ON grade.grade_id = result.grade_id "
+      + "        LEFT OUTER JOIN "
+      + "    SEMESTER semester ON semester.semester_id = course.semester_id "
+      + "WHERE " + "    student.user_id = ?";
+
+  private void createSubjectInfoListFromResultSet(ResultSet rs,
+      List<SubjectInfo> subjectInfoList) throws SQLException {
+    while (rs.next()) {
+      String subjectCode = rs.getString("subject_code");
+      String subjectName = rs.getString("subject_name");
+      String facultyName = rs.getString("faculty_name");
+      int semester = rs.getInt("semester_term");
+      String enrolledVal = rs.getString("student_id");
+      String enrolled = (null == enrolledVal) ? "N" : "Y";
+      String gradeVal = rs.getString("grade_name");
+      String grade = (null == gradeVal) ? "NA" : gradeVal;
+      SubjectInfo subjectInfo = new SubjectInfo(subjectCode, subjectName,
+          facultyName, semester, enrolled, grade);
+      subjectInfoList.add(subjectInfo);
+    }
+  }
+
   /*
    * (non-Javadoc)
    * 
@@ -70,22 +108,8 @@ public class CourseDAOImpl implements CourseDAO {
       ps = connection.prepareStatement(ALL_COURSES_QUERY);
       int index = 1;
       ps.setInt(index, userId);
-
       ResultSet rs = ps.executeQuery();
-
-      while (rs.next()) {
-        String subjectCode = rs.getString("subject_code");
-        String subjectName = rs.getString("subject_name");
-        String facultyName = rs.getString("faculty_name");
-        int semester = rs.getInt("semester_term");
-        boolean enrolled = (null == rs.getString("student_id")) ? false : true;
-        String gradeVal = rs.getString("grade_name");
-        String grade = (null == gradeVal) ? "NA" : gradeVal;
-        SubjectInfo subjectInfo = new SubjectInfo(subjectCode, subjectName,
-            facultyName, semester, enrolled, grade);
-        subjectInfoList.add(subjectInfo);
-      }
-
+      createSubjectInfoListFromResultSet(rs, subjectInfoList);
     } catch (SQLException e) {
       e.printStackTrace();
     } finally {
@@ -108,8 +132,28 @@ public class CourseDAOImpl implements CourseDAO {
    */
   @Override
   public List<SubjectInfo> getEnrolledCourses(Connection connection, int userId) {
-    // TODO Auto-generated method stub
-    return null;
+    List<SubjectInfo> subjectInfoList = null;
+    PreparedStatement ps = null;
+    try {
+      subjectInfoList = new ArrayList<SubjectInfo>();
+      ps = connection.prepareStatement(ENROLLED_COURSE_QUERY);
+      int index = 1;
+      ps.setInt(index, userId);
+      ResultSet rs = ps.executeQuery();
+      createSubjectInfoListFromResultSet(rs, subjectInfoList);
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      if (null != ps) {
+        try {
+          ps.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+    return subjectInfoList;
   }
 
 }

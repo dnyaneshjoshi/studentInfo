@@ -11,7 +11,7 @@ public class SubjectInfo {
   private String subjectName;
   private String facultyName;
   private int semester;
-  private boolean enrolled;
+  private String enrolled;
   private String grade;
 
   public SubjectInfo() {
@@ -19,7 +19,7 @@ public class SubjectInfo {
   }
 
   public SubjectInfo(String subjectCode, String subjectName,
-      String facultyName, int semester, boolean enrolled, String grade) {
+      String facultyName, int semester, String enrolled, String grade) {
     super();
     this.subjectCode = subjectCode;
     this.subjectName = subjectName;
@@ -53,11 +53,11 @@ public class SubjectInfo {
     this.semester = semester;
   }
 
-  public boolean isEnrolled() {
+  public String isEnrolled() {
     return enrolled;
   }
 
-  public void setEnrolled(boolean enrolled) {
+  public void setEnrolled(String enrolled) {
     this.enrolled = enrolled;
   }
 

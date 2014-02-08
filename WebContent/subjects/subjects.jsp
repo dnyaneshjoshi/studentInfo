@@ -7,8 +7,60 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Subjects Page</title>
 </head>
-<body>This is Subjects Page! I'll put all my Subject details here
-	Yo!
-Ping : <s:property value="subject.subjectName"/>
+<body>
+	<div>
+		<span>Show Enrolled Courses</span>
+		<table border="1">
+			<thead>
+				<tr>
+					<td>Subject Code</td>
+					<td>Subject</td>
+					<td>Faculty Name</td>
+					<td>Semester</td>
+					<td>Enrolled</td>
+					<td>Grade</td>
+				</tr>
+			</thead>
+			<tbody>
+				<s:iterator value="subjectInfoList" status="subject">
+					<tr>
+						<td><s:property value="subjectCode" /></td>
+						<td><s:property value="subjectName" /></td>
+						<td><s:property value="facultyName" /></td>
+						<td><s:property value="semester" /></td>
+						<td><s:property value="enrolled" /></td>
+						<td><s:property value="grade" /></td>
+					</tr>
+				</s:iterator>
+			</tbody>
+		</table>
+	</div>
+	<div>
+		<span>Show All Courses</span>
+		<table border="1">
+			<thead>
+				<tr>
+					<td>Subject Code</td>
+					<td>Subject</td>
+					<td>Faculty Name</td>
+					<td>Semester</td>
+					<td>Enrolled</td>
+					<td>Grade</td>
+				</tr>
+			</thead>
+			<tbody>
+				<s:iterator value="selectedSubjectInfoList" status="subject">
+					<tr>
+						<td><s:property value="subjectCode" /></td>
+						<td><s:property value="subjectName" /></td>
+						<td><s:property value="facultyName" /></td>
+						<td><s:property value="semester" /></td>
+						<td><s:property value="enrolled" /></td>
+						<td><s:property value="grade" /></td>
+					</tr>
+				</s:iterator>
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>

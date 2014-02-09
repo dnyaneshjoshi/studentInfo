@@ -54,9 +54,17 @@ public class MyFriendsAction implements Action
 	public String execute()
 	{
 		StudentDAO studentDao = new StudentDAOImpl();
-		setMyProfile(studentDao.getStudent(rollNo));
+
+		StudentInfo studentInfo = studentDao.getStudent(rollNo);
+		if(studentInfo!=null){
+
+		setMyProfile(studentInfo);
 
 		setStudents(studentDao.getFriends(rollNo));
+		}
+		else{
+			return ERROR;
+		}
 
 		return SUCCESS;
 	}

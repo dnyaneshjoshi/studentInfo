@@ -107,7 +107,7 @@ public class FriendProfileAction extends ActionSupport
 		StudentInfo studentInfo = studentDao.getStudent(friendNo);
 		if (studentInfo == null)
 		{
-			result = INPUT;
+			result = ERROR;
 		}
 		else
 		{

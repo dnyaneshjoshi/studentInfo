@@ -4,8 +4,8 @@
     "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-
-	<package name="default" extends="struts-default">
+<constant name="struts.devMode" value="true" />
+	<package name="default" namespace="/" extends="struts-default">
 
 
 		<action name="loginAction" class="org.iiitb.action.LoginAction">
@@ -19,9 +19,9 @@
 		<action name = "subjectsAction" class="org.iiitb.action.subjects.SubjectsAction">
 		    <result name="success">subjects/subjects.jsp</result>
 		</action>
-
-
+		
 	</package>
+	<include file="struts-grades.xml"></include>
 
 
 

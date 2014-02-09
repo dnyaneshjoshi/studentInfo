@@ -10,7 +10,7 @@
 
 		<action name="loginAction" class="org.iiitb.action.LoginAction">
 
-			<result name="success">success.jsp</result>
+			<result name="success" type="redirect">subjectsAction</result>
 			<result name="login">home.jsp</result>
 			<result name="input">home.jsp</result>
 

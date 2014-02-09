@@ -15,6 +15,14 @@ import org.iiitb.util.Constants;
 public class StudentDAOImpl implements StudentDAO
 {
 
+	private static final String GET_FREINDS_QRY = "select u.name,s1.roll_no, s1.student_id, s1.dob,s1.photo from user u, student s1,student s, friends f where s.student_id=f.student_id1 and s.roll_no=? and s.student_id !=s1.student_id and s1.student_id=f.student_id2 and u.user_id=s1.student_id union select u.name,s1.roll_no, s1.student_id, s1.dob,s1.photo from user u, student s,student s1, friends f where s.student_id=f.student_id2 and s.roll_no=? and s.student_id !=s1.student_id and s1.student_id=f.student_id1 and u.user_id=s1.student_id";
+
+	private static final String GET_STUDENT_QRY = "select * from student s, user u  where s.student_id= u.user_id and s.roll_no=?";
+
+	private static final String ARE_THEY_FRIENDS_QRY = "select s1.roll_no, s2.roll_no from student s1, student s2, friends f where s1.student_id=f.student_id1 and s2.student_id=f.student_id2 and s1.roll_no=? and s2.roll_no=? union select s1.roll_no, s2.roll_no from student s1, student s2, friends f where s1.student_id=f.student_id1 and s2.student_id=f.student_id2 and s2.roll_no=? and s1.roll_no=?";
+
+	private static final String ADD_FRIENDS_QRY = "insert into friends(student_id1, student_id2)     select s1.student_id, s2.student_id from student s1, student s2 where s1.roll_no=? and s2.roll_no=?";
+
 	@Override
 	public StudentInfo getStudent(String rollNo)
 	{
@@ -25,7 +33,7 @@ public class StudentDAOImpl implements StudentDAO
 
 		try
 		{
-			PreparedStatement stmt = conn.prepareStatement(Constants.GET_STUDENT_QRY);
+			PreparedStatement stmt = conn.prepareStatement(GET_STUDENT_QRY);
 			stmt.setString(1, rollNo);
 
 			ResultSet rs = stmt.executeQuery();
@@ -63,7 +71,7 @@ public class StudentDAOImpl implements StudentDAO
 
 		try
 		{
-			PreparedStatement stmt = conn.prepareStatement(Constants.GET_FREINDS_QRY);
+			PreparedStatement stmt = conn.prepareStatement(GET_FREINDS_QRY);
 			stmt.setString(1, rollno);
 			stmt.setString(2, rollno);
 
@@ -112,7 +120,7 @@ public class StudentDAOImpl implements StudentDAO
 		String result = Constants.NOT_A_FRIEND;
 		try
 		{
-			PreparedStatement stmt = conn.prepareStatement(Constants.ARE_THEY_FRIENDS_QRY);
+			PreparedStatement stmt = conn.prepareStatement(ARE_THEY_FRIENDS_QRY);
 			stmt.setString(1, rollNo);
 			stmt.setString(2, friendNo);
 			stmt.setString(3, rollNo);
@@ -148,7 +156,7 @@ public class StudentDAOImpl implements StudentDAO
 		boolean result = false;
 		try
 		{
-			PreparedStatement stmt = conn.prepareStatement(Constants.ADD_FRIENDS_QRY);
+			PreparedStatement stmt = conn.prepareStatement(ADD_FRIENDS_QRY);
 			stmt.setString(1, rollNo);
 			stmt.setString(2, friendNo);
 

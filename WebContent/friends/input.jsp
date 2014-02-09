@@ -10,7 +10,7 @@
 <body>
 
 	<s:form action="friendsPage">
-		<s:textfield key="rollNo" />
+		<s:textfield key="rollNo" label="search profile by rollNumber" />
 		<s:submit />
 	</s:form>
 

@@ -57,7 +57,7 @@
 
 		<tr>
 			<s:form action="friendProfile">
-				<s:textfield label="rollNumber" key="friendNo"></s:textfield>
+				<s:textfield tooltip="search Profile by rollNumber to add as Friend" label="search Profile" key="friendNo"></s:textfield>
 				<s:hidden key="myrollNo" value="%{myProfile.rollNo}"></s:hidden>
 				<s:submit label="search" value="search" />
 			</s:form>

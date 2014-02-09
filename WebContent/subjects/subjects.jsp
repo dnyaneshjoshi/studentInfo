@@ -8,42 +8,49 @@
 <title>Subjects Page</title>
 </head>
 <body>
-	<form action="subjectsAction">
-		<div>
-			<div>
-				<s:select list="subjectDisplayList" name="subjectDisplayChoice"></s:select>
-			</div>
-			<div>
-				<s:submit />
-			</div>
+	<div>
+		<div style="width: 20%; float: left;">Pic will come here</div>
+		<div style="width: 60%; float: left;">
+			<form action="subjectsAction" method="post">
+				<div style="text-align:center">
+					<s:select list="subjectDisplayList" name="subjectDisplayChoice" onchange="javascript:submitForm()"></s:select>					
+				</div>
+				<div>
+					<table border="1" style="margin:0px auto">
+						<thead>
+							<tr>
+								<td>Subject Code</td>
+								<td>Subject</td>
+								<td>Faculty Name</td>
+								<td>Semester</td>
+								<td>Enrolled</td>
+								<td>Grade</td>
+							</tr>
+						</thead>
+						<tbody>
+							<s:iterator value="subjectInfoList" status="subject">
+								<tr>
+									<td><s:property value="subjectCode" /></td>
+									<td><s:property value="subjectName" /></td>
+									<td><s:property value="facultyName" /></td>
+									<td><s:property value="semester" /></td>
+									<td><s:property value="enrolled" /></td>
+									<td><s:property value="grade" /></td>
+								</tr>
+							</s:iterator>
+						</tbody>
+					</table>
+				</div>
+			</form>
 		</div>
-		<div>
-			<span>Show Enrolled Courses</span>
-			<table border="1">
-				<thead>
-					<tr>
-						<td>Subject Code</td>
-						<td>Subject</td>
-						<td>Faculty Name</td>
-						<td>Semester</td>
-						<td>Enrolled</td>
-						<td>Grade</td>
-					</tr>
-				</thead>
-				<tbody>
-					<s:iterator value="subjectInfoList" status="subject">
-						<tr>
-							<td><s:property value="subjectCode" /></td>
-							<td><s:property value="subjectName" /></td>
-							<td><s:property value="facultyName" /></td>
-							<td><s:property value="semester" /></td>
-							<td><s:property value="enrolled" /></td>
-							<td><s:property value="grade" /></td>
-						</tr>
-					</s:iterator>
-				</tbody>
-			</table>
-		</div>
-	</form>
+		<div style="width: 20%; float: left;"></div>
+	</div>
 </body>
+
+<script type="text/javascript">
+
+function submitForm() {
+	document.forms[0].submit();
+}
+</script>
 </html>

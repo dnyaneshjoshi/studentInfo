@@ -8,20 +8,47 @@
 <title>Grades</title>
 </head>
 <body>
-	
-	
-	<form name=semesterDDL>
-		<s:select label="Semester" headerKey="-1"
-			onchange="onSemesterChange()" headerValue="Select semester"
-			list="termList" />
+	<form action="grades.action" name=termDDL>
+
+		<!-- The semester dropdown list -->
+		<s:select name="termDisplayChoice" onchange="onTermChange()"
+			list="termList"></s:select>
+
+		<!-- The subject dropdown list -->
+		<s:select name="courseDisplayChoice" list="courseList"></s:select>
+
+		<!-- The search button -->
+		<s:submit />
+
+		<!--  The grades table -->
+		<table border="1">
+			<thead>
+				<tr>
+					<td>Subject Code</td>
+					<td>Subject</td>
+					<td>Grade</td>
+					<td>Result</td>
+				</tr>
+			</thead>
+			<tbody>
+				<s:iterator value="resultList" status="subject">
+					<tr>
+						<td><s:property value="subjectName" /></td>
+						<td><s:property value="subjectCode" /></td>
+						<td><s:property value="grade" /></td>
+						<td><s:property value="result" /></td>
+					</tr>
+				</s:iterator>
+			</tbody>
+		</table>
 	</form>
+
 	<script type="text/javascript">
-		function onSemesterChange() {
-			document.semesterDDL.action = 'grades1.action';
-			document.semesterDDL.submit();
+		function onTermChange() {
+			document.termDDL.action = 'grades.action';
+			document.termDDL.submit();
 		}
 	</script>
-	
 
 </body>
 </html>

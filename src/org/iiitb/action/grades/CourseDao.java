@@ -47,7 +47,29 @@ public class CourseDao
 		}
 		
 		return courseList;
-		
-
 	}
+	
+	public List<String> getNames(int studentID, int term)
+	{
+		Connection con = ConnectionPool.getConnection();
+		PreparedStatement ps;
+		ResultSet rs;
+		try
+		{		
+			ps = con.prepareStatement("select distinct course.name from result, course, semester where result.course_id = course.course_id and course.semester_id = semester.semester_id and result.student_id = " + studentID + " and semester.term = " + term);
+			rs = ps.executeQuery();
+			while(rs.next())
+				courseList.add(rs.getString(1));
+
+			con.close();
+		}
+		catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return courseList;
+	}
+	
 }

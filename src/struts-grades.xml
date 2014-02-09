@@ -11,11 +11,5 @@
 			method="execute">
 			<result name="success">grades/grades.jsp</result>
 		</action>
-
-		<action name="grades1"
-			class="org.iiitb.action.grades.GradesAction1"
-			method="execute">
-			<result name="success">home.jsp</result>
-		</action>
 	</package>
 </struts>

@@ -9,9 +9,6 @@
 </head>
 <body>
 	
-	<form action="grades">
-	<s:select list="semesterDisplayList" name="semesterDisplayChoice"></s:select>
-	</form>
 	
 	<form name=semesterDDL>
 		<s:select label="Semester" headerKey="-1"
@@ -25,11 +22,6 @@
 		}
 	</script>
 	
-	<form name=subjectDDL>
-		<s:select label="Subject" headerKey="-1"
-			onchange="onSemesterChange()" headerValue="Select subject"
-			list="courseList"/>
-	</form>
 
 </body>
 </html>

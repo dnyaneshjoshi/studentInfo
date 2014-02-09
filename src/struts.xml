@@ -16,10 +16,27 @@
 
 		</action>
 
-		<action name = "subjectsAction" class="org.iiitb.action.subjects.SubjectsAction">
-		    <result name="success">subjects/subjects.jsp</result>
+		<action name="subjectsAction" class="org.iiitb.action.subjects.SubjectsAction">
+			<result name="success">subjects/subjects.jsp</result>
+
+		</action>
+
+		<action name="friendsPage" class="org.iiitb.action.friends.MyFriendsAction">
+			<result name="success">myFriends.jsp</result>
+
+		</action>
+
+
+		<action name="friendProfile" class="org.iiitb.action.friends.FriendProfileAction">
+			<result name="success">friendsProfile.jsp</result>
+			<result name="input">ProfileNotFoundjsp.jsp</result>
 		</action>
 		
+		<action name="updateFriend" class="org.iiitb.action.friends.FriendProfileAction"
+			method="update">
+			<result name="success">myFriends.jsp</result>
+		</action>
+
 	</package>
 	<include file="struts-grades.xml"></include>
 

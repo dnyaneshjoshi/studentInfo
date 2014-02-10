@@ -4,7 +4,7 @@
     "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-<constant name="struts.devMode" value="true" />
+	<constant name="struts.devMode" value="true" />
 	<package name="default" namespace="/" extends="struts-default">
 
 
@@ -31,18 +31,16 @@
 			<result name="success">friendsProfile.jsp</result>
 			<result name="error">ProfileNotFoundjsp.jsp</result>
 		</action>
-		
+
 		<action name="updateFriend" class="org.iiitb.action.friends.FriendProfileAction"
 			method="update">
 			<result name="success">myFriends.jsp</result>
 		</action>
 
+		<action name="grades" class="org.iiitb.action.grades.GradesAction"
+			method="execute">
+			<result name="success">grades/grades.jsp</result>
+		</action>
 	</package>
-	<include file="struts-grades.xml"></include>
-
-
-
-
-
-
+	
 </struts>

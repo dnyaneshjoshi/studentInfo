@@ -7,9 +7,6 @@
 
 	<package name="default" namespace="/" extends="struts-default">
 
-		<action name="grades" class="org.iiitb.action.grades.GradesAction"
-			method="execute">
-			<result name="success">grades/grades.jsp</result>
-		</action>
+		
 	</package>
 </struts>

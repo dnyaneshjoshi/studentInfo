@@ -4,16 +4,36 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
        
 	<tiles-definitions>
-	   <definition name="baseLayout" template="/baseLayout.jsp">
+	   <definition name="baseLayout" template="/layout/baseLayout.jsp">
 	      <put-attribute name="title"  value="Student Information System"/>
-	      <put-attribute name="banner" value="/banner.jsp"/>
-	      <put-attribute name="menu"   value="/menu.jsp"/>
-	      <put-attribute name="body"   value="/body.jsp"/>
-	      <put-attribute name="footerAnnouncements"   value="/announcements.jsp"/>
-	      <put-attribute name="footerNews"   value="/news.jsp"/>
+	      <put-attribute name="banner" value="/layout/banner.jsp"/>
+	      <put-attribute name="menu"   value="/layout/menu.jsp"/>
+	      <put-attribute name="body"   value="/layout/body.jsp"/>
+	      <put-attribute name="footerAnnouncements"   value="/layout/announcements.jsp"/>
+	      <put-attribute name="footerNews"   value="/layout/news.jsp"/>
 	   </definition>
-	
-	   <definition name="child1" extends="baseLayout">
-	      <put-attribute name="body"   value="/child1.jsp"/>      
+	   
+	   <definition name="homePage" extends="baseLayout">
+	      <put-attribute name="body" value="/home/homePage.jsp"/>
+	   </definition>
+	   
+	   <definition name="subjectsPage" extends="baseLayout">
+	      <put-attribute name="body" value="/subjects/subjects.jsp"/>
+	   </definition>
+	   
+	   <definition name="myFriendsPage" extends="baseLayout">
+	      <put-attribute name="body" value="myFriends.jsp"/>
+	   </definition>
+	   
+	   <definition name="profileNotFoundPage" extends="baseLayout">
+	      <put-attribute name="body" value="ProfileNotFoundjsp.jsp"/>
+	   </definition>
+	   
+	   <definition name="friendsProfilePage" extends="baseLayout">
+	      <put-attribute name="body" value="friendsProfile.jsp"/>
+	   </definition>
+	   
+	   <definition name="gradesPage" extends="baseLayout">
+	      <put-attribute name="body" value="/grades/grades.jsp"/>
 	   </definition>
 </tiles-definitions>

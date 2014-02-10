@@ -16,7 +16,6 @@ import com.opensymphony.xwork2.ActionSupport;
 public class FriendProfileAction extends ActionSupport
 {
 	private String friendNo;
-	private String myrollNo;
 
 	private String rollNo;
 
@@ -52,16 +51,6 @@ public class FriendProfileAction extends ActionSupport
 	public void setStudents(List<StudentInfo> students)
 	{
 		this.students = students;
-	}
-
-	public String getMyrollNo()
-	{
-		return myrollNo;
-	}
-
-	public void setMyrollNo(String myrollNo)
-	{
-		this.myrollNo = myrollNo;
 	}
 
 	String isFriend;
@@ -113,13 +102,13 @@ public class FriendProfileAction extends ActionSupport
 		{
 
 			setFriendProfile(studentInfo);
-			if (myrollNo == null || myrollNo.equals(friendNo))
+			if (rollNo == null || rollNo.equals(friendNo))
 			{
 				setIsFriend(Constants.FRIEND);
 			}
 			else
 			{
-				setIsFriend(studentDao.findRelationShip(myrollNo, friendNo));
+				setIsFriend(studentDao.findRelationShip(rollNo, friendNo));
 			}
 		}
 		return result;
@@ -128,12 +117,12 @@ public class FriendProfileAction extends ActionSupport
 	public String update()
 	{
 		StudentDAO studentDao = new StudentDAOImpl();
-		studentDao.addFriend(myrollNo, friendNo);
-		setRollNo(myrollNo);
+		studentDao.addFriend(rollNo, friendNo);
+		setRollNo(rollNo);
 
-		setMyProfile(studentDao.getStudent(myrollNo));
+		setMyProfile(studentDao.getStudent(rollNo));
 
-		setStudents(studentDao.getFriends(myrollNo));
+		setStudents(studentDao.getFriends(rollNo));
 
 		return SUCCESS;
 	}

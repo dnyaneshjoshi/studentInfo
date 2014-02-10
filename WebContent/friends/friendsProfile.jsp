@@ -16,7 +16,7 @@
 
 		<tr>
 			<td rowspan="3"><img
-				src="resources/images/<s:property value="%{friendProfile.photo}" />" />
+				src="friends/resources/images/<s:property value="%{friendProfile.photo}" />" />
 
 			</td>
 			<td></td>

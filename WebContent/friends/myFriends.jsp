@@ -9,7 +9,14 @@
 <title>MyFriends Page</title>
 </head>
 <body>
+	<h1 align="center">My Friends Page</h1>
 
+	<s:url id="friend" action="friendProfile" var="myProfileurl">
+		<s:param name="friendNo">
+			<s:property value="%{myProfile.rollNo}" />
+		</s:param>
+
+	</s:url>
 	<table cellpadding="10">
 		<tr>
 			<th align="center">My Photo</th>
@@ -17,9 +24,13 @@
 		</tr>
 
 		<tr>
-			<td><img width="100" height="100"
-				src="resources/images/<s:property value="%{myProfile.photo}" />" />
-			</td>
+			<td><a href='<s:property value="#myProfileurl"/>'><img
+					width="100" height="100"
+					src="friends/resources/images/<s:property value="%{myProfile.photo}" />" />
+					<br>
+					<h3>
+						<s:property value="%{myProfile.name}" /></a>
+			</h3></td>
 			<td><table cellpadding="25">
 
 
@@ -36,7 +47,7 @@
 									<tr>
 										<td><a href='<s:property value="#myurl"/>'><img
 												height="50" width="50"
-												src="resources/images/<s:property value="#student.photo"/>" /></a></td>
+												src="friends/resources/images/<s:property value="#student.photo"/>" /></a></td>
 									</tr>
 
 
@@ -57,8 +68,9 @@
 
 		<tr>
 			<s:form action="friendProfile">
-				<s:textfield tooltip="search Profile by rollNumber to add as Friend" label="search Profile" key="friendNo"></s:textfield>
-				<s:hidden key="myrollNo" value="%{myProfile.rollNo}"></s:hidden>
+				<s:textfield tooltip="search Profile by rollNumber to add as Friend"
+					label="search Profile" key="friendNo"></s:textfield>
+				<s:hidden key="rollNo" value="%{myProfile.rollNo}"></s:hidden>
 				<s:submit label="search" value="search" />
 			</s:form>
 		</tr>

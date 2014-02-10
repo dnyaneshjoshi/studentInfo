@@ -22,19 +22,19 @@
 		</action>
 
 		<action name="friendsPage" class="org.iiitb.action.friends.MyFriendsAction">
-			<result name="success">myFriends.jsp</result>
-			<result name="error">ProfileNotFoundjsp.jsp</result>
+			<result name="success">friends/myFriends.jsp</result>
+			<result name="error">friends/ProfileNotFoundjsp.jsp</result>
 		</action>
 
 
 		<action name="friendProfile" class="org.iiitb.action.friends.FriendProfileAction">
-			<result name="success">friendsProfile.jsp</result>
-			<result name="error">ProfileNotFoundjsp.jsp</result>
+			<result name="success">friends/friendsProfile.jsp</result>
+			<result name="error">friends/ProfileNotFoundjsp.jsp</result>
 		</action>
 
 		<action name="updateFriend" class="org.iiitb.action.friends.FriendProfileAction"
 			method="update">
-			<result name="success">myFriends.jsp</result>
+			<result name="success">friends/myFriends.jsp</result>
 		</action>
 
 		<action name="grades" class="org.iiitb.action.grades.GradesAction"

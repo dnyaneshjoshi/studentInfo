@@ -7,39 +7,47 @@
 	<constant name="struts.devMode" value="true" />
 	<package name="default" namespace="/" extends="struts-default">
 
+		<result-types>
+		   <result-type name="tiles" 
+		   class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+		
+		<action name="homeAction" class="org.iiitb.action.home.HomeAction">
+			<result name="success" type="tiles">homePage</result>
+		</action>
 
 		<action name="loginAction" class="org.iiitb.action.LoginAction">
 
-			<result name="success" type="redirect">subjectsAction</result>
+			<result name="success" type="redirect">homeAction</result>
 			<result name="login">home.jsp</result>
 			<result name="input">home.jsp</result>
 
 		</action>
 
 		<action name="subjectsAction" class="org.iiitb.action.subjects.SubjectsAction">
-			<result name="success">subjects/subjects.jsp</result>
+			<result name="success" type="tiles">subjectsPage</result>
 
 		</action>
 
 		<action name="friendsPage" class="org.iiitb.action.friends.MyFriendsAction">
-			<result name="success">friends/myFriends.jsp</result>
-			<result name="error">friends/ProfileNotFoundjsp.jsp</result>
+			<result name="success" type="tiles">myFriendsPage</result>
+			<result name="error" type="tiles">profileNotFoundPage</result>
 		</action>
 
 
 		<action name="friendProfile" class="org.iiitb.action.friends.FriendProfileAction">
-			<result name="success">friends/friendsProfile.jsp</result>
-			<result name="error">friends/ProfileNotFoundjsp.jsp</result>
+			<result name="success" type="tiles">friendsProfilePage</result>
+			<result name="error" type="tiles">profileNotFoundPage</result>
 		</action>
 
 		<action name="updateFriend" class="org.iiitb.action.friends.FriendProfileAction"
 			method="update">
-			<result name="success">friends/myFriends.jsp</result>
+			<result name="success" type="tiles">myFriendsPage</result>
 		</action>
 
 		<action name="grades" class="org.iiitb.action.grades.GradesAction"
 			method="execute">
-			<result name="success">grades/grades.jsp</result>
+			<result name="success" type="tiles">gradesPage</result>
 		</action>
 	</package>
 	

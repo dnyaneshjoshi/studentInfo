@@ -3,14 +3,17 @@ package org.iiitb.action.subjects;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.struts2.interceptor.SessionAware;
 import org.iiitb.action.dao.CourseDAO;
 import org.iiitb.action.dao.impl.CourseDAOImpl;
+import org.iiitb.model.User;
 import org.iiitb.util.ConnectionPool;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class SubjectsAction extends ActionSupport {
+public class SubjectsAction extends ActionSupport implements SessionAware {
 
   /**
    * serial id
@@ -19,10 +22,13 @@ public class SubjectsAction extends ActionSupport {
 
   private static final String SHOW_ALL_COURSES = "Show All Courses";
   private static final String SHOW_ENROLLED_COURSES = "Show Enrolled Courses";
+
+  private static final String USER = "user";
   private List<SubjectInfo> subjectInfoList;
   private List<String> subjectDisplayList;
   private String subjectDisplayChoice;
   private CourseDAO courseDAO = new CourseDAOImpl();
+  private Map<String, Object> session;
 
   {
     subjectDisplayList = new ArrayList<String>();
@@ -56,15 +62,27 @@ public class SubjectsAction extends ActionSupport {
 
   public String execute() {
     Connection connection = ConnectionPool.getConnection();
-    if (null == subjectDisplayChoice
-        || subjectDisplayChoice.equals(SHOW_ALL_COURSES)) {
-      subjectInfoList = courseDAO.getAllCourses(connection, 2);
-    } else {
-      subjectInfoList = courseDAO.getEnrolledCourses(connection, 2);
-    }
+    User loggedInUser = (User) this.session.get(USER);
+    if (null != loggedInUser) {
+      if (null == subjectDisplayChoice
+          || subjectDisplayChoice.equals(SHOW_ALL_COURSES)) {
+        subjectInfoList = courseDAO.getAllCourses(connection,
+            Integer.parseInt(loggedInUser.getUserId()));
+      } else {
+        subjectInfoList = courseDAO.getEnrolledCourses(connection,
+            Integer.parseInt(loggedInUser.getUserId()));
+      }
 
-    ConnectionPool.freeConnection(connection);
-    return SUCCESS;
+      ConnectionPool.freeConnection(connection);
+      return SUCCESS;
+    } else {
+      return LOGIN;
+    }
+  }
+
+  @Override
+  public void setSession(Map<String, Object> session) {
+    this.session = session;
   }
 
 }

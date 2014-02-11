@@ -40,6 +40,7 @@
 		<action name="subjectsAction" class="org.iiitb.action.subjects.SubjectsAction">
 			<interceptor-ref name="secureAccess"></interceptor-ref>
 			<result name="success" type="tiles">subjectsPage</result>
+			<result name="login">home.jsp</result>
 
 		</action>
 

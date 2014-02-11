@@ -13,7 +13,7 @@
 	<s:form action="loginAction">
 
 		<s:textfield key="username" label="username" />
-		<s:textfield key="password" label="password" />
+		<s:password key="password" label="password" />
 
 		<s:submit />
 	</s:form>

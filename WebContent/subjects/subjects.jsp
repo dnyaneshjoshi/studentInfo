@@ -11,7 +11,7 @@
 	<div>
 		<div style="width: 20%; float: left;">Pic will come here</div>
 		<div style="width: 60%; float: left;">
-			<form action="subjectsAction" method="post">
+			<form action="subjectsAction" method="post" id="subjectsForm">
 				<div style="text-align:center">
 					<s:select list="subjectDisplayList" name="subjectDisplayChoice" onchange="javascript:submitForm()"></s:select>					
 				</div>
@@ -50,7 +50,7 @@
 <script type="text/javascript">
 
 function submitForm() {
-	document.forms[0].submit();
+	document.getElementById("subjectsForm").submit();
 }
 </script>
 </html>

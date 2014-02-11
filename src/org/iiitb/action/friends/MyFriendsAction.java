@@ -1,35 +1,32 @@
 package org.iiitb.action.friends;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.struts2.interceptor.SessionAware;
 import org.iiitb.action.dao.StudentDAO;
 import org.iiitb.action.dao.impl.StudentDAOImpl;
 import org.iiitb.model.StudentInfo;
+import org.iiitb.model.User;
 
 import com.opensymphony.xwork2.Action;
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * @author prashanth
  * 
  */
-public class MyFriendsAction implements Action
+public class MyFriendsAction extends ActionSupport implements SessionAware
 {
 	/**
 	 * 
 	 */
-	private String rollNo;
 	private StudentInfo myProfile;
 	private List<StudentInfo> students;
+	private Map<String, Object> session;
 
-	public String getRollNo()
-	{
-		return rollNo;
-	}
-
-	public void setRollNo(String rollNo)
-	{
-		this.rollNo = rollNo;
-	}
+	
 
 	public StudentInfo getMyProfile()
 	{
@@ -53,20 +50,36 @@ public class MyFriendsAction implements Action
 
 	public String execute()
 	{
-		StudentDAO studentDao = new StudentDAOImpl();
 
-		StudentInfo studentInfo = studentDao.getStudent(rollNo);
-		if(studentInfo!=null){
+		User user = (User) session.get("user");
+		if (user != null)
+		{
 
-		setMyProfile(studentInfo);
+			StudentDAO studentDao = new StudentDAOImpl();
 
-		setStudents(studentDao.getFriends(rollNo));
-		}
-		else{
-			return ERROR;
+			StudentInfo studentInfo = studentDao.getStudentByUserId(user.getUserId());
+
+			if (studentInfo != null)
+			{
+
+				setMyProfile(studentInfo);
+
+				setStudents(studentDao.getFriends(user.getUserId()));
+			}
+			else
+			{
+				return ERROR;
+			}
 		}
 
 		return SUCCESS;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> session)
+	{
+		this.session = session;
+
 	}
 
 }

@@ -10,7 +10,7 @@
 	<table width="100%">
 		<tr>
 			<td><h3 align="left">STUDENT ZONE</h3></td>
-			<td><h3 align="right"><a href="loginAction">Logout</a></h3></td>
+			<td><h3 align="right"><a href="logout">Logout</a></h3></td>
 		</tr>
 	</table>
 </body>

@@ -7,17 +7,30 @@
 	<constant name="struts.devMode" value="true" />
 	<package name="default" namespace="/" extends="struts-default">
 
+
+
+
 		<result-types>
-		   <result-type name="tiles" 
-		   class="org.apache.struts2.views.tiles.TilesResult" />
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
-		
+
+		<interceptors>
+
+			<interceptor name="authenticateInterceptor"
+				class="org.iiitb.interceptor.AuthenticateInterceptor"></interceptor>
+
+			<interceptor-stack name="secureAccess">
+				<interceptor-ref name="authenticateInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+
 		<action name="homeAction" class="org.iiitb.action.home.HomeAction">
 			<result name="success" type="tiles">homePage</result>
 		</action>
 
 		<action name="loginAction" class="org.iiitb.action.LoginAction">
-
 			<result name="success" type="redirect">homeAction</result>
 			<result name="login">home.jsp</result>
 			<result name="input">home.jsp</result>
@@ -25,30 +38,39 @@
 		</action>
 
 		<action name="subjectsAction" class="org.iiitb.action.subjects.SubjectsAction">
+			<interceptor-ref name="secureAccess"></interceptor-ref>
 			<result name="success" type="tiles">subjectsPage</result>
 
 		</action>
 
 		<action name="friendsPage" class="org.iiitb.action.friends.MyFriendsAction">
+			<interceptor-ref name="secureAccess"></interceptor-ref>
 			<result name="success" type="tiles">myFriendsPage</result>
 			<result name="error" type="tiles">profileNotFoundPage</result>
 		</action>
 
 
 		<action name="friendProfile" class="org.iiitb.action.friends.FriendProfileAction">
+			<interceptor-ref name="secureAccess"></interceptor-ref>
 			<result name="success" type="tiles">friendsProfilePage</result>
 			<result name="error" type="tiles">profileNotFoundPage</result>
 		</action>
 
 		<action name="updateFriend" class="org.iiitb.action.friends.FriendProfileAction"
 			method="update">
+			<interceptor-ref name="secureAccess"></interceptor-ref>
 			<result name="success" type="tiles">myFriendsPage</result>
 		</action>
 
 		<action name="grades" class="org.iiitb.action.grades.GradesAction"
 			method="execute">
+			<interceptor-ref name="secureAccess"></interceptor-ref>
 			<result name="success" type="tiles">gradesPage</result>
 		</action>
+		
+		<action name="logout" class="org.iiitb.action.LogoutAction">
+		<result name="success">home.jsp</result>
+		</action>
 	</package>
-	
+
 </struts>

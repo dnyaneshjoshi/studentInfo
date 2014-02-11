@@ -66,14 +66,14 @@
 				</table></td>
 		</tr>
 
-		<tr>
+		<%-- <tr>
 			<s:form action="friendProfile">
 				<s:textfield tooltip="search Profile by rollNumber to add as Friend"
 					label="search Profile" key="friendNo"></s:textfield>
 				<s:hidden key="rollNo" value="%{myProfile.rollNo}"></s:hidden>
 				<s:submit label="search" value="search" />
 			</s:form>
-		</tr>
+		</tr> --%>
 	</table>
 </body>
 </html>

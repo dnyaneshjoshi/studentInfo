@@ -1,10 +1,13 @@
 package org.iiitb.action.friends;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.struts2.interceptor.SessionAware;
 import org.iiitb.action.dao.StudentDAO;
 import org.iiitb.action.dao.impl.StudentDAOImpl;
 import org.iiitb.model.StudentInfo;
+import org.iiitb.model.User;
 import org.iiitb.util.Constants;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -13,7 +16,7 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author prashanth
  * 
  */
-public class FriendProfileAction extends ActionSupport
+public class FriendProfileAction extends ActionSupport implements SessionAware
 {
 	private String friendNo;
 
@@ -93,7 +96,7 @@ public class FriendProfileAction extends ActionSupport
 
 		StudentDAO studentDao = new StudentDAOImpl();
 
-		StudentInfo studentInfo = studentDao.getStudent(friendNo);
+		StudentInfo studentInfo = studentDao.getStudentByRollNo(friendNo);
 		if (studentInfo == null)
 		{
 			result = ERROR;
@@ -101,29 +104,47 @@ public class FriendProfileAction extends ActionSupport
 		else
 		{
 
+			User user = (User) session.get("user");
+
 			setFriendProfile(studentInfo);
-			if (rollNo == null || rollNo.equals(friendNo))
+
+			if (studentInfo.getStudentId() == Integer.parseInt(user.getUserId()))
 			{
 				setIsFriend(Constants.FRIEND);
 			}
 			else
-			{
-				setIsFriend(studentDao.findRelationShip(rollNo, friendNo));
-			}
+
+				setIsFriend(studentDao.findRelationShip(user.getUserId(), friendNo));
+
 		}
 		return result;
 	}
 
 	public String update()
 	{
+
+		User user = (User) session.get("user");
 		StudentDAO studentDao = new StudentDAOImpl();
-		studentDao.addFriend(rollNo, friendNo);
-		setRollNo(rollNo);
+		studentDao.addFriend(user.getUserId(), friendNo);
 
-		setMyProfile(studentDao.getStudent(rollNo));
+		setMyProfile(studentDao.getStudentByUserId(user.getUserId()));
 
-		setStudents(studentDao.getFriends(rollNo));
+		setStudents(studentDao.getFriends(user.getUserId()));
 
 		return SUCCESS;
+	}
+
+	Map<String, Object> session;
+
+	public Map<String, Object> getSession()
+	{
+		return session;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> session)
+	{
+		this.session = session;
+
 	}
 }

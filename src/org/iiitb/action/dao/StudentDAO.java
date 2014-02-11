@@ -6,12 +6,14 @@ import org.iiitb.model.StudentInfo;
 
 /**
  * @author prashanth
- *
+ * 
  */
 public interface StudentDAO
 {
-	
-	public StudentInfo getStudent(String rollNo);
+
+	public StudentInfo getStudentByRollNo(String rollNo);
+
+	public StudentInfo getStudentByUserId(String rollNo);
 
 	public List<StudentInfo> getFriends(String rollno);
 

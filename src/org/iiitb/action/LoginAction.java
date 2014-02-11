@@ -4,16 +4,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
 import javax.naming.NamingException;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.struts2.interceptor.SessionAware;
+import org.iiitb.model.User;
 import org.iiitb.util.ConnectionPool;
 import org.iiitb.util.Constants;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class LoginAction extends ActionSupport
+public class LoginAction extends ActionSupport implements SessionAware
 {
 
 	private String username;
@@ -40,33 +43,37 @@ public class LoginAction extends ActionSupport
 		this.password = password;
 	}
 
+	private Map<String, Object> session;
+
+	public Map<String, Object> getSession()
+	{
+		return session;
+	}
+
 	public String execute() throws NamingException, SQLException
 	{
+		clearFieldErrors();
 
-		String resultStr = SUCCESS;
-		Connection conn = ConnectionPool.getConnection();
-
-		PreparedStatement preStmt = conn.prepareStatement(Constants.GET_PASSWORD_QRY);
-		preStmt.setString(1, username);
-		ResultSet result = preStmt.executeQuery();
-
-		if (result.first())
+		User user = (User) session.get("user");
+		if (user != null)
 		{
-			if (!password.equals(result.getString(Constants.DB_PASSWORD)))
-			{
-				addFieldError(Constants.DB_PASSWORD, Constants.INVALID_PASSWORD_ERROR);
-				resultStr = INPUT;
-			}
-
+			return SUCCESS;
 		}
 		else
 		{
-			addFieldError(Constants.DB_USERNAME, Constants.INVALID_USER_ERROR);
-			resultStr = INPUT;
-		}
-		ConnectionPool.freeConnection(conn);
+			User newUser = new User(username, password);
+			if (isValidUser(newUser))
+			{
+				session.put("user", newUser);
+				return SUCCESS;
+			}
+			else
+			{
+				return INPUT;
+			}
 
-		return resultStr;
+		}
+
 	}
 
 	public void validate()
@@ -81,6 +88,57 @@ public class LoginAction extends ActionSupport
 		{
 			addFieldError(Constants.DB_PASSWORD, Constants.PASSWORD_BLANK);
 		}
+	}
+
+	@Override
+	public void setSession(Map<String, Object> session)
+	{
+		this.session = session;
+	}
+
+	private boolean isValidUser(User user)
+	{
+
+		Connection conn = ConnectionPool.getConnection();
+
+		PreparedStatement preStmt;
+		try
+		{
+			preStmt = conn.prepareStatement(Constants.GET_PASSWORD_QRY);
+
+			preStmt.setString(1, user.getUsername());
+			ResultSet result = preStmt.executeQuery();
+
+			if (result.first())
+			{
+				if (!user.getPassword().equals(result.getString(Constants.DB_PASSWORD)))
+				{
+					addFieldError(Constants.DB_PASSWORD, Constants.INVALID_PASSWORD_ERROR);
+					return false;
+				}
+
+				user.setUserId(result.getString("user_id"));
+				user.setEmailId(result.getString("email"));
+				user.setName(result.getString("name"));
+				user.setUserType(result.getString("user_type"));
+
+			}
+			else
+			{
+				addFieldError(Constants.DB_USERNAME, Constants.INVALID_USER_ERROR);
+				return false;
+			}
+		}
+		catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally
+		{
+			ConnectionPool.freeConnection(conn);
+		}
+		return true;
 	}
 
 }

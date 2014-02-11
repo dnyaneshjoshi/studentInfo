@@ -22,15 +22,15 @@
 	   </definition>
 	   
 	   <definition name="myFriendsPage" extends="baseLayout">
-	      <put-attribute name="body" value="myFriends.jsp"/>
+	      <put-attribute name="body" value="/friends/myFriends.jsp"/>
 	   </definition>
 	   
 	   <definition name="profileNotFoundPage" extends="baseLayout">
-	      <put-attribute name="body" value="ProfileNotFoundjsp.jsp"/>
+	      <put-attribute name="body" value="/friends/ProfileNotFoundjsp.jsp"/>
 	   </definition>
 	   
 	   <definition name="friendsProfilePage" extends="baseLayout">
-	      <put-attribute name="body" value="friendsProfile.jsp"/>
+	      <put-attribute name="body" value="/friends/friendsProfile.jsp"/>
 	   </definition>
 	   
 	   <definition name="gradesPage" extends="baseLayout">

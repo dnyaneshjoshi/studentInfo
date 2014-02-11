@@ -15,16 +15,18 @@ import org.iiitb.util.Constants;
 public class StudentDAOImpl implements StudentDAO
 {
 
-	private static final String GET_FREINDS_QRY = "select u.name,s1.roll_no, s1.student_id, s1.dob,s1.photo from user u, student s1,student s, friends f where s.student_id=f.student_id1 and s.roll_no=? and s.student_id !=s1.student_id and s1.student_id=f.student_id2 and u.user_id=s1.student_id union select u.name,s1.roll_no, s1.student_id, s1.dob,s1.photo from user u, student s,student s1, friends f where s.student_id=f.student_id2 and s.roll_no=? and s.student_id !=s1.student_id and s1.student_id=f.student_id1 and u.user_id=s1.student_id";
+	private static final String GET_FREINDS_QRY = "select u.name,s1.roll_no, s1.student_id, s1.dob,s1.photo from user u, student s1,student s, friends f where s.student_id=f.student_id1 and s.student_id=? and s.student_id !=s1.student_id and s1.student_id=f.student_id2 and u.user_id=s1.student_id union select u.name,s1.roll_no, s1.student_id, s1.dob,s1.photo from user u, student s,student s1, friends f where s.student_id=f.student_id2 and s.student_id=? and s.student_id !=s1.student_id and s1.student_id=f.student_id1 and u.user_id=s1.student_id";
 
-	private static final String GET_STUDENT_QRY = "select * from student s, user u  where s.student_id= u.user_id and s.roll_no=?";
+	private static final String GET_STUDENT_QRY = "select * from student s, user u  where s.student_id= u.user_id and s.student_id=?";
+	
+	private static final String GET_STUDENT_ROLL_QRY = "select * from student s, user u  where s.student_id= u.user_id and s.roll_no=?";
 
-	private static final String ARE_THEY_FRIENDS_QRY = "select s1.roll_no, s2.roll_no from student s1, student s2, friends f where s1.student_id=f.student_id1 and s2.student_id=f.student_id2 and s1.roll_no=? and s2.roll_no=? union select s1.roll_no, s2.roll_no from student s1, student s2, friends f where s1.student_id=f.student_id1 and s2.student_id=f.student_id2 and s2.roll_no=? and s1.roll_no=?";
+	private static final String ARE_THEY_FRIENDS_QRY = "select s1.roll_no, s2.roll_no from student s1, student s2, friends f where s1.student_id=f.student_id1 and s2.student_id=f.student_id2 and s1.student_id=? and s2.roll_no=? union select s1.roll_no, s2.roll_no from student s1, student s2, friends f where s1.student_id=f.student_id1 and s2.student_id=f.student_id2 and s2.student_id=? and s1.roll_no=?";
 
-	private static final String ADD_FRIENDS_QRY = "insert into friends(student_id1, student_id2)     select s1.student_id, s2.student_id from student s1, student s2 where s1.roll_no=? and s2.roll_no=?";
+	private static final String ADD_FRIENDS_QRY = "insert into friends(student_id1, student_id2)     select s1.student_id, s2.student_id from student s1, student s2 where s1.student_id=? and s2.roll_no=?";
 
 	@Override
-	public StudentInfo getStudent(String rollNo)
+	public StudentInfo getStudentByUserId(String userId)
 	{
 
 		StudentInfo user = null;
@@ -34,6 +36,44 @@ public class StudentDAOImpl implements StudentDAO
 		try
 		{
 			PreparedStatement stmt = conn.prepareStatement(GET_STUDENT_QRY);
+			stmt.setString(1, userId);
+
+			ResultSet rs = stmt.executeQuery();
+
+			if (rs.next())
+			{
+				user = new StudentInfo();
+				user.setDob(rs.getString("dob"));
+				user.setName(rs.getString("name"));
+				user.setPhoto(rs.getString("photo"));
+				user.setRollNo(rs.getString("roll_no"));
+
+			}
+
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			ConnectionPool.freeConnection(conn);
+		}
+		return user;
+
+	}
+
+	@Override
+	public StudentInfo getStudentByRollNo(String rollNo)
+	{
+
+		StudentInfo user = null;
+
+		Connection conn = ConnectionPool.getConnection();
+
+		try
+		{
+			PreparedStatement stmt = conn.prepareStatement(GET_STUDENT_ROLL_QRY);
 			stmt.setString(1, rollNo);
 
 			ResultSet rs = stmt.executeQuery();
@@ -44,7 +84,9 @@ public class StudentDAOImpl implements StudentDAO
 				user.setDob(rs.getString("dob"));
 				user.setName(rs.getString("name"));
 				user.setPhoto(rs.getString("photo"));
-				user.setRollNo(rollNo);
+				user.setRollNo(rs.getString("roll_no"));
+				user.setStudentId(rs.getInt("user_id"));
+				
 
 			}
 

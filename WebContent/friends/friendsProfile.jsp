@@ -49,7 +49,7 @@
 					<s:elseif test="%{#checkFriend=='not_a_friend'}">
 
 						<td><s:checkbox name="checkMe" fieldValue="true"
-								label="Friend" /> <s:hidden key="rollNo" value="%{rollNo}"></s:hidden></td>
+								label="Friend" /> 
 						<s:hidden key="friendNo" value="%{friendProfile.rollNo}"></s:hidden>
 						<td><s:submit label="Add Friend" value="Add Friend" /></td>
 					</s:elseif></td>

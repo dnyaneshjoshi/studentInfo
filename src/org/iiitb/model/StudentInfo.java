@@ -17,6 +17,16 @@ import org.iiitb.util.Constants;
 public class StudentInfo
 {
 	int studentId;
+	public int getStudentId()
+	{
+		return studentId;
+	}
+
+	public void setStudentId(int studentId)
+	{
+		this.studentId = studentId;
+	}
+
 	String rollNo;
 	String dob;
 	String photo;

@@ -23,7 +23,7 @@ public class LayoutDAOImpl implements LayoutDAO
 			"	interest i, "+
 			"	student_interest si, "+
 			"	student s "+
-			"where s.student_id=2 "+
+			"where s.student_id=? "+
 			"	and si.student_id=s.student_id "+
 			"	and i.interest_id=si.interest_id "+
 			"	and ai.interest_id=i.interest_id "+
@@ -48,7 +48,7 @@ public class LayoutDAOImpl implements LayoutDAO
 			throws SQLException
 	{
 		PreparedStatement ps=connection.prepareStatement(ANNOUNCEMENTS_QUERY);
-		//ps.setInt(1, userId);
+		ps.setInt(1, userId);
 		ResultSet rs=ps.executeQuery();
 		List<AnnouncementsItem> la=new ArrayList<AnnouncementsItem>();
 		while(rs.next())

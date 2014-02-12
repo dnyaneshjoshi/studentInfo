@@ -26,12 +26,12 @@
 			</interceptor-stack>
 		</interceptors>
 
-		<action name="homeAction" class="org.iiitb.action.home.HomeAction">
-			<result name="success" type="tiles">homePage</result>
+		<action name="layoutAction" class="org.iiitb.action.layout.LayoutAction">
+			<result name="success" type="tiles">baseLayout</result>
 		</action>
 
 		<action name="loginAction" class="org.iiitb.action.LoginAction">
-			<result name="success" type="redirect">homeAction</result>
+			<result name="success" type="redirect">layoutAction</result>
 			<result name="login">home.jsp</result>
 			<result name="input">home.jsp</result>
 

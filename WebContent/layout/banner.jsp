@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="/struts-tags" prefix="s" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,7 +11,7 @@
 	<table width="100%">
 		<tr>
 			<td><h3 align="left">STUDENT ZONE</h3></td>
-			<td><h3 align="right"><a href="logout">Logout</a></h3></td>
+			<td><h5 align="right"><small><s:property value="user.name" /></small> <a href="logout">Logout</a></h5></td>
 		</tr>
 	</table>
 </body>

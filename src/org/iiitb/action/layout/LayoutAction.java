@@ -1,19 +1,23 @@
-package org.iiitb.action.home;
+package org.iiitb.action.layout;
 
 import java.util.List;
+import java.util.Map;
 import java.sql.Connection;
 import java.sql.SQLException;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import org.apache.struts2.interceptor.SessionAware;
 import org.iiitb.util.ConnectionPool;
 import org.iiitb.action.dao.LayoutDAO;
 import org.iiitb.action.dao.impl.LayoutDAOImpl;
+import org.iiitb.model.User;
 import org.iiitb.model.layout.*;
 
-public class HomeAction extends ActionSupport
+public class LayoutAction extends ActionSupport implements SessionAware
 {
-	private String picUrl;
+	private Map<String, Object> session;
+	private User user;
 	private List<NewsItem> allNews;
 	private List<AnnouncementsItem> announcements;
 	
@@ -21,10 +25,15 @@ public class HomeAction extends ActionSupport
 	
 	public String execute() throws SQLException
 	{
-		Connection cn=ConnectionPool.getConnection();
-		allNews=layoutDAO.getAllNews(cn);
-		announcements=layoutDAO.getAnnouncements(cn, 2);
-		ConnectionPool.freeConnection(cn);
+		user = (User)session.get("user");
+		if (user != null)
+		{
+			System.out.println("user id: "+user.getUserId());
+			Connection cn=ConnectionPool.getConnection();
+			allNews=layoutDAO.getAllNews(cn);
+			announcements=layoutDAO.getAnnouncements(cn, Integer.parseInt(user.getUserId()));
+			ConnectionPool.freeConnection(cn);	
+		}
 		return "success";
 	}
 
@@ -43,12 +52,14 @@ public class HomeAction extends ActionSupport
 	public void setAnnouncements(List<AnnouncementsItem> announcements) {
 		this.announcements = announcements;
 	}
-
-	public String getPicUrl() {
-		return picUrl;
+	
+	public User getUser()
+	{
+		return this.user;
 	}
 
-	public void setPicUrl(String picUrl) {
-		this.picUrl = picUrl;
+	@Override
+	public void setSession(Map<String, Object> arg0) {
+		this.session=arg0;
 	}
 }

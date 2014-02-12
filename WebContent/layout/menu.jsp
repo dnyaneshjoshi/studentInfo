@@ -10,11 +10,13 @@
 <body>
 	<table width="100%">
 		<tr>
-			<td><s:form action="friendProfile">
-					<s:textfield key="friendNo" label="" tooltip="search by rollNumber" />
-					<s:submit value="Search" />
-				</s:form></td>
-			<td><a href="homeAction">Home</a></td>
+			<td>
+				<form action="friendProfile" method="post">
+					<input type="text" name="friendNo" title="search by rollNumber" />
+					<input type="submit" value="Search">
+				</form>
+			</td>
+			<td><a href="layoutAction">Home</a></td>
 			<td><a href="gradesAction">Grades</a></td>
 			<td><a href="subjectsAction">Subjects</a></td>
 			<td><a href="friendsPage">My Friends</a></td>

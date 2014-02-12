@@ -40,8 +40,8 @@
    		</thead>
    		<tbody>
 			<tr>
-				<td align="center"><div align="left" style="overflow-y:scroll; height:300px; width:99%; word-wrap:break-word; border:2px solid; border-color:#3f3fbf;"><tiles:insertAttribute name="footerAnnouncements" /></div></td>
-				<td align="center"><div align="left" style="overflow-y:scroll; height:300px; width:99%; word-wrap:break-word; border:2px solid; border-color:#3f3fbf;"><tiles:insertAttribute name="footerNews" /></div></td>
+				<td align="center"><div align="left" style="height:300px; width:99%; word-wrap:break-word; border:2px solid; border-color:#3f3fbf;"><tiles:insertAttribute name="footerAnnouncements" /></div></td>
+				<td align="center"><div align="left" style="height:300px; width:99%; word-wrap:break-word; border:2px solid; border-color:#3f3fbf;"><tiles:insertAttribute name="footerNews" /></div></td>
 			</tr>
    		</tbody>
 	</table>

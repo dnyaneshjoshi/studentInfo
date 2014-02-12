@@ -72,6 +72,11 @@
 		<action name="logout" class="org.iiitb.action.LogoutAction">
 		<result name="success">home.jsp</result>
 		</action>
+		
+		<action name="syllabusAction" class="org.iiitb.action.syllabus.SyllabusAction">
+			<result name="success">syllabus/syllabus.jsp</result>
+		</action>
+		
 	</package>
 
 </struts>

@@ -20,6 +20,7 @@ import org.iiitb.action.subjects.SubjectInfo;
 public class CourseDAOImpl implements CourseDAO {
 
   private static final String ALL_COURSES_QUERY = "SELECT  "
+      + "    SUBJECTS_AVAILABLE.course_id as course_id, "
       + "    subject_code, "
       + "    subject_name, "
       + "    faculty_name, "
@@ -57,7 +58,7 @@ public class CourseDAOImpl implements CourseDAO {
       + "ORDER BY subject_code;";
 
   private static final String ENROLLED_COURSE_QUERY = "SELECT  "
-      + "    course.course_id, " + "    student.user_id as student_id, "
+      + "    course.course_id as course_id, " + "    student.user_id as student_id, "
       + "    student.name as student_name, " + "    grade.name as grade_name, "
       + "    course.code as subject_code, "
       + "    course.name as subject_name, "
@@ -80,6 +81,7 @@ public class CourseDAOImpl implements CourseDAO {
   private void createSubjectInfoListFromResultSet(ResultSet rs,
       List<SubjectInfo> subjectInfoList) throws SQLException {
     while (rs.next()) {
+      String courseId = rs.getString("course_id");
       String subjectCode = rs.getString("subject_code");
       String subjectName = rs.getString("subject_name");
       String facultyName = rs.getString("faculty_name");
@@ -88,7 +90,7 @@ public class CourseDAOImpl implements CourseDAO {
       String enrolled = (null == enrolledVal) ? "N" : "Y";
       String gradeVal = rs.getString("grade_name");
       String grade = (null == gradeVal) ? "NA" : gradeVal;
-      SubjectInfo subjectInfo = new SubjectInfo(subjectCode, subjectName,
+      SubjectInfo subjectInfo = new SubjectInfo(courseId, subjectCode, subjectName,
           facultyName, semester, enrolled, grade);
       subjectInfoList.add(subjectInfo);
     }

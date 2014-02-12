@@ -26,28 +26,31 @@
 			</interceptor-stack>
 		</interceptors>
 
+
+
 		<action name="layoutAction" class="org.iiitb.action.layout.LayoutAction">
+			<interceptor-ref name="secureAccess"></interceptor-ref>
 			<result name="success" type="tiles">baseLayout</result>
+			<result name="login">home.jsp</result>
 		</action>
 
 		<action name="loginAction" class="org.iiitb.action.LoginAction">
 			<result name="success" type="redirect">layoutAction</result>
 			<result name="login">home.jsp</result>
 			<result name="input">home.jsp</result>
-
 		</action>
 
 		<action name="subjectsAction" class="org.iiitb.action.subjects.SubjectsAction">
 			<interceptor-ref name="secureAccess"></interceptor-ref>
 			<result name="success" type="tiles">subjectsPage</result>
 			<result name="login">home.jsp</result>
-
 		</action>
 
 		<action name="friendsPage" class="org.iiitb.action.friends.MyFriendsAction">
 			<interceptor-ref name="secureAccess"></interceptor-ref>
 			<result name="success" type="tiles">myFriendsPage</result>
 			<result name="error" type="tiles">profileNotFoundPage</result>
+			<result name="login">home.jsp</result>
 		</action>
 
 
@@ -55,28 +58,34 @@
 			<interceptor-ref name="secureAccess"></interceptor-ref>
 			<result name="success" type="tiles">friendsProfilePage</result>
 			<result name="error" type="tiles">profileNotFoundPage</result>
+			<result name="login">home.jsp</result>
 		</action>
 
 		<action name="updateFriend" class="org.iiitb.action.friends.FriendProfileAction"
 			method="update">
 			<interceptor-ref name="secureAccess"></interceptor-ref>
 			<result name="success" type="tiles">myFriendsPage</result>
+			<result name="login">home.jsp</result>
 		</action>
 
 		<action name="grades" class="org.iiitb.action.grades.GradesAction"
 			method="execute">
 			<interceptor-ref name="secureAccess"></interceptor-ref>
 			<result name="success" type="tiles">gradesPage</result>
+			<result name="login">home.jsp</result>
 		</action>
-		
+
 		<action name="logout" class="org.iiitb.action.LogoutAction">
-		<result name="success">home.jsp</result>
+			<result name="success">home.jsp</result>
+			<result name="login">home.jsp</result>
 		</action>
-		
+
 		<action name="syllabusAction" class="org.iiitb.action.syllabus.SyllabusAction">
+			<interceptor-ref name="secureAccess"></interceptor-ref>
 			<result name="success">syllabus/syllabus.jsp</result>
+			<result name="login">home.jsp</result>
 		</action>
-		
+
 	</package>
 
 </struts>

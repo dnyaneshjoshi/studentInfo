@@ -17,7 +17,7 @@ import org.iiitb.model.layout.*;
 public class LayoutAction extends ActionSupport implements SessionAware
 {
 	private Map<String, Object> session;
-	private User user;
+	private User user=null;
 	private List<NewsItem> allNews;
 	private List<AnnouncementsItem> announcements;
 	
@@ -25,10 +25,10 @@ public class LayoutAction extends ActionSupport implements SessionAware
 	
 	public String execute() throws SQLException
 	{
-		user = (User)session.get("user");
-		if (user != null)
+		if(session!=null)
+			user = (User)session.get("user");
+		if(user != null)
 		{
-			System.out.println("user id: "+user.getUserId());
 			Connection cn=ConnectionPool.getConnection();
 			allNews=layoutDAO.getAllNews(cn);
 			announcements=layoutDAO.getAnnouncements(cn, Integer.parseInt(user.getUserId()));
@@ -41,16 +41,8 @@ public class LayoutAction extends ActionSupport implements SessionAware
 		return allNews;
 	}
 
-	public void setAllNews(List<NewsItem> allNews) {
-		this.allNews = allNews;
-	}
-
 	public List<AnnouncementsItem> getAnnouncements() {
 		return announcements;
-	}
-
-	public void setAnnouncements(List<AnnouncementsItem> announcements) {
-		this.announcements = announcements;
 	}
 	
 	public User getUser()

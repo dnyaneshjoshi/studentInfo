@@ -15,10 +15,8 @@
 			list="termList"></s:select>
 
 		<!-- The subject dropdown list -->
-		<s:select name="courseDisplayChoice" list="courseList"></s:select>
-
-		<!-- The search button -->
-		<s:submit />
+		<s:select name="courseDisplayChoice"  onchange="onTermChange()"
+			list="courseList"></s:select>
 
 		<!--  The grades table -->
 		<table border="1">

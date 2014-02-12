@@ -17,7 +17,7 @@
 				</form>
 			</td>
 			<td><a href="layoutAction">Home</a></td>
-			<td><a href="gradesAction">Grades</a></td>
+			<td><a href="grades.action">Grades</a></td>
 			<td><a href="subjectsAction">Subjects</a></td>
 			<td><a href="friendsPage">My Friends</a></td>
 		</tr>

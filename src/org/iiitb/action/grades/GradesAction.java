@@ -2,15 +2,25 @@ package org.iiitb.action.grades;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
+import org.iiitb.model.User;
+
+import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * 
  * @author Abhijith Madhav (MT2013002)
  * 
  */
-public class GradesAction
+public class GradesAction extends ActionSupport implements SessionAware
 {
-	private int studentID = 2;
+	/**
+	 * serial id
+	 */
+	private static final long serialVersionUID = -3927650660405287420L;
+
 	private final static String DEFAULT_TERM = "Semester";
 	private final static String DEFAULT_COURSE = "Subject";
 
@@ -21,6 +31,9 @@ public class GradesAction
 	private List<String> courseList;
 
 	private List<GradeInfo> resultList;
+
+	private Map<String, Object> session;
+	private static final String USER = "user";
 
 	public GradesAction()
 	{
@@ -35,40 +48,36 @@ public class GradesAction
 
 	public String execute() throws Exception
 	{
-		termList.addAll(new SemesterDao().getTerms(studentID));
-
-		if (!termDisplayChoice.equals(DEFAULT_TERM))
-			courseList.addAll(new CourseDao().getNames(studentID,
-					Integer.parseInt(termDisplayChoice)));
-
-		if (!termDisplayChoice.equals(DEFAULT_TERM)
-				&& !courseDisplayChoice.equals(DEFAULT_COURSE))
+		User loggedInUser = (User) this.session.get(USER);
+		if (loggedInUser != null)
 		{
-			System.out.println(termDisplayChoice + " : " + courseDisplayChoice);
-			System.out.println("Data for table");
-			resultList.addAll(new ResultDao().getGrades(studentID,
-					Integer.parseInt(termDisplayChoice), courseDisplayChoice));
+			termList.addAll(new SemesterDao().getTerms(Integer
+					.parseInt(loggedInUser.getUserId())));
+
+			if (!termDisplayChoice.equals(DEFAULT_TERM))
+				courseList.addAll(new CourseDao().getNames(
+						Integer.parseInt(loggedInUser.getUserId()),
+						Integer.parseInt(termDisplayChoice)));
+
+			if (!termDisplayChoice.equals(DEFAULT_TERM)
+					&& !courseDisplayChoice.equals(DEFAULT_COURSE))
+				resultList.addAll(new ResultDao().getGrades(
+						Integer.parseInt(loggedInUser.getUserId()),
+						Integer.parseInt(termDisplayChoice),
+						courseDisplayChoice));
+			else if (termDisplayChoice.equals(DEFAULT_TERM))
+				resultList.addAll(new ResultDao().getGrades(Integer
+						.parseInt(loggedInUser.getUserId())));
+			else if (!termDisplayChoice.equals(DEFAULT_TERM)
+					&& courseDisplayChoice.equals(DEFAULT_COURSE))
+				resultList.addAll(new ResultDao().getGrades(
+						Integer.parseInt(loggedInUser.getUserId()),
+						Integer.parseInt(termDisplayChoice)));
+
+			return SUCCESS;
 		}
-		else if (termDisplayChoice.equals(DEFAULT_TERM))
-		{
-			resultList.addAll(new ResultDao().getGrades(studentID));
-		}
-		else if (!termDisplayChoice.equals(DEFAULT_TERM)
-				&& courseDisplayChoice.equals(DEFAULT_COURSE))
-			resultList.addAll(new ResultDao().getGrades(studentID,
-					Integer.parseInt(termDisplayChoice)));
-
-		return "success";
-	}
-
-	public int getStudentID()
-	{
-		return studentID;
-	}
-
-	public void setStudentID(int studentID)
-	{
-		this.studentID = studentID;
+		else
+			return LOGIN;
 	}
 
 	public List<String> getTermList()
@@ -121,4 +130,16 @@ public class GradesAction
 		this.resultList = resultList;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.apache.struts2.interceptor.SessionAware#setSession(java.util.Map)
+	 */
+	@Override
+	public void setSession(Map<String, Object> session)
+	{
+		this.session = session;
+
+	}
 }

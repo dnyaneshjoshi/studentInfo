@@ -121,6 +121,7 @@ public class LoginAction extends ActionSupport implements SessionAware
 				user.setEmailId(result.getString("email"));
 				user.setName(result.getString("name"));
 				user.setUserType(result.getString("user_type"));
+				user.setPhoto(result.getString("photo"));
 
 			}
 			else

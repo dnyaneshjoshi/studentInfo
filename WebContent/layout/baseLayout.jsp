@@ -13,7 +13,18 @@
    <hr style="color:#3f3fbf;" />
    <tiles:insertAttribute name="menu" />
    <hr style="color:#3f3fbf;" />
-   <tiles:insertAttribute name="body" />
+   <table width="100%">
+   		<colgroup>
+			<col style="width:200px" />
+			<col />
+		</colgroup>
+		<tbody>
+			<tr>
+				<td><tiles:insertAttribute name="pic" /></td>
+				<td><tiles:insertAttribute name="body" /></td>
+			</tr>
+		</tbody>
+   </table>
    <hr style="color:#3f3fbf;" />
    <br />
    <table width="100%">

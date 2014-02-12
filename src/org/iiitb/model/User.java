@@ -8,6 +8,7 @@ public class User
 	String userId;
 	String emailId;
 	String password;
+	String photo;
 
 	public User(String username, String password)
 	{
@@ -75,5 +76,14 @@ public class User
 	{
 		this.userId = userId;
 	}
-
+	
+	public String getPhoto()
+	{
+		return this.photo;
+	}
+	
+	public void setPhoto(String photo)
+	{
+		this.photo=photo;
+	}
 }

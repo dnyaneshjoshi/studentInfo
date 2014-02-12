@@ -8,6 +8,7 @@
 	      <put-attribute name="title"  value="Student Information System"/>
 	      <put-attribute name="banner" value="/layout/banner.jsp"/>
 	      <put-attribute name="menu"   value="/layout/menu.jsp"/>
+	      <put-attribute name="pic"   value="/layout/pic.jsp"/>
 	      <put-attribute name="body"   value="/home/homePage.jsp"/>
 	      <put-attribute name="footerAnnouncements"   value="/layout/announcements.jsp"/>
 	      <put-attribute name="footerNews"   value="/layout/news.jsp"/>

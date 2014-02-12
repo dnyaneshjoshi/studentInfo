@@ -2,7 +2,7 @@ package org.iiitb.util;
 
 public interface Constants
 {
-	String GET_PASSWORD_QRY = "select * from user where username=?";
+	String GET_PASSWORD_QRY = "select user.*, student.* from user, student where username=? and user.user_id=student.student_id";
 
 	
 	String INVALID_PASSWORD_ERROR = "username, password doesn't match";

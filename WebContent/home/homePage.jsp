@@ -8,6 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	HOME
+	<div align="center" style="background-color:#e0e0ff;">
+		<h1 style="color:BLUE;">|</h1>
+		<h1 style="color:BLUE;">----<s:property value="user.name" />&apos;s Home ----</h1>
+		<h1 style="color:BLUE;">|</h1>
+	</div>
 </body>
 </html>

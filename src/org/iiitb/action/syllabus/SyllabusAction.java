@@ -17,17 +17,17 @@ import org.iiitb.util.ConnectionPool;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class SyllabusAction extends ActionSupport implements SessionAware{
-		
-	private List<SyllabusInfo> syllabusInfoList;
-	private SyllabusDAO syllabusDAO = new SyllabusDAOImpl();
-	
-	private String subjectCode = "SE101";
-	private List<NewsItem> allNews;
+public class SyllabusAction extends ActionSupport implements SessionAware {
+
+  private List<SyllabusInfo> syllabusInfoList;
+  private SyllabusDAO syllabusDAO = new SyllabusDAOImpl();
+
+  private String subjectCode;
+  private List<NewsItem> allNews;
   private List<AnnouncementsItem> announcements;
   private LayoutDAO layoutDAO = new LayoutDAOImpl();
   private Map<String, Object> session;
-  
+
   public List<NewsItem> getAllNews() {
     return allNews;
   }
@@ -43,34 +43,38 @@ public class SyllabusAction extends ActionSupport implements SessionAware{
   public void setAnnouncements(List<AnnouncementsItem> announcements) {
     this.announcements = announcements;
   }
-  
-	// subjectCode to be send as a request parameter from Subjects page.
-	public void setSubjectCode(String subjectCode) {
-		this.subjectCode = subjectCode;
-	}
 
-	public String execute() throws SQLException {
-	  User user = (User) session.get("user");
+  public String getSubjectCode() {
+    return subjectCode;
+  }
+
+  // subjectCode to be send as a request parameter from Subjects page.
+  public void setSubjectCode(String subjectCode) {
+    this.subjectCode = subjectCode;
+  }
+
+  public String execute() throws SQLException {
+    User user = (User) session.get("user");
     Connection connection = ConnectionPool.getConnection();
     syllabusInfoList = syllabusDAO.getSyllabus(connection, subjectCode);
     allNews = layoutDAO.getAllNews(connection);
     announcements = layoutDAO.getAnnouncements(connection,
         Integer.parseInt(user.getUserId()));
     ConnectionPool.freeConnection(connection);
-	    return SUCCESS;
-	  }
+    return SUCCESS;
+  }
 
-	public List<SyllabusInfo> getSyllabusInfoList() {
-		return syllabusInfoList;
-	}
+  public List<SyllabusInfo> getSyllabusInfoList() {
+    return syllabusInfoList;
+  }
 
-	public void setSyllabusInfoList(List<SyllabusInfo> syllabusInfoList) {
-		this.syllabusInfoList = syllabusInfoList;
-	}
+  public void setSyllabusInfoList(List<SyllabusInfo> syllabusInfoList) {
+    this.syllabusInfoList = syllabusInfoList;
+  }
 
   @Override
   public void setSession(Map<String, Object> session) {
     this.session = session;
-    
+
   }
 }

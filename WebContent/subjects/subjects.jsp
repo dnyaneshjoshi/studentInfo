@@ -34,7 +34,7 @@
 									<td>
 									<s:url
 											action="syllabusAction" var="syllabusURL">
-											<s:param name="courseId" value="courseId" />
+											<s:param name="subjectCode" value="subjectCode" />
 									</s:url>
 									<s:a href="%{syllabusURL}"><s:property value="subjectCode" /></s:a> 
 										</td>

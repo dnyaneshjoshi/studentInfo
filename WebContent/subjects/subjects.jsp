@@ -12,11 +12,12 @@
 		<div style="width: 20%; float: left;">Pic will come here</div>
 		<div style="width: 60%; float: left;">
 			<form action="subjectsAction" method="post" id="subjectsForm">
-				<div style="text-align:center">
-					<s:select list="subjectDisplayList" name="subjectDisplayChoice" onchange="javascript:submitForm()"></s:select>					
+				<div style="text-align: center">
+					<s:select list="subjectDisplayList" name="subjectDisplayChoice"
+						onchange="javascript:submitForm()"></s:select>
 				</div>
 				<div>
-					<table border="1" style="margin:0px auto">
+					<table border="1" style="margin: 0px auto">
 						<thead>
 							<tr>
 								<td>Subject Code</td>
@@ -30,7 +31,13 @@
 						<tbody>
 							<s:iterator value="subjectInfoList" status="subject">
 								<tr>
-									<td><s:property value="subjectCode" /></td>
+									<td>
+									<s:url
+											action="syllabusAction" var="syllabusURL">
+											<s:param name="courseId" value="courseId" />
+									</s:url>
+									<s:a href="%{syllabusURL}"><s:property value="subjectCode" /></s:a> 
+										</td>
 									<td><s:property value="subjectName" /></td>
 									<td><s:property value="facultyName" /></td>
 									<td><s:property value="semester" /></td>
@@ -48,9 +55,8 @@
 </body>
 
 <script type="text/javascript">
-
-function submitForm() {
-	document.getElementById("subjectsForm").submit();
-}
+	function submitForm() {
+		document.getElementById("subjectsForm").submit();
+	}
 </script>
 </html>

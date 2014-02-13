@@ -1,13 +1,20 @@
 package org.iiitb.action.friends;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
+import org.iiitb.action.dao.LayoutDAO;
 import org.iiitb.action.dao.StudentDAO;
+import org.iiitb.action.dao.impl.LayoutDAOImpl;
 import org.iiitb.action.dao.impl.StudentDAOImpl;
 import org.iiitb.model.StudentInfo;
 import org.iiitb.model.User;
+import org.iiitb.model.layout.AnnouncementsItem;
+import org.iiitb.model.layout.NewsItem;
+import org.iiitb.util.ConnectionPool;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
@@ -26,7 +33,9 @@ public class MyFriendsAction extends ActionSupport implements SessionAware
 	private List<StudentInfo> students;
 	private Map<String, Object> session;
 
-	
+  private List<NewsItem> allNews;
+  private List<AnnouncementsItem> announcements;
+  private LayoutDAO layoutDAO = new LayoutDAOImpl();
 
 	public StudentInfo getMyProfile()
 	{
@@ -48,7 +57,23 @@ public class MyFriendsAction extends ActionSupport implements SessionAware
 		this.students = students;
 	}
 
-	public String execute()
+	public List<NewsItem> getAllNews() {
+    return allNews;
+  }
+
+  public void setAllNews(List<NewsItem> allNews) {
+    this.allNews = allNews;
+  }
+
+  public List<AnnouncementsItem> getAnnouncements() {
+    return announcements;
+  }
+
+  public void setAnnouncements(List<AnnouncementsItem> announcements) {
+    this.announcements = announcements;
+  }
+
+  public String execute() throws SQLException
 	{
 
 		User user = (User) session.get("user");
@@ -58,18 +83,26 @@ public class MyFriendsAction extends ActionSupport implements SessionAware
 			StudentDAO studentDao = new StudentDAOImpl();
 
 			StudentInfo studentInfo = studentDao.getStudentByUserId(user.getUserId());
-
+			
+      
 			if (studentInfo != null)
 			{
 
 				setMyProfile(studentInfo);
 
 				setStudents(studentDao.getFriends(user.getUserId()));
+				
+				Connection connection = ConnectionPool.getConnection();
+	      allNews = layoutDAO.getAllNews(connection);
+	      announcements = layoutDAO.getAnnouncements(connection,
+	          Integer.parseInt(user.getUserId()));
+	      ConnectionPool.freeConnection(connection);
 			}
 			else
 			{
 				return ERROR;
 			}
+			
 		}
 
 		return SUCCESS;

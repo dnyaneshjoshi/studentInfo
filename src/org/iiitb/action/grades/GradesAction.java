@@ -1,11 +1,17 @@
 package org.iiitb.action.grades;
 
+import java.sql.Connection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
+import org.iiitb.action.dao.LayoutDAO;
+import org.iiitb.action.dao.impl.LayoutDAOImpl;
 import org.iiitb.model.User;
+import org.iiitb.model.layout.AnnouncementsItem;
+import org.iiitb.model.layout.NewsItem;
+import org.iiitb.util.ConnectionPool;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -35,6 +41,11 @@ public class GradesAction extends ActionSupport implements SessionAware
 	private Map<String, Object> session;
 	private static final String USER = "user";
 
+
+  private List<NewsItem> allNews;
+  private List<AnnouncementsItem> announcements;
+  private LayoutDAO layoutDAO = new LayoutDAOImpl();
+  
 	public GradesAction()
 	{
 		termList = new LinkedList<String>();
@@ -74,6 +85,11 @@ public class GradesAction extends ActionSupport implements SessionAware
 						Integer.parseInt(loggedInUser.getUserId()),
 						Integer.parseInt(termDisplayChoice)));
 
+			Connection connection = ConnectionPool.getConnection();
+			allNews = layoutDAO.getAllNews(connection);
+      announcements = layoutDAO.getAnnouncements(connection,
+          Integer.parseInt(loggedInUser.getUserId()));
+      ConnectionPool.freeConnection(connection);
 			return SUCCESS;
 		}
 		else
@@ -130,7 +146,24 @@ public class GradesAction extends ActionSupport implements SessionAware
 		this.resultList = resultList;
 	}
 
-	/*
+	
+	public List<NewsItem> getAllNews() {
+    return allNews;
+  }
+
+  public void setAllNews(List<NewsItem> allNews) {
+    this.allNews = allNews;
+  }
+
+  public List<AnnouncementsItem> getAnnouncements() {
+    return announcements;
+  }
+
+  public void setAnnouncements(List<AnnouncementsItem> announcements) {
+    this.announcements = announcements;
+  }
+
+  /*
 	 * (non-Javadoc)
 	 * 
 	 * @see

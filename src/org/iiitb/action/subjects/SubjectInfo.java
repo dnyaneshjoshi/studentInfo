@@ -7,6 +7,7 @@ package org.iiitb.action.subjects;
  */
 public class SubjectInfo {
 
+  private String courseId;
   private String subjectCode;
   private String subjectName;
   private String facultyName;
@@ -18,15 +19,29 @@ public class SubjectInfo {
     super();
   }
 
-  public SubjectInfo(String subjectCode, String subjectName,
+  public SubjectInfo(String courseId, String subjectCode, String subjectName,
       String facultyName, int semester, String enrolled, String grade) {
     super();
+    this.courseId = courseId;
     this.subjectCode = subjectCode;
     this.subjectName = subjectName;
     this.facultyName = facultyName;
     this.semester = semester;
     this.enrolled = enrolled;
     this.grade = grade;
+  }
+
+  
+  public String getCourseId() {
+    return courseId;
+  }
+
+  public void setCourseId(String courseId) {
+    this.courseId = courseId;
+  }
+
+  public String getEnrolled() {
+    return enrolled;
   }
 
   public String getSubjectCode() {
@@ -51,10 +66,6 @@ public class SubjectInfo {
 
   public void setSemester(int semester) {
     this.semester = semester;
-  }
-
-  public String isEnrolled() {
-    return enrolled;
   }
 
   public void setEnrolled(String enrolled) {

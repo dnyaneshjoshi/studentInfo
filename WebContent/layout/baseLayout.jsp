@@ -11,7 +11,15 @@
 <body style="background-color:#efefff;">
    <tiles:insertAttribute name="banner" />
    <hr style="color:#3f3fbf;" />
-   <tiles:insertAttribute name="menu" />
+   <table width="100%">
+		<tr>
+			<td><tiles:insertAttribute name="search" /></td>
+			<td><tiles:insertAttribute name="home" /></td>
+			<td><tiles:insertAttribute name="grades" /></td>
+			<td><tiles:insertAttribute name="subjects" /></td>
+			<td><tiles:insertAttribute name="myFriends" /></td>
+		</tr>
+   </table>
    <hr style="color:#3f3fbf;" />
    <table width="100%">
    		<colgroup>

@@ -21,8 +21,8 @@ public class SyllabusAction extends ActionSupport implements SessionAware{
 		
 	private List<SyllabusInfo> syllabusInfoList;
 	private SyllabusDAO syllabusDAO = new SyllabusDAOImpl();
+	private String subjectCode;
 	
-	private String subjectCode = "SE101";
 	private List<NewsItem> allNews;
   private List<AnnouncementsItem> announcements;
   private LayoutDAO layoutDAO = new LayoutDAOImpl();
@@ -44,6 +44,10 @@ public class SyllabusAction extends ActionSupport implements SessionAware{
 
   public void setAnnouncements(List<AnnouncementsItem> announcements) {
     this.announcements = announcements;
+  }
+  
+    public String getSubjectCode() {
+    return subjectCode;
   }
   
 	// subjectCode to be send as a request parameter from Subjects page.

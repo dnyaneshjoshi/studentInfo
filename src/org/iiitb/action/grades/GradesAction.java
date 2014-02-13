@@ -44,7 +44,7 @@ public class GradesAction extends ActionSupport implements SessionAware
 	private List<NewsItem> allNews;
 	private List<AnnouncementsItem> announcements;
 	private LayoutDAO layoutDAO = new LayoutDAOImpl();
-	private String lastLoggedOn;
+	private String lastLoggedOn = "";
 
 	public GradesAction()
 	{

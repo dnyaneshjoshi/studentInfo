@@ -26,15 +26,9 @@
 			</interceptor-stack>
 		</interceptors>
 
-		<action name="homeAction" class="org.iiitb.action.home.HomeAction">
-			<interceptor-ref name="secureAccess"></interceptor-ref>
-			<result name="success" type="tiles">homePage</result>
-			<result name="login">home.jsp</result>
-		</action>
-
 		<action name="layoutAction" class="org.iiitb.action.layout.LayoutAction">
 			<interceptor-ref name="secureAccess"></interceptor-ref>
-			<result name="success" type="redirect">homeAction</result>
+			<result name="success" type="tiles">homePage</result>
 			<result name="login">home.jsp</result>
 		</action>
 

@@ -11,7 +11,7 @@
 	<table width="100%">
 		<tr>
 			<td><h3 align="left">STUDENT ZONE</h3></td>
-			<td><h5 align="right"><small><s:property value="user.name" /></small> <a href="logout">Logout</a></h5></td>
+			<td><h5 align="right"><small><s:property value="#session.user.name" /></small> <a href="logout">Logout</a></h5></td>
 		</tr>
 	</table>
 </body>

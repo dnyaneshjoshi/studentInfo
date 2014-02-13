@@ -91,7 +91,6 @@ public class GradesAction extends ActionSupport implements SessionAware
 					Integer.parseInt(loggedInUser.getUserId()));
 			setLastLoggedOn(layoutDAO.getLastLoggedOn(connection,
 					Integer.parseInt(loggedInUser.getUserId())));
-			System.out.println(getLastLoggedOn());
 			ConnectionPool.freeConnection(connection);
 			return SUCCESS;
 		}

@@ -7,18 +7,29 @@
 	   <definition name="baseLayout" template="/layout/baseLayout.jsp">
 	      <put-attribute name="title"  value="Student Information System"/>
 	      <put-attribute name="banner" value="/layout/banner.jsp"/>
-	      <put-attribute name="menu"   value="/layout/menu.jsp"/>
+	      <put-attribute name="search"   value="/layout/search.jsp"/>
+	      <put-attribute name="home"   value="/layout/home.jsp"/>
+	      <put-attribute name="grades"   value="/layout/grades.jsp"/>
+	      <put-attribute name="subjects"   value="/layout/subjects.jsp"/>
+	      <put-attribute name="myFriends"   value="/layout/myFriends.jsp"/>
 	      <put-attribute name="pic"   value="/layout/pic.jsp"/>
-	      <put-attribute name="body"   value="/home/homePage.jsp"/>
+	      <put-attribute name="body"   value=""/>
 	      <put-attribute name="footerAnnouncements"   value="/layout/announcements.jsp"/>
 	      <put-attribute name="footerNews"   value="/layout/news.jsp"/>
 	   </definition>
 	   
+	   <definition name="homePage" extends="baseLayout">
+	   	  <put-attribute name="home"   value="/layout/homeBold.jsp"/>
+	      <put-attribute name="body" value="/home/homePage.jsp"/>
+	   </definition>
+	   
 	   <definition name="subjectsPage" extends="baseLayout">
+	      <put-attribute name="subjects"   value="/layout/subjectsBold.jsp"/>
 	      <put-attribute name="body" value="/subjects/subjects.jsp"/>
 	   </definition>
 	   
 	   <definition name="myFriendsPage" extends="baseLayout">
+	      <put-attribute name="myFriends"   value="/layout/myFriendsBold.jsp"/>
 	      <put-attribute name="body" value="/friends/myFriends.jsp"/>
 	   </definition>
 	   
@@ -31,6 +42,7 @@
 	   </definition>
 	   
 	   <definition name="gradesPage" extends="baseLayout">
+	      <put-attribute name="grades"   value="/layout/gradesBold.jsp"/>
 	      <put-attribute name="body" value="/grades/grades.jsp"/>
 	   </definition>
 </tiles-definitions>

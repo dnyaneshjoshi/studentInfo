@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="/struts-tags" prefix="s" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,8 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<img src='layout/resources/<s:property value="#session.user.photo" />' alt='Photo' width="150px" />
-	<br>
-	Last logged on: <s:label key="lastLoggedOn" />
+	<a href="grades.action">Grades</a>
 </body>
 </html>

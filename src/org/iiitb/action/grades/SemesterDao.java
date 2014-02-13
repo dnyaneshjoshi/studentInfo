@@ -20,6 +20,12 @@ import java.sql.SQLException;
 public class SemesterDao
 {
 	private List<String> termList;
+	
+	private static final String GET_TERMS_QUERY = "select distinct term"
+			+ " from semester,course,result"
+			+ " where course.semester_id = semester.semester_id "
+			+ "and course.course_id = result.course_id "
+			+ "and result.student_id=?";
 
 	public SemesterDao()
 	{
@@ -33,9 +39,8 @@ public class SemesterDao
 		ResultSet rs;
 		try
 		{
-			ps = con
-					.prepareStatement("select distinct term from semester,course,result where course.semester_id = semester.semester_id and course.course_id = result.course_id and result.student_id = "
-							+ studentID);
+			ps = con.prepareStatement(GET_TERMS_QUERY);
+			ps.setInt(1, studentID);
 			rs = ps.executeQuery();
 			while(rs.next())
 				termList.add(new Integer((rs.getInt(1))).toString());

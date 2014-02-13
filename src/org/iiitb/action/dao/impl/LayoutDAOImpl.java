@@ -93,8 +93,7 @@ public class LayoutDAOImpl implements LayoutDAO
 		PreparedStatement ps = connection
 				.prepareStatement(UPDATE_LAST_LOGGED_ON);
 		ps.setInt(1, userId);
-		ResultSet rs = ps.executeQuery();
-		rs.close();
+		ps.executeUpdate();
 	}
 
 }

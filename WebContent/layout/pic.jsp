@@ -10,6 +10,6 @@
 <body>
 	<img src='layout/resources/<s:property value="#session.user.photo" />' alt='Photo' width="150px" />
 	<br>
-	Last logged on: <s:label key="lastLoggedOn" />
+	Last logged on: <s:property value="lastLoggedOn" />
 </body>
 </html>

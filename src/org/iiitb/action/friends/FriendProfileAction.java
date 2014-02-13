@@ -32,6 +32,7 @@ public class FriendProfileAction extends ActionSupport implements SessionAware
   private List<NewsItem> allNews;
   private List<AnnouncementsItem> announcements;
   private LayoutDAO layoutDAO = new LayoutDAOImpl();
+  private String lastLoggedOn;
   
   public List<NewsItem> getAllNews() {
     return allNews;
@@ -138,6 +139,9 @@ public class FriendProfileAction extends ActionSupport implements SessionAware
       announcements = layoutDAO.getAnnouncements(connection,
           Integer.parseInt(user.getUserId()));
       ConnectionPool.freeConnection(connection);
+		setLastLoggedOn(layoutDAO.getLastLoggedOn(connection,
+				Integer.parseInt(user.getUserId())));
+
 			setFriendProfile(studentInfo);
 
 			if (studentInfo.getStudentId() == Integer.parseInt(user.getUserId()))
@@ -178,5 +182,15 @@ public class FriendProfileAction extends ActionSupport implements SessionAware
 	{
 		this.session = session;
 
+	}
+
+	public String getLastLoggedOn()
+	{
+		return lastLoggedOn;
+	}
+
+	public void setLastLoggedOn(String lastLoggedOn)
+	{
+		this.lastLoggedOn = lastLoggedOn;
 	}
 }

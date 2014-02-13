@@ -41,11 +41,11 @@ public class GradesAction extends ActionSupport implements SessionAware
 	private Map<String, Object> session;
 	private static final String USER = "user";
 
+	private List<NewsItem> allNews;
+	private List<AnnouncementsItem> announcements;
+	private LayoutDAO layoutDAO = new LayoutDAOImpl();
+	private String lastLoggedOn;
 
-  private List<NewsItem> allNews;
-  private List<AnnouncementsItem> announcements;
-  private LayoutDAO layoutDAO = new LayoutDAOImpl();
-  
 	public GradesAction()
 	{
 		termList = new LinkedList<String>();
@@ -87,9 +87,12 @@ public class GradesAction extends ActionSupport implements SessionAware
 
 			Connection connection = ConnectionPool.getConnection();
 			allNews = layoutDAO.getAllNews(connection);
-      announcements = layoutDAO.getAnnouncements(connection,
-          Integer.parseInt(loggedInUser.getUserId()));
-      ConnectionPool.freeConnection(connection);
+			announcements = layoutDAO.getAnnouncements(connection,
+					Integer.parseInt(loggedInUser.getUserId()));
+			setLastLoggedOn(layoutDAO.getLastLoggedOn(connection,
+					Integer.parseInt(loggedInUser.getUserId())));
+			System.out.println(getLastLoggedOn());
+			ConnectionPool.freeConnection(connection);
 			return SUCCESS;
 		}
 		else
@@ -146,24 +149,27 @@ public class GradesAction extends ActionSupport implements SessionAware
 		this.resultList = resultList;
 	}
 
-	
-	public List<NewsItem> getAllNews() {
-    return allNews;
-  }
+	public List<NewsItem> getAllNews()
+	{
+		return allNews;
+	}
 
-  public void setAllNews(List<NewsItem> allNews) {
-    this.allNews = allNews;
-  }
+	public void setAllNews(List<NewsItem> allNews)
+	{
+		this.allNews = allNews;
+	}
 
-  public List<AnnouncementsItem> getAnnouncements() {
-    return announcements;
-  }
+	public List<AnnouncementsItem> getAnnouncements()
+	{
+		return announcements;
+	}
 
-  public void setAnnouncements(List<AnnouncementsItem> announcements) {
-    this.announcements = announcements;
-  }
+	public void setAnnouncements(List<AnnouncementsItem> announcements)
+	{
+		this.announcements = announcements;
+	}
 
-  /*
+	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
@@ -174,5 +180,15 @@ public class GradesAction extends ActionSupport implements SessionAware
 	{
 		this.session = session;
 
+	}
+
+	public String getLastLoggedOn()
+	{
+		return lastLoggedOn;
+	}
+
+	public void setLastLoggedOn(String lastLoggedOn)
+	{
+		this.lastLoggedOn = lastLoggedOn;
 	}
 }

@@ -9,5 +9,6 @@
 </head>
 <body>
 	<img src='layout/resources/<s:property value="user.photo" />' alt='Photo' width="150px" />
+	Last logged on  <s:label key="lastLoggedOn" />
 </body>
 </html>

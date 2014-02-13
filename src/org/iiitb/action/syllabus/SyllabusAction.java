@@ -28,6 +28,8 @@ public class SyllabusAction extends ActionSupport implements SessionAware{
   private LayoutDAO layoutDAO = new LayoutDAOImpl();
   private Map<String, Object> session;
   
+  private String lastLoggedOn;
+  
   public List<NewsItem> getAllNews() {
     return allNews;
   }
@@ -56,6 +58,8 @@ public class SyllabusAction extends ActionSupport implements SessionAware{
     allNews = layoutDAO.getAllNews(connection);
     announcements = layoutDAO.getAnnouncements(connection,
         Integer.parseInt(user.getUserId()));
+	setLastLoggedOn(layoutDAO.getLastLoggedOn(connection,
+			Integer.parseInt(user.getUserId())));
     ConnectionPool.freeConnection(connection);
 	    return SUCCESS;
 	  }
@@ -73,4 +77,14 @@ public class SyllabusAction extends ActionSupport implements SessionAware{
     this.session = session;
     
   }
+
+public String getLastLoggedOn()
+{
+	return lastLoggedOn;
+}
+
+public void setLastLoggedOn(String lastLoggedOn)
+{
+	this.lastLoggedOn = lastLoggedOn;
+}
 }

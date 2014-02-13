@@ -37,6 +37,8 @@ public class SubjectsAction extends ActionSupport implements SessionAware {
   private LayoutDAO layoutDAO = new LayoutDAOImpl();
   private CourseDAO courseDAO = new CourseDAOImpl();
   private Map<String, Object> session;
+  
+  private String lastLoggedOn;
 
   {
     subjectDisplayList = new ArrayList<String>();
@@ -100,6 +102,8 @@ public class SubjectsAction extends ActionSupport implements SessionAware {
       allNews = layoutDAO.getAllNews(connection);
       announcements = layoutDAO.getAnnouncements(connection,
           Integer.parseInt(loggedInUser.getUserId()));
+		setLastLoggedOn(layoutDAO.getLastLoggedOn(connection,
+				Integer.parseInt(loggedInUser.getUserId())));
       
       ConnectionPool.freeConnection(connection);
       return SUCCESS;
@@ -112,5 +116,15 @@ public class SubjectsAction extends ActionSupport implements SessionAware {
   public void setSession(Map<String, Object> session) {
     this.session = session;
   }
+
+public String getLastLoggedOn()
+{
+	return lastLoggedOn;
+}
+
+public void setLastLoggedOn(String lastLoggedOn)
+{
+	this.lastLoggedOn = lastLoggedOn;
+}
 
 }

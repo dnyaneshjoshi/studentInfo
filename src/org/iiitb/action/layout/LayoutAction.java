@@ -20,6 +20,7 @@ public class LayoutAction extends ActionSupport implements SessionAware
 	private User user=null;
 	private List<NewsItem> allNews;
 	private List<AnnouncementsItem> announcements;
+	private String lastLoggedOn;
 	
 	private LayoutDAO layoutDAO=new LayoutDAOImpl();
 	
@@ -32,6 +33,8 @@ public class LayoutAction extends ActionSupport implements SessionAware
 			Connection cn=ConnectionPool.getConnection();
 			allNews=layoutDAO.getAllNews(cn);
 			announcements=layoutDAO.getAnnouncements(cn, Integer.parseInt(user.getUserId()));
+			setLastLoggedOn(layoutDAO.getLastLoggedOn(cn,
+					Integer.parseInt(user.getUserId())));
 			ConnectionPool.freeConnection(cn);	
 		}
 		return "success";
@@ -53,5 +56,15 @@ public class LayoutAction extends ActionSupport implements SessionAware
 	@Override
 	public void setSession(Map<String, Object> arg0) {
 		this.session=arg0;
+	}
+
+	public String getLastLoggedOn()
+	{
+		return lastLoggedOn;
+	}
+
+	public void setLastLoggedOn(String lastLoggedOn)
+	{
+		this.lastLoggedOn = lastLoggedOn;
 	}
 }

@@ -11,4 +11,6 @@ public interface LayoutDAO
 {
 	public List<NewsItem> getAllNews(Connection connection) throws SQLException;
 	public List<AnnouncementsItem> getAnnouncements(Connection connection, int userId) throws SQLException;
+	public String getLastLoggedOn(Connection connection, int userId) throws SQLException;
+	public void setLastLoggedOn(Connection connection, int userId) throws SQLException;
 }

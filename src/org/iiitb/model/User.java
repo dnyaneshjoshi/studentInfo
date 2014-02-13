@@ -9,6 +9,7 @@ public class User
 	String emailId;
 	String password;
 	String photo;
+	private String lastLoggedOn;
 
 	public User(String username, String password)
 	{
@@ -85,5 +86,15 @@ public class User
 	public void setPhoto(String photo)
 	{
 		this.photo=photo;
+	}
+
+	public String getLastLoggedOn()
+	{
+		return lastLoggedOn;
+	}
+
+	public void setLastLoggedOn(String lastLoggedOn)
+	{
+		this.lastLoggedOn = lastLoggedOn;
 	}
 }

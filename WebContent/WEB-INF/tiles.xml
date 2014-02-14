@@ -45,4 +45,9 @@
 	      <put-attribute name="grades"   value="/layout/gradesBold.jsp"/>
 	      <put-attribute name="body" value="/grades/grades.jsp"/>
 	   </definition>
+	   
+	   <definition name="syllabusPage" extends="baseLayout">
+	      <put-attribute name="subjects"   value="/layout/subjectsBold.jsp"/>
+	      <put-attribute name="body" value="/syllabus/syllabus.jsp"/>
+	   </definition>
 </tiles-definitions>

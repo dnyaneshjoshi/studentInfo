@@ -9,9 +9,19 @@
 </head>
 <body>
 	<div align="center" style="background-color:#e0e0ff;">
-		<h1 style="color:BLUE;">|</h1>
-		<h1 style="color:BLUE;">----<s:property value="user.name" />&apos;s Home ----</h1>
-		<h1 style="color:BLUE;">|</h1>
+		<br />
+		<h3 style="color:BLUE;"><s:property value="user.name" />&apos;s Home</h3>
+		<div align="left" style="margin-left: 10px;">
+			Welcome to Student Information System.<br /><br />
+			<b>Tips:</b><br />
+			<ul>
+				<li>Type the roll number of the student you wish to search for in the search textbox in the menu.</li>
+				<li>Use the four hyperlinks (Home, Grades, Subjects and My Friends) to navigate to the respective pages.</li>
+				<li>Announcements matching your interests are displayed below on the left. Hover the mouse pointer over the section to stop auto-scrolling.</li>
+				<li>The news are displayed below on the right. Hover the mouse pointer over the section to stop auto-scrolling.</li>
+			</ul>
+		</div>
+		<br />
 	</div>
 </body>
 </html>

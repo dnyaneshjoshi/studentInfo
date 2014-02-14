@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div style="text-align:center">
-		<span><h1>Syllabus</h1></span>
+		<span><h1>Syllabus of <s:property value="subjectCode"/></h1></span>
 		<table border="0" style="margin:0px auto">
 			<thead>
 				<tr>

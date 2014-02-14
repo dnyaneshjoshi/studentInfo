@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<marquee direction="up" height="100%">
+	<marquee direction="up" height="100%" onmouseover="this.stop();" onmouseout="this.start();">
 		<ol>
 		<s:iterator value="allNews" status="NewsItem">
 			<li><b><s:property value="name"/></b><br /><small><s:property value="details"/></small><hr /></li>

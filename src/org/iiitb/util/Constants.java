@@ -4,7 +4,7 @@ public interface Constants
 {
 	String GET_PASSWORD_QRY = "select user.*, student.* from user, student where username=? and user.user_id=student.student_id";
 
-	
+	String GET_USER= "select * from user where username=?";
 	String INVALID_PASSWORD_ERROR = "username, password doesn't match";
 	String INVALID_USER_ERROR = "user doesnt exits";
 

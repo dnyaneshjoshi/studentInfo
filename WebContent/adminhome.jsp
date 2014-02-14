@@ -7,7 +7,7 @@
 <title>Admin Home page</title>
 </head>
 <body>
-<h1 align="middle">Admin Home page</h1>
+<h1 align="middle">Admin Home page</h1><h5 align="right"><small><s:property value="admin" /></small> <a href="logout">Logout</a></h5>
 	<h1>Contents</h1>
 	<br>
 	

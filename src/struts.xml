@@ -36,6 +36,7 @@
 			<result name="success" type="redirect">layoutAction</result>
 			<result name="login">home.jsp</result>
 			<result name="input">home.jsp</result>
+			<result name="admin">adminhome.jsp</result>
 		</action>
 
 		<action name="subjectsAction" class="org.iiitb.action.subjects.SubjectsAction">

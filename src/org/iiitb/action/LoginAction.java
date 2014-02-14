@@ -65,6 +65,10 @@ public class LoginAction extends ActionSupport implements SessionAware
 			if (isValidUser(newUser))
 			{
 				session.put("user", newUser);
+				if(newUser.getUserType().equalsIgnoreCase("A"))
+				{
+					return "admin";
+				}
 				return SUCCESS;
 			}
 			else
@@ -104,11 +108,11 @@ public class LoginAction extends ActionSupport implements SessionAware
 		PreparedStatement preStmt;
 		try
 		{
-			preStmt = conn.prepareStatement(Constants.GET_PASSWORD_QRY);
+			preStmt = conn.prepareStatement(Constants.GET_USER);
 
 			preStmt.setString(1, user.getUsername());
 			ResultSet result = preStmt.executeQuery();
-
+			
 			if (result.first())
 			{
 				if (!user.getPassword().equals(result.getString(Constants.DB_PASSWORD)))
@@ -116,12 +120,28 @@ public class LoginAction extends ActionSupport implements SessionAware
 					addFieldError(Constants.DB_PASSWORD, Constants.INVALID_PASSWORD_ERROR);
 					return false;
 				}
+				else
+				{
+					
+					user.setUserId(result.getString("user_id"));
+					user.setEmailId(result.getString("email"));
+					user.setName(result.getString("name"));
+					user.setUserType(result.getString("user_type"));
+					
+					
+					if(user.getUserType().equalsIgnoreCase("A"))
+						return true;
+					else
+					{
+						preStmt = conn.prepareStatement(Constants.GET_PASSWORD_QRY);
+						preStmt.setString(1, user.getUsername());
+						result = preStmt.executeQuery();
+						user.setPhoto(result.getString("photo"));		
+					
+					}
+						
+				}
 
-				user.setUserId(result.getString("user_id"));
-				user.setEmailId(result.getString("email"));
-				user.setName(result.getString("name"));
-				user.setUserType(result.getString("user_type"));
-				user.setPhoto(result.getString("photo"));
 
 			}
 			else
@@ -129,6 +149,7 @@ public class LoginAction extends ActionSupport implements SessionAware
 				addFieldError(Constants.DB_USERNAME, Constants.INVALID_USER_ERROR);
 				return false;
 			}
+				
 		}
 		catch (SQLException e)
 		{

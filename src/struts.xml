@@ -81,7 +81,7 @@
 
 		<action name="syllabusAction" class="org.iiitb.action.syllabus.SyllabusAction">
 			<interceptor-ref name="secureAccess"></interceptor-ref>
-			<result name="success">syllabus/syllabus.jsp</result>
+			<result name="success" type="tiles">syllabusPage</result>
 			<result name="login">home.jsp</result>
 		</action>
 		<action name="adduser" class="org.iiitb.action.user.AdduserAction">

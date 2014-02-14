@@ -27,7 +27,7 @@
 			<col />
 		</colgroup>
 		<tbody>
-			<tr>
+			<tr valign="top">
 				<td><tiles:insertAttribute name="pic" /></td>
 				<td><tiles:insertAttribute name="body" /></td>
 			</tr>

@@ -20,7 +20,16 @@ import java.sql.SQLException;
 public class CourseDao
 {
 	private List<String> courseList;
-
+	private String GET_NAMES_QUERY = "select distinct course.name"
+			+ " from result, course "
+			+ "where result.course_id = course.course_id "
+			+ "and result.student_id=?";
+	private String GET_NAMES_QUERY_TERM = "select distinct course.name "
+			+ "from result, course, semester "
+			+ "where result.course_id = course.course_id "
+			+ "and course.semester_id = semester.semester_id "
+			+ "and result.student_id = ? and semester.term = ?";
+	
 	public CourseDao()
 	{
 		courseList = new LinkedList<String>();
@@ -33,8 +42,9 @@ public class CourseDao
 		ResultSet rs;
 		try
 		{		
-			ps = con.prepareStatement("select distinct course.name from result, course where result.course_id = course.course_id and result.student_id = " + studentID);
+			ps = con.prepareStatement(GET_NAMES_QUERY);
 			rs = ps.executeQuery();
+			ps.setInt(1,  studentID);
 			while(rs.next())
 				courseList.add(rs.getString(1));
 
@@ -56,7 +66,9 @@ public class CourseDao
 		ResultSet rs;
 		try
 		{		
-			ps = con.prepareStatement("select distinct course.name from result, course, semester where result.course_id = course.course_id and course.semester_id = semester.semester_id and result.student_id = " + studentID + " and semester.term = " + term);
+			ps = con.prepareStatement(GET_NAMES_QUERY_TERM);
+			ps.setInt(1, studentID);
+			ps.setInt(2, term);
 			rs = ps.executeQuery();
 			while(rs.next())
 				courseList.add(rs.getString(1));

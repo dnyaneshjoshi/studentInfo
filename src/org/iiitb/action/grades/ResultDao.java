@@ -20,6 +20,40 @@ import java.sql.SQLException;
 public class ResultDao
 {
 	private List<GradeInfo> resultList;
+	private String GET_GRADES_QUERY1 = "select course.code, grade.name, "
+			+ "grade.status "
+			+ "from course, result, grade, semester "
+			+ "where course.course_id = result.course_id "
+			+ "and result.grade_id = grade.grade_id "
+			+ "and course.semester_id = semester.semester_id "
+			+ "and result.student_id = ? "
+			+ "and semester.term = ? "
+			+ " and course.name = ?";
+	private static final String GET_GRADES_QUERY2 = "select "
+			+ "course.name, course.code, grade.name, grade.status "
+			+ "from "
+			+ "course, result, grade, semester "
+			+ "where "
+			+ "course.course_id = result.course_id "
+			+ "and "
+			+ "result.grade_id = grade.grade_id "
+			+ "and "
+			+ "course.semester_id = semester.semester_id "
+			+ "and "
+			+ "result.student_id = ?";
+	private static final String GET_GRADES_QUERY3 = "select "
+			+ "course.name, course.code, grade.name, grade.status "
+			+ "from "
+			+ "course, result, grade, semester "
+			+ "where "
+			+ "course.course_id = result.course_id "
+			+ "and "
+			+ "result.grade_id = grade.grade_id "
+			+ "and "
+			+ "course.semester_id = semester.semester_id "
+			+ "and "
+			+ "result.student_id = ? "
+			+ "and semester.term = ? ";
 
 	public ResultDao()
 	{
@@ -33,11 +67,10 @@ public class ResultDao
 		ResultSet rs;
 		try
 		{
-			ps = con.prepareStatement("select course.code, grade.name, grade.status from course, result, grade, semester where course.course_id = result.course_id and result.grade_id = grade.grade_id and course.semester_id = semester.semester_id and result.student_id = "
-					+ studentID
-					+ " and semester.term = "
-					+ term
-					+ " and course.name = \"" + subjectName + "\"");
+			ps = con.prepareStatement(GET_GRADES_QUERY1);
+			ps.setInt(1, studentID);
+			ps.setInt(2, term);
+			ps.setString(3, subjectName);
 			rs = ps.executeQuery();
 			while (rs.next())
 			{
@@ -65,8 +98,8 @@ public class ResultDao
 		ResultSet rs;
 		try
 		{
-			ps = con.prepareStatement("select course.name, course.code, grade.name, grade.status from course, result, grade, semester where course.course_id = result.course_id and result.grade_id = grade.grade_id and course.semester_id = semester.semester_id and result.student_id = "
-					+ studentID);
+			ps = con.prepareStatement(GET_GRADES_QUERY2);
+			ps.setInt(1, studentID);
 			rs = ps.executeQuery();
 			while (rs.next())
 			{
@@ -96,10 +129,9 @@ public class ResultDao
 		ResultSet rs;
 		try
 		{
-			ps = con.prepareStatement("select course.name, course.code, grade.name, grade.status from course, result, grade, semester where course.course_id = result.course_id and result.grade_id = grade.grade_id and course.semester_id = semester.semester_id and result.student_id = "
-					+ studentID
-					+ " and semester.term = "
-					+ term);
+			ps = con.prepareStatement(GET_GRADES_QUERY3);
+			ps.setInt(1, studentID);
+			ps.setInt(2, term);
 			rs = ps.executeQuery();
 			while (rs.next())
 			{

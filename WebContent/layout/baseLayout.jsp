@@ -8,7 +8,7 @@
 	<title><tiles:insertAttribute name="title" ignore="true" /></title>
 </head>
 
-<body style="background-color:#efefff;">
+<body style="background-color:#efefff; font-family: cursive;">
    <tiles:insertAttribute name="banner" />
    <hr style="color:#3f3fbf;" />
    <table width="100%">

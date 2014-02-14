@@ -29,27 +29,31 @@ public class FriendProfileAction extends ActionSupport implements SessionAware
 
 	private String rollNo;
 
-  private List<NewsItem> allNews;
-  private List<AnnouncementsItem> announcements;
-  private LayoutDAO layoutDAO = new LayoutDAOImpl();
-  private String lastLoggedOn;
-  
-  public List<NewsItem> getAllNews() {
-    return allNews;
-  }
+	private List<NewsItem> allNews;
+	private List<AnnouncementsItem> announcements;
+	private LayoutDAO layoutDAO = new LayoutDAOImpl();
+	private String lastLoggedOn;
 
-  public void setAllNews(List<NewsItem> allNews) {
-    this.allNews = allNews;
-  }
+	public List<NewsItem> getAllNews()
+	{
+		return allNews;
+	}
 
-  public List<AnnouncementsItem> getAnnouncements() {
-    return announcements;
-  }
+	public void setAllNews(List<NewsItem> allNews)
+	{
+		this.allNews = allNews;
+	}
 
-  public void setAnnouncements(List<AnnouncementsItem> announcements) {
-    this.announcements = announcements;
-  }
-  
+	public List<AnnouncementsItem> getAnnouncements()
+	{
+		return announcements;
+	}
+
+	public void setAnnouncements(List<AnnouncementsItem> announcements)
+	{
+		this.announcements = announcements;
+	}
+
 	public String getRollNo()
 	{
 		return rollNo;
@@ -135,12 +139,12 @@ public class FriendProfileAction extends ActionSupport implements SessionAware
 			User user = (User) session.get("user");
 
 			Connection connection = ConnectionPool.getConnection();
-      allNews = layoutDAO.getAllNews(connection);
-      announcements = layoutDAO.getAnnouncements(connection,
-          Integer.parseInt(user.getUserId()));
-      ConnectionPool.freeConnection(connection);
-		setLastLoggedOn(layoutDAO.getLastLoggedOn(connection,
-				Integer.parseInt(user.getUserId())));
+			allNews = layoutDAO.getAllNews(connection);
+			announcements = layoutDAO.getAnnouncements(connection, Integer.parseInt(user.getUserId()));
+
+			setLastLoggedOn(layoutDAO.getLastLoggedOn(connection, Integer.parseInt(user.getUserId())));
+
+			ConnectionPool.freeConnection(connection);
 
 			setFriendProfile(studentInfo);
 

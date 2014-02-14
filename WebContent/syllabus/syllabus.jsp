@@ -8,6 +8,7 @@
 <title>Syllabus Page</title>
 </head>
 <body>
+	<a href="subjectsAction">Back</a>
 	<div style="text-align:center">
 		<span><h1>Syllabus of <s:property value="subjectCode"/></h1></span>
 		<table border="0" style="margin:0px auto">

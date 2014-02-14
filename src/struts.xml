@@ -83,7 +83,31 @@
 			<result name="success">syllabus/syllabus.jsp</result>
 			<result name="login">home.jsp</result>
 		</action>
-
+		<action name="adduser" class="org.iiitb.action.user.AdduserAction">
+			<result name="success">adminhome.jsp</result>
+			<result name="error">adminhome.jsp</result>
+			<result name="input">add_user.jsp</result>
+		</action>
+		<action name="addnews" class="org.iiitb.action.news.AddnewsAction">
+			<result name="success">adminhome.jsp</result>
+			<result name="error">adminhome.jsp</result>
+			<result name="input">add_news.jsp</result>
+		</action>
+		<action name="addann" class="org.iiitb.action.announcements.AddannAction">
+			<result name="success">adminhome.jsp</result>
+			<result name="error">adminhome.jsp</result>
+			<result name="input">add_ann.jsp</result>
+		</action>
+		<action name="removenews" class="org.iiitb.action.news.RemovenewsAction">
+			<result name="success">adminhome.jsp</result>
+			<result name="error">adminhome.jsp</result>
+			<result name="input">remove_news.jsp</result>
+		</action>
+		<action name="removeann" class="org.iiitb.action.announcements.RemoveannAction">
+			<result name="success">adminhome.jsp</result>
+			<result name="error">adminhome.jsp</result>
+			<result name="input">remove_ann.jsp</result>
+		</action>
 	</package>
 
 </struts>

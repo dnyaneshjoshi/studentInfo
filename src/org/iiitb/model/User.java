@@ -10,7 +10,10 @@ public class User
 	String password;
 	String photo;
 	private String lastLoggedOn;
-
+	public User()
+	{
+		
+	}
 	public User(String username, String password)
 	{
 		super();

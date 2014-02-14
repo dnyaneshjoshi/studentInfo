@@ -33,6 +33,9 @@
 					<s:textfield key="faculty" label="Faculty "></s:textfield>
 				</td>
 				<td>
+					<s:textfield key="lastDate" label="Last Date for Enrollnment "></s:textfield>
+				</td>
+				<td>
 					<s:textarea key="syllabus" label="Syllabus " cols="50" rows="10"></s:textarea>
 				</td>
 			</tr>

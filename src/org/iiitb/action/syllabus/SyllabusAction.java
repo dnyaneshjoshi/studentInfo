@@ -23,10 +23,19 @@ public class SyllabusAction extends ActionSupport implements SessionAware{
 	private SyllabusDAO syllabusDAO = new SyllabusDAOImpl();
 	private String subjectCode;
 	
+	private String code;
+	private String courseName;
+	private String credits;
+	private String lastDate;
+	private String semester;
+	private String year;
+	private String facultyName;
+	private String syllabus;
+	
 	private List<NewsItem> allNews;
-  private List<AnnouncementsItem> announcements;
-  private LayoutDAO layoutDAO = new LayoutDAOImpl();
-  private Map<String, Object> session;
+	private List<AnnouncementsItem> announcements;
+	private LayoutDAO layoutDAO = new LayoutDAOImpl();
+	private Map<String, Object> session;
   
   private String lastLoggedOn;
   
@@ -54,6 +63,70 @@ public class SyllabusAction extends ActionSupport implements SessionAware{
 	public void setSubjectCode(String subjectCode) {
 		this.subjectCode = subjectCode;
 	}
+	
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
+	public String getCredits() {
+		return credits;
+	}
+
+	public void setCredits(String credits) {
+		this.credits = credits;
+	}
+
+	public String getSemester() {
+		return semester;
+	}
+
+	public void setSemester(String semester) {
+		this.semester = semester;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	public String getFacultyName() {
+		return facultyName;
+	}
+
+	public String getLastDate() {
+		return lastDate;
+	}
+
+	public void setLastDate(String lastDate) {
+		this.lastDate = lastDate;
+	}
+
+	public void setFacultyName(String facultyName) {
+		this.facultyName = facultyName;
+	}
+
+	public String getSyllabus() {
+		return syllabus;
+	}
+
+	public void setSyllabus(String syllabus) {
+		this.syllabus = syllabus;
+	}
 
 	public String execute() throws SQLException {
 	  User user = (User) session.get("user");
@@ -67,6 +140,27 @@ public class SyllabusAction extends ActionSupport implements SessionAware{
     ConnectionPool.freeConnection(connection);
 	    return SUCCESS;
 	  }
+	
+	public String setCourseAndSyllabus() throws SQLException {
+		  User user = (User) session.get("user");
+		  Connection connection = ConnectionPool.getConnection();
+		  
+		  boolean result = syllabusDAO.setCourseAndSyllabus(connection, code, courseName, credits, lastDate, 
+					semester, year, facultyName, syllabus);
+		  
+		  
+		  allNews = layoutDAO.getAllNews(connection);
+		  announcements = layoutDAO.getAnnouncements(connection,Integer.parseInt(user.getUserId()));
+		
+		  setLastLoggedOn(layoutDAO.getLastLoggedOn(connection, Integer.parseInt(user.getUserId())));
+		    
+		  ConnectionPool.freeConnection(connection);
+		  
+		  if (result)
+			  return SUCCESS;
+		  else 
+			  return ERROR;
+	}
 
 	public List<SyllabusInfo> getSyllabusInfoList() {
 		return syllabusInfoList;

@@ -10,8 +10,8 @@
 
 <body style="background-color:#efefff; font-family: cursive;">
    <tiles:insertAttribute name="banner" />
-   <hr style="color:#3f3fbf;" />
-   <table width="100%">
+   
+   <table width="100%" height="50px" style="background-color:#afafff;">
 		<tr>
 			<td><tiles:insertAttribute name="search" /></td>
 			<td><tiles:insertAttribute name="home" /></td>
@@ -20,7 +20,7 @@
 			<td><tiles:insertAttribute name="myFriends" /></td>
 		</tr>
    </table>
-   <hr style="color:#3f3fbf;" />
+   <br />
    <table width="100%">
    		<colgroup>
 			<col style="width:200px" />

@@ -14,6 +14,7 @@ import org.iiitb.model.User;
 import org.iiitb.model.layout.AnnouncementsItem;
 import org.iiitb.model.layout.NewsItem;
 import org.iiitb.util.ConnectionPool;
+import org.iiitb.util.Constants;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -135,8 +136,7 @@ public class SyllabusAction extends ActionSupport implements SessionAware{
     allNews = layoutDAO.getAllNews(connection);
     announcements = layoutDAO.getAnnouncements(connection,
         Integer.parseInt(user.getUserId()));
-	setLastLoggedOn(layoutDAO.getLastLoggedOn(connection,
-			Integer.parseInt(user.getUserId())));
+	setLastLoggedOn((String) this.session.get(Constants.LAST_LOGGED_ON));
     ConnectionPool.freeConnection(connection);
 	    return SUCCESS;
 	  }

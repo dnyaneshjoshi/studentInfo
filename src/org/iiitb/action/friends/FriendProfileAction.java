@@ -142,7 +142,7 @@ public class FriendProfileAction extends ActionSupport implements SessionAware
 			allNews = layoutDAO.getAllNews(connection);
 			announcements = layoutDAO.getAnnouncements(connection, Integer.parseInt(user.getUserId()));
 
-			setLastLoggedOn(layoutDAO.getLastLoggedOn(connection, Integer.parseInt(user.getUserId())));
+			setLastLoggedOn((String) this.session.get(Constants.LAST_LOGGED_ON));
 
 			ConnectionPool.freeConnection(connection);
 

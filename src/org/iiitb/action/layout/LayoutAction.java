@@ -9,6 +9,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import org.apache.struts2.interceptor.SessionAware;
 import org.iiitb.util.ConnectionPool;
+import org.iiitb.util.Constants;
 import org.iiitb.action.dao.LayoutDAO;
 import org.iiitb.action.dao.impl.LayoutDAOImpl;
 import org.iiitb.model.User;
@@ -33,8 +34,7 @@ public class LayoutAction extends ActionSupport implements SessionAware
 			Connection cn=ConnectionPool.getConnection();
 			allNews=layoutDAO.getAllNews(cn);
 			announcements=layoutDAO.getAnnouncements(cn, Integer.parseInt(user.getUserId()));
-			setLastLoggedOn(layoutDAO.getLastLoggedOn(cn,
-					Integer.parseInt(user.getUserId())));
+			setLastLoggedOn((String) this.session.get(Constants.LAST_LOGGED_ON));
 			ConnectionPool.freeConnection(cn);	
 		}
 		return "success";

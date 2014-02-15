@@ -1,11 +1,9 @@
-/**
- * 
- */
-package org.iiitb.action.grades;
+package org.iiitb.action.dao.impl;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import org.iiitb.action.dao.SemesterDAO;
 import org.iiitb.util.ConnectionPool;
 
 import java.sql.PreparedStatement;
@@ -17,7 +15,7 @@ import java.sql.SQLException;
  * @author kempa
  * 
  */
-public class SemesterDao
+public class SemesterDAOImpl implements SemesterDAO
 {
 	private List<String> termList;
 	
@@ -27,7 +25,7 @@ public class SemesterDao
 			+ "and course.course_id = result.course_id "
 			+ "and result.student_id=?";
 
-	public SemesterDao()
+	public SemesterDAOImpl()
 	{
 		termList = new LinkedList<String>();
 	}
@@ -35,7 +33,7 @@ public class SemesterDao
 	public List<String> getTerms(int studentID)
 	{
 		Connection con = ConnectionPool.getConnection();
-		PreparedStatement ps;
+		PreparedStatement ps = null;
 		ResultSet rs;
 		try
 		{
@@ -49,8 +47,19 @@ public class SemesterDao
 		}
 		catch (SQLException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		finally
+		{
+			if (ps != null)
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
 		}
 		return termList;
 	}

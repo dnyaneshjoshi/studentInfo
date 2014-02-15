@@ -6,8 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
+import org.iiitb.action.dao.CourseDAO;
 import org.iiitb.action.dao.LayoutDAO;
+import org.iiitb.action.dao.ResultDAO;
+import org.iiitb.action.dao.impl.CourseDAOImpl;
 import org.iiitb.action.dao.impl.LayoutDAOImpl;
+import org.iiitb.action.dao.impl.ResultDAOImpl;
+import org.iiitb.action.dao.impl.SemesterDAOImpl;
+import org.iiitb.action.dao.SemesterDAO;
 import org.iiitb.model.User;
 import org.iiitb.model.layout.AnnouncementsItem;
 import org.iiitb.model.layout.NewsItem;
@@ -36,7 +42,7 @@ public class GradesAction extends ActionSupport implements SessionAware
 
 	private String courseDisplayChoice = DEFAULT_COURSE;
 	private List<String> courseList;
-
+	
 	private List<GradeInfo> resultList;
 
 	private Map<String, Object> session;
@@ -62,27 +68,27 @@ public class GradesAction extends ActionSupport implements SessionAware
 	{
 		User loggedInUser = (User) this.session.get(USER);
 		if (loggedInUser != null)
-		{
-			termList.addAll(new SemesterDao().getTerms(Integer
+		{	
+			termList.addAll(new SemesterDAOImpl().getTerms(Integer
 					.parseInt(loggedInUser.getUserId())));
 
 			if (!termDisplayChoice.equals(DEFAULT_TERM))
-				courseList.addAll(new CourseDao().getNames(
+				courseList.addAll(new CourseDAOImpl().getNames(
 						Integer.parseInt(loggedInUser.getUserId()),
 						Integer.parseInt(termDisplayChoice)));
 
 			if (!termDisplayChoice.equals(DEFAULT_TERM)
 					&& !courseDisplayChoice.equals(DEFAULT_COURSE))
-				resultList.addAll(new ResultDao().getGrades(
+				resultList.addAll(new ResultDAOImpl().getGrades(
 						Integer.parseInt(loggedInUser.getUserId()),
 						Integer.parseInt(termDisplayChoice),
 						courseDisplayChoice));
 			else if (termDisplayChoice.equals(DEFAULT_TERM))
-				resultList.addAll(new ResultDao().getGrades(Integer
+				resultList.addAll(new ResultDAOImpl().getGrades(Integer
 						.parseInt(loggedInUser.getUserId())));
 			else if (!termDisplayChoice.equals(DEFAULT_TERM)
 					&& courseDisplayChoice.equals(DEFAULT_COURSE))
-				resultList.addAll(new ResultDao().getGrades(
+				resultList.addAll(new ResultDAOImpl().getGrades(
 						Integer.parseInt(loggedInUser.getUserId()),
 						Integer.parseInt(termDisplayChoice)));
 

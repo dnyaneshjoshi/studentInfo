@@ -1,11 +1,13 @@
 /**
  * 
  */
-package org.iiitb.action.grades;
+package org.iiitb.action.dao.impl;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import org.iiitb.action.dao.ResultDAO;
+import org.iiitb.action.grades.GradeInfo;
 import org.iiitb.util.ConnectionPool;
 
 import java.sql.PreparedStatement;
@@ -17,10 +19,10 @@ import java.sql.SQLException;
  * @author kempa
  * 
  */
-public class ResultDao
+public class ResultDAOImpl implements ResultDAO
 {
-	private List<GradeInfo> resultList;
-	private String GET_GRADES_QUERY1 = "select course.code, grade.name, "
+	private List<GradeInfo> resultList = new LinkedList<GradeInfo>();
+	private static final String GET_GRADES_QUERY1 = "select course.code, grade.name, "
 			+ "grade.status "
 			+ "from course, result, grade, semester "
 			+ "where course.course_id = result.course_id "
@@ -55,15 +57,10 @@ public class ResultDao
 			+ "result.student_id = ? "
 			+ "and semester.term = ? ";
 
-	public ResultDao()
-	{
-		resultList = new LinkedList<GradeInfo>();
-	}
-
 	public List<GradeInfo> getGrades(int studentID, int term, String subjectName)
 	{
 		Connection con = ConnectionPool.getConnection();
-		PreparedStatement ps;
+		PreparedStatement ps = null;
 		ResultSet rs;
 		try
 		{
@@ -84,8 +81,19 @@ public class ResultDao
 		}
 		catch (SQLException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		finally
+		{
+			if (ps != null)
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
 		}
 
 		return resultList;
@@ -94,7 +102,7 @@ public class ResultDao
 	public List<GradeInfo> getGrades(int studentID)
 	{
 		Connection con = ConnectionPool.getConnection();
-		PreparedStatement ps;
+		PreparedStatement ps = null;
 		ResultSet rs;
 		try
 		{
@@ -114,8 +122,19 @@ public class ResultDao
 		}
 		catch (SQLException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		finally
+		{
+			if (ps != null)
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
 		}
 
 		
@@ -125,7 +144,7 @@ public class ResultDao
 	public List<GradeInfo> getGrades(int studentID, int term)
 	{
 		Connection con = ConnectionPool.getConnection();
-		PreparedStatement ps;
+		PreparedStatement ps = null;
 		ResultSet rs;
 		try
 		{
@@ -146,11 +165,21 @@ public class ResultDao
 		}
 		catch (SQLException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		finally
+		{
+			if (ps != null)
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
 		}
 
 		return resultList;
 	}
-
 }

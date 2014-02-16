@@ -45,4 +45,11 @@
 	      <put-attribute name="grades"   value="/layout/gradesBold.jsp"/>
 	      <put-attribute name="body" value="/grades/grades.jsp"/>
 	   </definition>
+	    <definition name="viewProfilePage" extends="baseLayout">
+	      <put-attribute name="body" value="/ViewProfile.jsp"/>
+	   </definition>
+	   <definition name="editProfilePage" extends="baseLayout">
+	      <put-attribute name="body" value="/EditProfile.jsp"/>
+	   </definition>
+	   
 </tiles-definitions>

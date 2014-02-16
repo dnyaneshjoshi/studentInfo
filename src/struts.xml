@@ -83,6 +83,31 @@
 			<result name="success">syllabus/syllabus.jsp</result>
 			<result name="login">home.jsp</result>
 		</action>
+		<action name="view" class="org.iiitb.action.viewprofile.MyProfileAction"
+			method="execute">
+			<result name="success" type="tiles">viewProfilePage</result>
+			<result name="login">home.jsp</result>
+		</action>
+		<action name="edit" class="org.iiitb.action.viewprofile.MyProfileAction"
+			method="execute">
+			<result name="success" type="tiles">editProfilePage</result>
+			<result name="login">home.jsp</result>
+		</action>
+		<action name="submit" class="org.iiitb.action.editprofile.EditProfileAction"
+			method="execute">
+			<interceptor-ref name="fileUpload">  
+         <param name="maximumSize">2097152</param>  
+         <param name="allowedTypes">  
+             image/png,image/gif,image/jpeg  
+         </param>  
+       </interceptor-ref>  
+    <interceptor-ref name="defaultStack"></interceptor-ref>  
+			<result name="success" type="tiles">viewProfilePage</result>
+			<result name="login">home.jsp</result>
+		</action>
+		
+		
+		
 
 	</package>
 

@@ -8,10 +8,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.iiitb.action.dao.CourseDAO;
 import org.iiitb.action.subjects.SubjectInfo;
+import org.iiitb.util.ConnectionPool;
 
 /**
  * @author arjun
@@ -78,6 +80,17 @@ public class CourseDAOImpl implements CourseDAO {
       + "    semester semester ON semester.semester_id = course.semester_id "
       + "WHERE " + "    student.user_id = ?";
 
+	private static final String GET_NAMES_QUERY = "select distinct course.name"
+			+ " from result, course "
+			+ "where result.course_id = course.course_id "
+			+ "and result.student_id=?";
+
+	private static final String GET_NAMES_QUERY_TERM = "select distinct course.name "
+			+ "from result, course, semester "
+			+ "where result.course_id = course.course_id "
+			+ "and course.semester_id = semester.semester_id "
+			+ "and result.student_id = ? and semester.term = ?";
+	
   private void createSubjectInfoListFromResultSet(ResultSet rs,
       List<SubjectInfo> subjectInfoList) throws SQLException {
     while (rs.next()) {
@@ -158,4 +171,76 @@ public class CourseDAOImpl implements CourseDAO {
     return subjectInfoList;
   }
 
+	public List<String> getNames(int studentID)
+	{
+		List<String> courseList = new LinkedList<String>();
+		Connection con = ConnectionPool.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs;
+		try
+		{		
+			ps = con.prepareStatement(GET_NAMES_QUERY);
+			rs = ps.executeQuery();
+			ps.setInt(1,  studentID);
+			while(rs.next())
+				courseList.add(rs.getString(1));
+
+			con.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if (ps != null)
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
+		}
+		
+		return courseList;
+	}
+	
+	public List<String> getNames(int studentID, int term)
+	{
+		List<String> courseList = new LinkedList<String>();
+		Connection con = ConnectionPool.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs;
+		try
+		{		
+			ps = con.prepareStatement(GET_NAMES_QUERY_TERM);
+			ps.setInt(1, studentID);
+			ps.setInt(2, term);
+			rs = ps.executeQuery();
+			while(rs.next())
+				courseList.add(rs.getString(1));
+
+			con.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if (ps != null)
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
+		}
+		
+		return courseList;
+	}
 }

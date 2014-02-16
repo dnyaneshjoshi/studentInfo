@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="layoutAction"><b>Home</b></a>
+	<a style="color:#ffffff;" href="layoutAction"><b>Home</b></a>
 </body>
 </html>

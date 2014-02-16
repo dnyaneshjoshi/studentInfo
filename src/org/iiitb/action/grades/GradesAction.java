@@ -6,12 +6,19 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
+import org.iiitb.action.dao.CourseDAO;
 import org.iiitb.action.dao.LayoutDAO;
+import org.iiitb.action.dao.ResultDAO;
+import org.iiitb.action.dao.impl.CourseDAOImpl;
 import org.iiitb.action.dao.impl.LayoutDAOImpl;
+import org.iiitb.action.dao.impl.ResultDAOImpl;
+import org.iiitb.action.dao.impl.SemesterDAOImpl;
+import org.iiitb.action.dao.SemesterDAO;
 import org.iiitb.model.User;
 import org.iiitb.model.layout.AnnouncementsItem;
 import org.iiitb.model.layout.NewsItem;
 import org.iiitb.util.ConnectionPool;
+import org.iiitb.util.Constants;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -27,15 +34,15 @@ public class GradesAction extends ActionSupport implements SessionAware
 	 */
 	private static final long serialVersionUID = -3927650660405287420L;
 
-	private final static String DEFAULT_TERM = "Semester";
-	private final static String DEFAULT_COURSE = "Subject";
+	private final static String DEFAULT_TERM = "All";
+	private final static String DEFAULT_COURSE = "All";
 
 	private String termDisplayChoice = DEFAULT_TERM;
 	private List<String> termList;
 
 	private String courseDisplayChoice = DEFAULT_COURSE;
 	private List<String> courseList;
-
+	
 	private List<GradeInfo> resultList;
 
 	private Map<String, Object> session;
@@ -61,27 +68,27 @@ public class GradesAction extends ActionSupport implements SessionAware
 	{
 		User loggedInUser = (User) this.session.get(USER);
 		if (loggedInUser != null)
-		{
-			termList.addAll(new SemesterDao().getTerms(Integer
+		{	
+			termList.addAll(new SemesterDAOImpl().getTerms(Integer
 					.parseInt(loggedInUser.getUserId())));
 
 			if (!termDisplayChoice.equals(DEFAULT_TERM))
-				courseList.addAll(new CourseDao().getNames(
+				courseList.addAll(new CourseDAOImpl().getNames(
 						Integer.parseInt(loggedInUser.getUserId()),
 						Integer.parseInt(termDisplayChoice)));
 
 			if (!termDisplayChoice.equals(DEFAULT_TERM)
 					&& !courseDisplayChoice.equals(DEFAULT_COURSE))
-				resultList.addAll(new ResultDao().getGrades(
+				resultList.addAll(new ResultDAOImpl().getGrades(
 						Integer.parseInt(loggedInUser.getUserId()),
 						Integer.parseInt(termDisplayChoice),
 						courseDisplayChoice));
 			else if (termDisplayChoice.equals(DEFAULT_TERM))
-				resultList.addAll(new ResultDao().getGrades(Integer
+				resultList.addAll(new ResultDAOImpl().getGrades(Integer
 						.parseInt(loggedInUser.getUserId())));
 			else if (!termDisplayChoice.equals(DEFAULT_TERM)
 					&& courseDisplayChoice.equals(DEFAULT_COURSE))
-				resultList.addAll(new ResultDao().getGrades(
+				resultList.addAll(new ResultDAOImpl().getGrades(
 						Integer.parseInt(loggedInUser.getUserId()),
 						Integer.parseInt(termDisplayChoice)));
 
@@ -89,9 +96,7 @@ public class GradesAction extends ActionSupport implements SessionAware
 			allNews = layoutDAO.getAllNews(connection);
 			announcements = layoutDAO.getAnnouncements(connection,
 					Integer.parseInt(loggedInUser.getUserId()));
-			setLastLoggedOn(layoutDAO.getLastLoggedOn(connection,
-					Integer.parseInt(loggedInUser.getUserId())));
-			System.out.println(getLastLoggedOn());
+			setLastLoggedOn((String) this.session.get(Constants.LAST_LOGGED_ON));
 			ConnectionPool.freeConnection(connection);
 			return SUCCESS;
 		}

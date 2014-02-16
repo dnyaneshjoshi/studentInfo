@@ -52,4 +52,9 @@
 	      <put-attribute name="body" value="/EditProfile.jsp"/>
 	   </definition>
 	   
+	   
+	   <definition name="syllabusPage" extends="baseLayout">
+	      <put-attribute name="subjects"   value="/layout/subjectsBold.jsp"/>
+	      <put-attribute name="body" value="/syllabus/syllabus.jsp"/>
+	   </definition>
 </tiles-definitions>

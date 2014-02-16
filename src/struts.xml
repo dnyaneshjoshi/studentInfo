@@ -36,6 +36,7 @@
 			<result name="success" type="redirect">layoutAction</result>
 			<result name="login">home.jsp</result>
 			<result name="input">home.jsp</result>
+			<result name="admin">adminhome.jsp</result>
 		</action>
 
 		<action name="subjectsAction" class="org.iiitb.action.subjects.SubjectsAction">
@@ -80,7 +81,7 @@
 
 		<action name="syllabusAction" class="org.iiitb.action.syllabus.SyllabusAction">
 			<interceptor-ref name="secureAccess"></interceptor-ref>
-			<result name="success">syllabus/syllabus.jsp</result>
+			<result name="success" type="tiles">syllabusPage</result>
 			<result name="login">home.jsp</result>
 		</action>
 		<action name="view" class="org.iiitb.action.viewprofile.MyProfileAction"
@@ -108,7 +109,31 @@
 		
 		
 		
-
+		<action name="adduser" class="org.iiitb.action.user.AdduserAction">
+			<result name="success">adminhome.jsp</result>
+			<result name="error">adminhome.jsp</result>
+			<result name="input">add_user.jsp</result>
+		</action>
+		<action name="addnews" class="org.iiitb.action.news.AddnewsAction">
+			<result name="success">adminhome.jsp</result>
+			<result name="error">adminhome.jsp</result>
+			<result name="input">add_news.jsp</result>
+		</action>
+		<action name="addann" class="org.iiitb.action.announcements.AddannAction">
+			<result name="success">adminhome.jsp</result>
+			<result name="error">adminhome.jsp</result>
+			<result name="input">add_ann.jsp</result>
+		</action>
+		<action name="removenews" class="org.iiitb.action.news.RemovenewsAction">
+			<result name="success">adminhome.jsp</result>
+			<result name="error">adminhome.jsp</result>
+			<result name="input">remove_news.jsp</result>
+		</action>
+		<action name="removeann" class="org.iiitb.action.announcements.RemoveannAction">
+			<result name="success">adminhome.jsp</result>
+			<result name="error">adminhome.jsp</result>
+			<result name="input">remove_ann.jsp</result>
+		</action>
 	</package>
 
 </struts>

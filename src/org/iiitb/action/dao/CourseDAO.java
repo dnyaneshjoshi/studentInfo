@@ -24,5 +24,19 @@ public interface CourseDAO {
    * @return list of subjectInfo objects
    */
   public List<SubjectInfo> getEnrolledCourses(Connection connection, int userId);
-
+  
+  /**
+   * 
+   * @param studentID
+   * @return
+   */
+  public List<String> getNames(int studentID);
+  
+  /**
+   * 
+   * @param studentID
+   * @param term
+   * @return
+   */
+  public List<String> getNames(int studentID, int term);
 }

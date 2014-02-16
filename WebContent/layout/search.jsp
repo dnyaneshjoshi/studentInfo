@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="friendProfile" method="post">
-		<input type="text" name="friendNo" title="search by rollNumber" />
-		<input type="submit" value="Search">
+	<form id="searchForm" action="friendProfile" method="post">
+		<input type="text" name="friendNo" title="Search by roll number" />
+		<a style="color:#412066;" href="javascript:{}" onclick="document.getElementById('searchForm').submit(); return false;"><b>Search</b></a>
 	</form>
 </body>
 </html>

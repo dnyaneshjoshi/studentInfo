@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="subjectsAction"><b>Subjects</b></a>
+	<a style="color:#ffffff;" href="subjectsAction"><b>Subjects</b></a>
 </body>
 </html>

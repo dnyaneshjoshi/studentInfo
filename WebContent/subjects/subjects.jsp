@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div>
-		<div style="width: 20%; float: left;">Pic will come here</div>
+		<h2 style="color:#412066;">Subjects</h2>
 		<div style="width: 60%; float: left;">
 			<form action="subjectsAction" method="post" id="subjectsForm">
 				<div style="text-align: center">

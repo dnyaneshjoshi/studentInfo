@@ -8,8 +8,8 @@
 </head>
 <body>
 	<form id="searchForm" action="friendProfile" method="post">
-		<input type="text" name="friendNo" title="search by rollNumber" />
-		<a href="javascript:{}" onclick="document.getElementById('searchForm').submit(); return false;">Search</a>
+		<input type="text" name="friendNo" title="Search by roll number" />
+		<a style="color:#412066;" href="javascript:{}" onclick="document.getElementById('searchForm').submit(); return false;"><b>Search</b></a>
 	</form>
 </body>
 </html>

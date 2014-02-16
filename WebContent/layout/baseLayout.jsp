@@ -8,7 +8,7 @@
 	<title><tiles:insertAttribute name="title" ignore="true" /></title>
 </head>
 
-<body style="background-color:#efefff; font-family: cursive;">
+<body style="background-color:#f6f4ff; font-family: cursive;">
    <tiles:insertAttribute name="banner" />
    
    <table width="100%" height="50px" style="background-color:#afafff;">
@@ -21,35 +21,32 @@
 		</tr>
    </table>
    <br />
-   <table width="100%">
-   		<colgroup>
-			<col style="width:200px" />
-			<col />
-		</colgroup>
-		<tbody>
-			<tr valign="top">
-				<td><tiles:insertAttribute name="pic" /></td>
-				<td><tiles:insertAttribute name="body" /></td>
-			</tr>
-		</tbody>
-   </table>
-   <hr style="color:#3f3fbf;" />
-   <br />
-   <table width="100%">
+   <div style="width:250px; float:left;">
+   		<br /><br />
+   		<tiles:insertAttribute name="pic" />
+   </div>
+   <div style="float:left;">
+   		<tiles:insertAttribute name="body" />
+   </div>
+   <div style="width:100%; float:left;">
+   		<br /><br /><br />
+   </div>
+
+   <table width="100%" style="background-color:#dfdfff;">
 		<colgroup>
 			<col style="width:50%" />
 			<col style="width:50%" />
 		</colgroup>
    		<thead>
-   			<tr>
-   				<td align="center"><b>ANNOUNCEMENTS</b></td>
-   				<td align="center"><b>NEWS</b></td>
+   			<tr style="background-color:#afafff; height:40px; color:#412066;">
+   				<td align="center" valign="middle"><b>ANNOUNCEMENTS</b></td>
+   				<td align="center" valign="middle"><b>NEWS</b></td>
    			</tr>
    		</thead>
    		<tbody>
 			<tr>
-				<td align="center"><div align="left" style="height:300px; width:99%; word-wrap:break-word; border:2px solid; border-color:#3f3fbf;"><tiles:insertAttribute name="footerAnnouncements" /></div></td>
-				<td align="center"><div align="left" style="height:300px; width:99%; word-wrap:break-word; border:2px solid; border-color:#3f3fbf;"><tiles:insertAttribute name="footerNews" /></div></td>
+				<td align="center"><div align="left" style="height:300px; width:99%; word-wrap:break-word; border:2px solid; border-color:#7066b6;"><tiles:insertAttribute name="footerAnnouncements" /></div></td>
+				<td align="center"><div align="left" style="height:300px; width:99%; word-wrap:break-word; border:2px solid; border-color:#7066b6;"><tiles:insertAttribute name="footerNews" /></div></td>
 			</tr>
    		</tbody>
 	</table>

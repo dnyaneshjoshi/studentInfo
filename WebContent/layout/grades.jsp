@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="grades.action">Grades</a>
+	<a style="color:#412066;" href="grades.action"><b>Grades</b></a>
 </body>
 </html>

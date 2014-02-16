@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="friendsPage">My Friends</a>
+	<a style="color:#412066;" href="friendsPage"><b>My Friends</b></a>
 </body>
 </html>

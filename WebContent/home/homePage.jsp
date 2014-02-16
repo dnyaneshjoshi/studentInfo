@@ -8,10 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div align="center" style="background-color:#e0e0ff;">
-		<br />
-		<h3 style="color:BLUE;"><s:property value="user.name" />&apos;s Home</h3>
+	<div>
 		<div align="left" style="margin-left: 10px;">
+			<h2 style="color:#412066;"><s:property value="user.name" />&apos;s Home</h2>
+			<br />
 			Welcome to Student Information System.<br /><br />
 			<b>Tips:</b><br />
 			<ul>

@@ -8,6 +8,7 @@
 <title>Grades</title>
 </head>
 <body>
+	<h2 style="color:#412066;">Grades</h2>
 
 			<form action="grades.action" name=termDDL method=post>
 

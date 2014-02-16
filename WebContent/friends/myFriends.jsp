@@ -9,7 +9,7 @@
 <title>MyFriends Page</title>
 </head>
 <body>
-	<h1 align="center">My Friends Page</h1>
+	<h2 style="color:#412066;">My Friends</h2>
 
 	<s:url id="friend" action="friendProfile" var="myProfileurl">
 		<s:param name="friendNo">

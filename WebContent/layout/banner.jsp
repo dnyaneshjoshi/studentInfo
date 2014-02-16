@@ -8,10 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table width="100%">
+	<table width="100%" bgcolor="#7066b6">
 		<tr>
-			<td><h3 align="left">STUDENT ZONE</h3></td>
-			<td><h5 align="right"><small><s:property value="#session.user.name" /></small> <a href="logout">Logout</a></h5></td>
+			<td><h3 align="left" style="color:WHITE; margin:10px;">STUDENT ZONE</h3></td>
+			<td><h4 align="right" style="color:WHITE;"><s:property value="#session.user.name" /> | <a style="color:WHITE;" href="logout">Logout</a></h4></td>
 		</tr>
 	</table>
 </body>

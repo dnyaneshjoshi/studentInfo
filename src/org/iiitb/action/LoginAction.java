@@ -148,12 +148,11 @@ public class LoginAction extends ActionSupport implements SessionAware
 						return true;
 					else
 					{
-						preStmt = conn
-								.prepareStatement(Constants.GET_PASSWORD_QRY);
+						preStmt = conn.prepareStatement(Constants.GET_PHOTO_QRY);
 						preStmt.setString(1, user.getUsername());
 						result = preStmt.executeQuery();
-						user.setPhoto(result.getString("photo"));
-
+						if(result.next())
+							user.setPhoto(result.getString("photo"));
 					}
 
 				}

@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<img src='layout/resources/<s:property value="#session.user.photo" />' alt='Photo' width="150px" />
+	<img src='layout/resources/<s:property value="#session.user.photo" />' alt='Photo not found' width="150px" />
 	<br>
 	Last logged on: <s:property value="lastLoggedOn" />
 </body>

@@ -34,8 +34,8 @@ public class GradesAction extends ActionSupport implements SessionAware
 	 */
 	private static final long serialVersionUID = -3927650660405287420L;
 
-	private final static String DEFAULT_TERM = "Semester";
-	private final static String DEFAULT_COURSE = "Subject";
+	private final static String DEFAULT_TERM = "All";
+	private final static String DEFAULT_COURSE = "All";
 
 	private String termDisplayChoice = DEFAULT_TERM;
 	private List<String> termList;

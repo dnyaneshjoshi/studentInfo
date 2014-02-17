@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.interceptor.SessionAware;
 import org.iiitb.action.dao.CourseDAO;
 import org.iiitb.action.dao.LayoutDAO;
@@ -27,6 +28,8 @@ public class SyllabusAction extends ActionSupport implements SessionAware{
 	private List<SyllabusInfo> syllabusInfoList;
 	private SyllabusDAO syllabusDAO = new SyllabusDAOImpl();
 	private String subjectCode;
+	private String subjectName;
+	private String topic;
 		
 	private List<NewsItem> allNews;
 	private List<AnnouncementsItem> announcements;
@@ -57,13 +60,21 @@ public class SyllabusAction extends ActionSupport implements SessionAware{
 	    this.announcements = announcements;
 	  }
 	  
-	    public String getSubjectCode() {
-	    return subjectCode;
+	    public String getSubjectName() {
+	    return subjectName;
 	  }
-  
-	// subjectCode to be send as a request parameter from Subjects page.
+	    
+	public String getSubjectCode() {
+		return subjectCode;
+	}
+	
 	public void setSubjectCode(String subjectCode) {
 		this.subjectCode = subjectCode;
+	}
+  
+	// subjectCode to be send as a request parameter from Subjects page.
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
 	}
 	
 	public List<String> getSubjectCodeList() {
@@ -86,21 +97,34 @@ public class SyllabusAction extends ActionSupport implements SessionAware{
 	    return SUCCESS;
 	  }
 	
-	public String addSyllabus() {
+	public String selectSyllabus() {
 		CourseDAO courseDAO = new CourseDAOImpl();
 		subjectCodeList = new ArrayList<String>();
 		Connection connection = ConnectionPool.getConnection();
 		subjectInfoList = courseDAO.getAllCourses(connection, 1);
 		for (SubjectInfo subject : subjectInfoList) {
-			subjectCodeList.add( subject.getSubjectCode() );
+			subjectCodeList.add( subject.getSubjectName() );
 		}
 
 		ConnectionPool.freeConnection(connection);
 
 		return SUCCESS;
 	}
+	
+	public String addSyllabus() {
+		Connection connection = ConnectionPool.getConnection();
+		syllabusDAO.setSyllabus(connection, subjectName, topic);
+		ConnectionPool.freeConnection(connection);
+		return SUCCESS;
+	}
+	
+	public String getTopic() {
+		return topic;
+	}
 
-
+	public void setTopic(String topic) {
+		this.topic = topic;
+	}
 
 	public List<SyllabusInfo> getSyllabusInfoList() {
 		return syllabusInfoList;

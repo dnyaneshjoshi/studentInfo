@@ -11,16 +11,16 @@
 <body>
 		<h1>Add Syllabus</h1>
 		<div style="text-align:left">
-		<form action="" method="post">
+		<form action="addSyllabusAction" method="post" >
 			<table width="50%">
 			<tr>
 				<td>
-					<s:select name="subjectCode" list="subjectCodeList" label="Course Code "></s:select>
+					<s:select name="subjectName" list="subjectCodeList" label="Course Name "></s:select>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<s:textarea key="syllabus" label="Syllabus " cols="100" rows="10"></s:textarea>
+					<s:textarea key="topic" label="Syllabus " cols="100" rows="10"></s:textarea>
 				</td>
 			</tr>
 			<tr>

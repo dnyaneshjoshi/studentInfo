@@ -9,7 +9,6 @@ public interface SyllabusDAO {
 	
 	public List<SyllabusInfo> getSyllabus(Connection connection, String subjectCode);
 	
-	public boolean setCourseAndSyllabus(Connection connection, String code, String courseName, String credits, String lastDate, 
-			String semester, String year, String facultyName, String syllabus);
+	public boolean setSyllabus(Connection connection, String courseName, String syllabus);
 	
 }

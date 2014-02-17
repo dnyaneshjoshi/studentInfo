@@ -84,10 +84,15 @@
 			<result name="success" type="tiles">syllabusPage</result>
 			<result name="login">home.jsp</result>
 		</action>
-		<action name="addSyllabusAction" class="org.iiitb.action.syllabus.SyllabusAction" method="addSyllabus">
+		<action name="selectSyllabusAction" class="org.iiitb.action.syllabus.SyllabusAction" method="selectSyllabus">
 			<result name="success">addSyllabus.jsp</result>
 			<result name="error">home.jsp</result>
 		</action>
+		<action name="addSyllabusAction" class="org.iiitb.action.syllabus.SyllabusAction" method="addSyllabus">
+			<result name="success">addSuccess.jsp</result>
+			<result name="error">addError.jsp</result>
+		</action>
+		
 		<action name="view" class="org.iiitb.action.viewprofile.MyProfileAction"
 			method="execute">
 			<result name="success" type="tiles">viewProfilePage</result>

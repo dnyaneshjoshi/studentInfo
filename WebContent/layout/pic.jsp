@@ -9,8 +9,8 @@
 </head>
 <body>
 	<a href='view'>
-		<object width="200px" data='layout/resources/images/<s:property value="#session.user.photo" />'>
-			<img width="200px" src='layout/resources/images/default_photo.png' />
+		<object width="180px" data='layout/resources/images/<s:property value="#session.user.photo" />'>
+			<img width="180px" src='layout/resources/images/default_photo.png' />
 		</object>
 	</a>
 	<br>

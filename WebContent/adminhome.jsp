@@ -14,7 +14,7 @@
 	<br>
 	<a href="addCourse.jsp"> Add Course</a>
 	<br>
-	<a href="addSyllabus.jsp"> Add Syllabus</a>
+	<a href="addSyllabusAction"> Add Syllabus</a>
 	<br>
 	<a href="add_ann.jsp"> Add Announcement</a>
 	<br>

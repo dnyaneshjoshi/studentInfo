@@ -15,7 +15,7 @@
 			<table width="50%">
 			<tr>
 				<td>
-					<s:textfield key="code" label="Course Code "></s:textfield>
+					<s:select name="subjectCode" list="subjectCodeList" label="Course Code "></s:select>
 				</td>
 			</tr>
 			<tr>

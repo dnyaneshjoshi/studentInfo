@@ -8,7 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href='view'><img src='layout/resources/<s:property value="#session.user.photo" />' alt='Photo not found' width="150px" /></a>
+	<a href='view'>
+		<object width="200px" data='layout/resources/images/<s:property value="#session.user.photo" />'>
+			<img width="200px" src='layout/resources/images/default_photo.png' />
+		</object>
+	</a>
 	<br>
 	Last logged on: <s:property value="lastLoggedOn" />
 </body>

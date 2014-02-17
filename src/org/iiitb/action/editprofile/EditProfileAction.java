@@ -9,13 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.dispatcher.mapper.ActionMapping;
 import org.apache.struts2.interceptor.ApplicationAware;
+import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.apache.commons.io.FileUtils;
 import org.iiitb.action.dao.EditProfileDAO;
 import org.iiitb.model.User;
 
 import com.opensymphony.xwork2.ActionSupport;
-public class EditProfileAction extends ActionSupport implements SessionAware
+public class EditProfileAction extends ActionSupport implements SessionAware,ServletRequestAware
 {
 	String name;
 	String rollno;
@@ -25,6 +26,7 @@ public class EditProfileAction extends ActionSupport implements SessionAware
 	String fileUploadFileName;
 	List<String> interests;
 	private Map<String, Object> session;
+    private HttpServletRequest servletRequest;
 	public String getFileUploadContentType() {
 		return fileUploadContentType;
 	}
@@ -103,7 +105,11 @@ public class EditProfileAction extends ActionSupport implements SessionAware
 	{
 		User user = (User) session.get("user");
 		EditProfileDAO edp = new EditProfileDAO(user.getUserId());
+		if(fileUploadFileName!=null)
+		{
+		//String destpath=servletRequest.getSession().getServletContext().getRealPath("/studentInfo/WebContent/layout/resources");
 		String destpath="/home/saikrishna/git/studentInfo/WebContent/layout/resources";
+		System.out.println("Server path:" + destpath);
 		File destFile  = new File(destpath, fileUploadFileName);
     	try {
 			FileUtils.copyFile(fileUpload, destFile);
@@ -112,11 +118,23 @@ public class EditProfileAction extends ActionSupport implements SessionAware
 			e.printStackTrace();
 			return ERROR;
 		}  
+    	edp.setPhoto(fileUploadFileName);
+		}
 		edp.setName(name);
 		edp.setPassword(password);
+		if(interests!=null)
 		edp.setInterests(interests);
-		edp.setPhoto(fileUploadFileName);
+		user.setName(name);
+		if(fileUploadFileName!=null)
+		user.setPhoto(fileUploadFileName);
+		user.setPassword(password);
 		return SUCCESS;
+	}
+
+	@Override
+	public void setServletRequest(HttpServletRequest req) {
+		this.servletRequest=req;
+		
 	}
 
 	

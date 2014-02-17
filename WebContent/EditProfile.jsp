@@ -19,10 +19,8 @@
 	<s:textfield name="name" label="Name" size="15">
 		<s:param name="value"><s:property value="name"/></s:param>			
 	</s:textfield>
-	
-	<s:textfield name="password" label="Password">
-		<s:param name="value"><s:property value="password"/></s:param>		
-	</s:textfield>
+	<s:password key="password" label="Password" showPassword="true"/>
+	<s:password key="repassword" label="Reenter Password" showPassword="true"/>
 	<s:checkboxlist list="{'cricket','football','badminton','hockey'}" name="interests" label="Interests"></s:checkboxlist>
 	 <s:file name="fileUpload" label="Select a File to change photo"/>
  	<s:submit value="Submit"/>

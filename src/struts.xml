@@ -84,6 +84,15 @@
 			<result name="success" type="tiles">syllabusPage</result>
 			<result name="login">home.jsp</result>
 		</action>
+		<action name="selectSyllabusAction" class="org.iiitb.action.syllabus.SyllabusAction" method="selectSyllabus">
+			<result name="success">addSyllabus.jsp</result>
+			<result name="error">home.jsp</result>
+		</action>
+		<action name="addSyllabusAction" class="org.iiitb.action.syllabus.SyllabusAction" method="addSyllabus">
+			<result name="success">addSuccess.jsp</result>
+			<result name="error">addError.jsp</result>
+		</action>
+		
 		<action name="view" class="org.iiitb.action.viewprofile.MyProfileAction"
 			method="execute">
 			<result name="success" type="tiles">viewProfilePage</result>
@@ -93,6 +102,7 @@
 			method="execute">
 			<result name="success" type="tiles">editProfilePage</result>
 			<result name="login">home.jsp</result>
+			<result name="input">home.jsp</result>
 		</action>
 		<action name="submit" class="org.iiitb.action.editprofile.EditProfileAction"
 			method="execute">
@@ -133,6 +143,23 @@
 			<result name="success">adminhome.jsp</result>
 			<result name="error">adminhome.jsp</result>
 			<result name="input">remove_ann.jsp</result>
+		</action>
+		<action name="Index" class="org.iiitb.action.enrollment.Indexaction"
+			method="execute">
+			<result name="success">/enrollment/enrollmentMenu.jsp</result>
+			<result name="fail">/error.jsp</result>
+		</action>
+
+		<action name="Indexsuccess" class="org.iiitb.action.enrollment.Indexaction"
+			method="SelectedUpdate">
+			<result name="success">/</result>
+			<result name="fail">/</result>
+		</action>
+
+		<action name="Index1" class="org.iiitb.action.enrollment.Indexaction"
+			method="Update">
+			<result name="success" type="tiles">enrollmentPage</result>
+			<result name="fail" type="tiles">enrollmentErrorPage</result>
 		</action>
 	</package>
 

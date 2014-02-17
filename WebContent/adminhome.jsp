@@ -7,21 +7,22 @@
 <title>Admin Home page</title>
 </head>
 <body>
-<h1 align="middle">Admin Home page</h1><h5 align="right"><small><s:property value="admin" /></small> <a href="logout">Logout</a></h5>
+<h1 align="middle">Admin Home</h1><h5 align="right"><small><s:property value="admin" /></small> <a href="logout">Logout</a></h5>
 	<h1>Contents</h1>
 	<br>
-	
-	<a href="addcourseandsyllabus.jsp"> Add courses and syllabus </a>
+	<a href="add_user.jsp"> Add User</a>
 	<br>
-	<a href="add_user.jsp"> Add user </a>
+	<a href="addCourse.jsp"> Add Course</a>
 	<br>
-	<a href="add_ann.jsp"> Add announcement</a>
+	<a href="addSyllabus.jsp"> Add Syllabus</a>
 	<br>
-	<a href="add_news.jsp"> Add news </a>
+	<a href="add_ann.jsp"> Add Announcement</a>
 	<br>
-	<a href="remove_news.jsp"> remove news </a>
+	<a href="add_news.jsp"> Add News</a>
 	<br>
-	<a href="remove_ann.jsp"> remove announcements </a>
+	<a href="remove_news.jsp">Remove News</a>
+	<br>
+	<a href="remove_ann.jsp">Remove Announcements</a>
 	
 	
 </body>

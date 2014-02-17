@@ -26,7 +26,7 @@
 		<tr>
 			<td><a href='<s:property value="#myProfileurl"/>'><img
 					width="100" height="100"
-					src="friends/resources/images/<s:property value="%{myProfile.photo}" />" />
+					src="layout/resources/images/<s:property value="%{myProfile.photo}" />" />
 					<br>
 					<h3>
 						<s:property value="%{myProfile.name}" /></a>
@@ -47,7 +47,7 @@
 									<tr>
 										<td><a href='<s:property value="#myurl"/>'><img
 												height="50" width="50"
-												src="friends/resources/images/<s:property value="#student.photo"/>" /></a></td>
+												src="layout/resources/images/<s:property value="#student.photo"/>" /></a></td>
 									</tr>
 
 

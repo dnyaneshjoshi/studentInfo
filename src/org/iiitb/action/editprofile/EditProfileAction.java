@@ -108,7 +108,7 @@ public class EditProfileAction extends ActionSupport implements SessionAware,Ser
 		if(fileUploadFileName!=null)
 		{
 		//String destpath=servletRequest.getSession().getServletContext().getRealPath("/studentInfo/WebContent/layout/resources");
-		String destpath="/home/saikrishna/git/studentInfo/WebContent/layout/resources";
+		String destpath="/home/saikrishna/git/studentInfo/WebContent/layout/resources/images";
 		System.out.println("Server path:" + destpath);
 		File destFile  = new File(destpath, fileUploadFileName);
     	try {

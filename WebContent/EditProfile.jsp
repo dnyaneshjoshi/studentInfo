@@ -12,19 +12,29 @@
 <tr>
 <td>
 <s:actionerror/>
-<s:form action="submit" method="post" enctype="multipart/form-data">
+<s:form action="submit" method="post" enctype="multipart/form-data" onsubmit = "return onTypingPassword(this)">
 	<s:textfield name="rollno" label="Roll No" readonly="true">
 		<s:param name="value"><s:property value="rollno"/></s:param>		
 	</s:textfield>
 	<s:textfield name="name" label="Name" size="15">
 		<s:param name="value"><s:property value="name"/></s:param>			
 	</s:textfield>
-	<s:password key="password" label="Password" showPassword="true"/>
-	<s:password key="repassword" label="Reenter Password" showPassword="true"/>
+	<s:password name="password" label="Password"  value="password" showPassword="true" />	
+	<s:password name="repassword" label="Reenter Password" value="password" showPassword="true" />
 	<s:checkboxlist list="{'cricket','football','badminton','hockey'}" name="interests" label="Interests"></s:checkboxlist>
 	 <s:file name="fileUpload" label="Select a File to change photo"/>
  	<s:submit value="Submit"/>
 </s:form>
+<script type="text/javascript">
+function onTypingPassword(form) {
+	var e = form.elements;
+	  if(e['password'].value != e['repassword'].value) {
+	    alert('Your passwords do not match. Please type more carefully.');
+	    return false;
+	  }
+	  return true;
+    }
+</script>
 </td>
 </tr>
 </table>

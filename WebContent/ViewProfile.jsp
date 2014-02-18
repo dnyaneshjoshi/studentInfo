@@ -13,14 +13,15 @@
 				<td><s:actionerror /> <s:form action="edit">
 				</br>Roll No : <s:property value="rollno"/></h4>
 				</br></br>Name : <s:property value="name"/></h4>
-				</br></br><s:select label="Interests" name="interesttype" headerKey="- - -"
-							headerValue="View Interests" list="interests">
-							<s:param name="value">
-								<s:property value="interests" />
-							</s:param>
-				</s:select>
+				</br></br>
+				Interests :
+				<ol>
+				<s:iterator value="interests">
+  				<li><s:property /></li>
+				</s:iterator>
+				</ol>
 				<s:submit value="Edit" href="EditProfile.jsp"/>
-					</s:form></td>
+				</s:form></td>
 			</tr>
 		</table>
 	</body>

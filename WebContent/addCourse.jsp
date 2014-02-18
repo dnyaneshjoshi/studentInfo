@@ -7,16 +7,37 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Course</title>
 <a href="adminhome.jsp">Back</a>
+<script type="text/javascript">
+function validateForm(form) {
+	var doc = form.elements;
+	  if(doc['code'].value == '') {
+	    alert('Course Code cannot be empty');
+	    doc['code'].focus();
+	    return false;
+	  }
+	  if(doc['name'].value == '') {
+		    alert('Course Name cannot be empty');
+		    doc['name'].focus();
+		    return false;
+	  }
+	  if(doc['faculty'].value == '') {
+		    alert('Faculty cannot be empty');
+		    doc['faculty'].focus();
+		    return false;
+	  }
+	  if(doc['lastDate'].value == '') {
+		    alert('Last Date cannot be empty');
+		    doc['lastDate'].focus();
+		    return false;
+	  }
+	  return true;
+    }
+</script>
 </head>
 <body>
 		<h1>Add Course - Page under construction</h1>
-		<s:if test="hasActionErrors()">
-   		<div class="errors">
-      		<s:actionerror/>
-   		</div>
-		</s:if>
 		<div style="text-align:left">
-		<form action="addSubjectsAction" method="post">
+		<form action="addSubjectsAction" method="post" onsubmit="return validateForm(this)">
 			<table width="50%">
 			<tr>
 				<td>
@@ -28,10 +49,7 @@
 			</tr>
 			<tr>
 				<td>
-					<s:textfield key="term" label="Semester "></s:textfield>
-				</td>
-				<td>
-					<s:textfield key="year" label="Year "></s:textfield>
+					<s:select name="semester" list="semesterList" label="Semester " cssStyle="width:230px;"></s:select>
 				</td>
 			</tr>
 			<tr>

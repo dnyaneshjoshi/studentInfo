@@ -12,7 +12,7 @@
 	<br>
 	<a href="add_user.jsp"> Add User</a>
 	<br>
-	<a href="addCourse.jsp"> Add Course</a>
+	<a href="initSubjectsAction"> Add Course</a>
 	<br>
 	<a href="selectSyllabusAction"> Add Syllabus</a>
 	<br>

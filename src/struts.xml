@@ -47,7 +47,10 @@
 		<action name="addSubjectsAction" class="org.iiitb.action.subjects.ManageSubjectsAction">
 			<result name="success">addSuccess.jsp</result>
 			<result name="error">addError.jsp</result>
-			<result name="input">addCourse.jsp</result>
+		</action>
+		<action name="initSubjectsAction" class="org.iiitb.action.subjects.ManageSubjectsAction" method="initSubjects">
+			<result name="success">addCourse.jsp</result>
+			<result name="error">addError.jsp</result>
 		</action>
 
 		<action name="friendsPage" class="org.iiitb.action.friends.MyFriendsAction">
@@ -91,7 +94,7 @@
 		</action>
 		<action name="selectSyllabusAction" class="org.iiitb.action.syllabus.SyllabusAction" method="selectSyllabus">
 			<result name="success">addSyllabus.jsp</result>
-			<result name="error">home.jsp</result>
+			<result name="error">adminhome.jsp</result>
 		</action>
 		<action name="addSyllabusAction" class="org.iiitb.action.syllabus.SyllabusAction" method="addSyllabus">
 			<result name="success">addSuccess.jsp</result>

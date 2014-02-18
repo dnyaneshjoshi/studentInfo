@@ -1,9 +1,17 @@
 package org.iiitb.action.subjects;
 
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.interceptor.SessionAware;
+import org.iiitb.action.dao.CourseDAO;
+import org.iiitb.action.dao.SemesterDAO;
+import org.iiitb.action.dao.impl.CourseDAOImpl;
+import org.iiitb.action.dao.impl.SemesterDAOImpl;
+import org.iiitb.util.ConnectionPool;
 import org.iiitb.util.Constants;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -14,11 +22,12 @@ public class ManageSubjectsAction extends ActionSupport implements SessionAware 
 	
 	private String code;
 	private String name;
-	private String term;
+	private String semester;
 	private String year;
 	private String faculty;
 	private String lastDate;
 	
+	private List<String> semesterList;
 	
 	@Override
 	public void setSession(Map<String, Object> arg0) {
@@ -26,31 +35,22 @@ public class ManageSubjectsAction extends ActionSupport implements SessionAware 
 		
 	}
 	
-	public void validate() {
-		if (StringUtils.isEmpty(code)) {
-			addActionError("Course Code cannot be empty");
-		}
-		if (StringUtils.isEmpty(name)) {
-			addActionError("Course Name cannot be empty");
-		}
-		if (StringUtils.isEmpty(term)) {
-			addActionError("Semester cannot be empty");
-		}
-		if (StringUtils.isEmpty(year)) {
-			addActionError("Year cannot be empty");
-		}
-		if (StringUtils.isEmpty(faculty)) {
-			addActionError("Faculty cannot be empty");
-		}
-		if (StringUtils.isEmpty(lastDate)) {
-			addActionError("Last date of enrollnment cannot be empty");
-		}
-	}
-	
 	public String execute() {
 		return SUCCESS;
 	}
+	
+	public String initSubjects() {
+		SemesterDAO semesterDAO = new SemesterDAOImpl();
+		semesterList = new ArrayList<String>();
 
+		Connection connection = ConnectionPool.getConnection();
+		semesterList = semesterDAO.getSemester(connection, 1, null);
+		ConnectionPool.freeConnection(connection);
+		
+		return SUCCESS;
+	}
+	
+	
 	public String getCode() {
 		return code;
 	}
@@ -67,12 +67,12 @@ public class ManageSubjectsAction extends ActionSupport implements SessionAware 
 		this.name = name;
 	}
 
-	public String getTerm() {
-		return term;
+	public String getSemester() {
+		return semester;
 	}
 
-	public void setTerm(String term) {
-		this.term = term;
+	public void setSemester(String semester) {
+		this.semester = semester;
 	}
 
 	public String getYear() {
@@ -99,6 +99,11 @@ public class ManageSubjectsAction extends ActionSupport implements SessionAware 
 		this.lastDate = lastDate;
 	}
 	
-	
+	public List<String> getSemesterList() {
+		return semesterList;
+	}
 
+	public void setSemesterList(List<String> semesterList) {
+		this.semesterList = semesterList;
+	}
 }

@@ -1,9 +1,11 @@
 package org.iiitb.action.dao.impl;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.iiitb.action.dao.SemesterDAO;
+import org.iiitb.action.syllabus.SyllabusInfo;
 import org.iiitb.util.ConnectionPool;
 
 import java.sql.PreparedStatement;
@@ -18,13 +20,25 @@ import java.sql.SQLException;
 public class SemesterDAOImpl implements SemesterDAO
 {
 	private List<String> termList;
+	private List<String> semesterList;
 	
 	private static final String GET_TERMS_QUERY = "select distinct term"
 			+ " from semester,course,result"
 			+ " where course.semester_id = semester.semester_id "
 			+ "and course.course_id = result.course_id "
 			+ "and result.student_id=?";
-
+	
+	private static final String GET_TERMS = "SELECT DISTINCT " +
+			"term " +
+			"FROM " +
+			"semester";
+	
+	private static final String GET_TERMS_FOR_YEAR = "SELECT DISTINCT " +
+			"term " +
+			"FROM " +
+			"semester " +
+			"WHERE year = ?";
+	
 	public SemesterDAOImpl()
 	{
 		termList = new LinkedList<String>();
@@ -62,5 +76,38 @@ public class SemesterDAOImpl implements SemesterDAO
 				}
 		}
 		return termList;
+	}
+	
+	public List<String> getSemester(Connection connection, int studentId, String year) {
+		// TODO Auto-generated method stub
+	    PreparedStatement ps = null;
+	    int index;
+	    try {
+	    	semesterList = new ArrayList<String>();
+	    	if ( year == null) {
+	    		ps = connection.prepareStatement(GET_TERMS);
+	    	} else {
+	    		ps = connection.prepareStatement(GET_TERMS_FOR_YEAR);
+		    	index = 1;
+		    	ps.setInt(index, Integer.parseInt(year));
+	    	}
+	    	ResultSet rs = ps.executeQuery();
+	    	
+	    	while( rs.next() ) {
+	    		semesterList.add( rs.getString("term") );
+	    	}
+	    	
+	    } 	catch (SQLException e) {
+	    		e.printStackTrace();
+	    } 	finally {
+	    		if (null != ps) {
+	    			try {
+	    				ps.close();
+	    			} catch (SQLException e) {
+	    				e.printStackTrace();
+	    			}
+	    		}
+	    }
+	    return semesterList;
 	}
 }

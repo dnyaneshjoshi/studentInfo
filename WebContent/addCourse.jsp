@@ -9,9 +9,14 @@
 <a href="adminhome.jsp">Back</a>
 </head>
 <body>
-		<h1>Add Course</h1>
+		<h1>Add Course - Page under construction</h1>
+		<s:if test="hasActionErrors()">
+   		<div class="errors">
+      		<s:actionerror/>
+   		</div>
+		</s:if>
 		<div style="text-align:left">
-		<form action="">
+		<form action="addSubjectsAction" method="post">
 			<table width="50%">
 			<tr>
 				<td>

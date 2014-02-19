@@ -1,10 +1,17 @@
 package org.iiitb.action.viewprofile;
+import java.sql.Connection;
 import java.util.Map;
 import java.util.List;
 
 import org.apache.struts2.interceptor.SessionAware;
+import org.iiitb.action.dao.LayoutDAO;
 import org.iiitb.action.dao.MyProfileDAO;
+import org.iiitb.action.dao.impl.LayoutDAOImpl;
 import org.iiitb.model.User;
+import org.iiitb.model.layout.AnnouncementsItem;
+import org.iiitb.model.layout.NewsItem;
+import org.iiitb.util.ConnectionPool;
+import org.iiitb.util.Constants;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
@@ -64,6 +71,11 @@ public class MyProfileAction extends ActionSupport implements SessionAware
 		return session;
 	}
 
+	private List<NewsItem> allNews;
+	private List<AnnouncementsItem> announcements;
+	private LayoutDAO layoutDAO = new LayoutDAOImpl();
+	private String lastLoggedOn = "";
+
 	public String execute() throws Exception
 	{
 		User user = (User) session.get("user");
@@ -75,7 +87,13 @@ public class MyProfileAction extends ActionSupport implements SessionAware
 			// name=prof.getPhoto();
 			rollno = prof.getRollno();
 			interests = prof.getInterests();
-
+			
+			Connection connection = ConnectionPool.getConnection();
+			allNews = layoutDAO.getAllNews(connection);
+			announcements = layoutDAO.getAnnouncements(connection,
+					Integer.parseInt(user.getUserId()));
+			setLastLoggedOn((String) this.session.get(Constants.LAST_LOGGED_ON));
+			ConnectionPool.freeConnection(connection);
 		}
 		return SUCCESS;
 	}
@@ -85,6 +103,16 @@ public class MyProfileAction extends ActionSupport implements SessionAware
 	{
 		this.session=session;
 
+	}
+
+	public String getLastLoggedOn()
+	{
+		return lastLoggedOn;
+	}
+
+	public void setLastLoggedOn(String lastLoggedOn)
+	{
+		this.lastLoggedOn = lastLoggedOn;
 	}
 
 }

@@ -1,4 +1,5 @@
 package org.iiitb.action.editprofile;
+import java.sql.Connection;
 import java.util.List;
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +14,13 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.apache.commons.io.FileUtils;
 import org.iiitb.action.dao.EditProfileDAO;
+import org.iiitb.action.dao.LayoutDAO;
+import org.iiitb.action.dao.impl.LayoutDAOImpl;
 import org.iiitb.model.User;
+import org.iiitb.model.layout.AnnouncementsItem;
+import org.iiitb.model.layout.NewsItem;
+import org.iiitb.util.ConnectionPool;
+import org.iiitb.util.Constants;
 
 import com.opensymphony.xwork2.ActionSupport;
 public class EditProfileAction extends ActionSupport implements SessionAware,ServletRequestAware
@@ -101,7 +108,12 @@ public class EditProfileAction extends ActionSupport implements SessionAware,Ser
 		this.session = session;
 	}
 
-	public String execute()
+	private List<NewsItem> allNews;
+	private List<AnnouncementsItem> announcements;
+	private LayoutDAO layoutDAO = new LayoutDAOImpl();
+	private String lastLoggedOn = "";
+
+	public String execute() throws Exception
 	{
 		User user = (User) session.get("user");
 		EditProfileDAO edp = new EditProfileDAO(user.getUserId());
@@ -128,6 +140,14 @@ public class EditProfileAction extends ActionSupport implements SessionAware,Ser
 		if(fileUploadFileName!=null)
 		user.setPhoto(fileUploadFileName);
 		user.setPassword(password);
+		
+		Connection connection = ConnectionPool.getConnection();
+		allNews = layoutDAO.getAllNews(connection);
+		announcements = layoutDAO.getAnnouncements(connection,
+				Integer.parseInt(user.getUserId()));
+		setLastLoggedOn((String) this.session.get(Constants.LAST_LOGGED_ON));
+		ConnectionPool.freeConnection(connection);
+		
 		return SUCCESS;
 	}
 
@@ -135,6 +155,16 @@ public class EditProfileAction extends ActionSupport implements SessionAware,Ser
 	public void setServletRequest(HttpServletRequest req) {
 		this.servletRequest=req;
 		
+	}
+
+	public String getLastLoggedOn()
+	{
+		return lastLoggedOn;
+	}
+
+	public void setLastLoggedOn(String lastLoggedOn)
+	{
+		this.lastLoggedOn = lastLoggedOn;
 	}
 
 	

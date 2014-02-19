@@ -20,9 +20,9 @@ function validateForm(form) {
 		    doc['name'].focus();
 		    return false;
 	  }
-	  if(doc['faculty'].value == '') {
-		    alert('Faculty cannot be empty');
-		    doc['faculty'].focus();
+	  if(doc['credit'].value == '') {
+		    alert('Credits cannot be empty');
+		    doc['credi'].focus();
 		    return false;
 	  }
 	  if(doc['lastDate'].value == '') {
@@ -35,7 +35,7 @@ function validateForm(form) {
 </script>
 </head>
 <body>
-		<h1>Add Course - Page under construction</h1>
+		<h1>Add Course</h1>
 		<div style="text-align:left">
 		<form action="addSubjectsAction" method="post" onsubmit="return validateForm(this)">
 			<table width="50%">
@@ -51,13 +51,16 @@ function validateForm(form) {
 				<td>
 					<s:select name="semester" list="semesterList" label="Semester " cssStyle="width:230px;"></s:select>
 				</td>
+				<td>
+					<s:textfield key="credit" label="Credits "></s:textfield>
+				</td>
 			</tr>
 			<tr>
 				<td>
-					<s:textfield key="faculty" label="Faculty "></s:textfield>
+					<s:select name="faculty" list="facultyList" label="Faculty " cssStyle="width:230px;"></s:select>
 				</td>
 				<td>
-					<s:textfield key="lastDate" label="Last Date for Enrollnment "></s:textfield>
+					<s:textfield key="lastDate" label="Last Date for Enrollnment (DD/MM/YYYY) "></s:textfield>
 				</td>
 			</tr>
 			<tr>

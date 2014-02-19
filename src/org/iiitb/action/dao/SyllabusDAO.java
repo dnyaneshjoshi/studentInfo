@@ -11,4 +11,7 @@ public interface SyllabusDAO {
 	
 	public boolean setSyllabus(Connection connection, String courseName, String syllabus);
 	
+	// need to move this to User DAO
+	public List<String> getFaculty(Connection connection);
+	
 }

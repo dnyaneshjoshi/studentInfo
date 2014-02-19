@@ -39,4 +39,7 @@ public interface CourseDAO {
    * @return
    */
   public List<String> getNames(int studentID, int term);
+  
+  public boolean setCourse(Connection connection, String code, String courseName, String credits, String lastDate, 
+		  											String semester, String facultyName);
 }

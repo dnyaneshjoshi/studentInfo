@@ -9,8 +9,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.interceptor.SessionAware;
 import org.iiitb.action.dao.CourseDAO;
 import org.iiitb.action.dao.SemesterDAO;
+import org.iiitb.action.dao.SyllabusDAO;
 import org.iiitb.action.dao.impl.CourseDAOImpl;
 import org.iiitb.action.dao.impl.SemesterDAOImpl;
+import org.iiitb.action.dao.impl.SyllabusDAOImpl;
 import org.iiitb.util.ConnectionPool;
 import org.iiitb.util.Constants;
 
@@ -23,11 +25,12 @@ public class ManageSubjectsAction extends ActionSupport implements SessionAware 
 	private String code;
 	private String name;
 	private String semester;
-	private String year;
+	private String credit;
 	private String faculty;
 	private String lastDate;
 	
 	private List<String> semesterList;
+	private List<String> facultyList;
 	
 	@Override
 	public void setSession(Map<String, Object> arg0) {
@@ -36,15 +39,26 @@ public class ManageSubjectsAction extends ActionSupport implements SessionAware 
 	}
 	
 	public String execute() {
+		CourseDAO courseDAO = new CourseDAOImpl();
+		Connection connection = ConnectionPool.getConnection();
+		
+		courseDAO.setCourse(connection, code, name, credit, lastDate, semester, faculty);
+		
+		ConnectionPool.freeConnection(connection);
 		return SUCCESS;
 	}
 	
 	public String initSubjects() {
+		
 		SemesterDAO semesterDAO = new SemesterDAOImpl();
+		SyllabusDAO syllabusDAO = new SyllabusDAOImpl();
+		
 		semesterList = new ArrayList<String>();
+		facultyList = new ArrayList<String>();
 
 		Connection connection = ConnectionPool.getConnection();
 		semesterList = semesterDAO.getSemester(connection, 1, null);
+		facultyList = syllabusDAO.getFaculty(connection);
 		ConnectionPool.freeConnection(connection);
 		
 		return SUCCESS;
@@ -75,14 +89,6 @@ public class ManageSubjectsAction extends ActionSupport implements SessionAware 
 		this.semester = semester;
 	}
 
-	public String getYear() {
-		return year;
-	}
-
-	public void setYear(String year) {
-		this.year = year;
-	}
-
 	public String getFaculty() {
 		return faculty;
 	}
@@ -105,5 +111,21 @@ public class ManageSubjectsAction extends ActionSupport implements SessionAware 
 
 	public void setSemesterList(List<String> semesterList) {
 		this.semesterList = semesterList;
+	}
+
+	public List<String> getFacultyList() {
+		return facultyList;
+	}
+
+	public void setFacultyList(List<String> facultyList) {
+		this.facultyList = facultyList;
+	}
+
+	public String getCredit() {
+		return credit;
+	}
+
+	public void setCredit(String credit) {
+		this.credit = credit;
 	}
 }

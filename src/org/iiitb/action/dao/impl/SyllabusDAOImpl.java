@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.iiitb.action.dao.SyllabusDAO;
 import org.iiitb.action.syllabus.SyllabusInfo;
+import org.iiitb.util.ConnectionPool;
 
 public class SyllabusDAOImpl implements SyllabusDAO {
 
@@ -42,6 +43,10 @@ public class SyllabusDAOImpl implements SyllabusDAO {
 			"(topic_id, name, syllabus_id) " +
 			"VALUES " +
 			"(topic_id, ?, ?)";
+	
+	private static final String GET_FACULTY = "select name from user where user_type = 'F'";
+	
+	private List<String> facultyList;
 	
 	  private void createSyllabusInfoListFromResultSet(ResultSet rs, List<SyllabusInfo> syllabusInfoList) throws SQLException {
 		    while (rs.next()) {
@@ -153,6 +158,34 @@ public class SyllabusDAOImpl implements SyllabusDAO {
 	    		}
 	    }
 		return true;
+	}
+
+
+	@Override
+	public List<String> getFaculty(Connection connection) {
+		PreparedStatement ps = null;
+	    int index;
+	    try {
+	    	facultyList = new ArrayList<String>();
+	    	ps = connection.prepareStatement(GET_FACULTY);
+	    	ResultSet rs = ps.executeQuery();
+	    	
+	    	while( rs.next() ) {
+	    		facultyList.add( rs.getString("name") );
+	    	}
+	    	
+	    } 	catch (SQLException e) {
+	    		e.printStackTrace();
+	    } 	finally {
+	    		if (null != ps) {
+	    			try {
+	    				ps.close();
+	    			} catch (SQLException e) {
+	    				e.printStackTrace();
+	    			}
+	    		}
+	    }
+	    return facultyList;
 	}
 
 }

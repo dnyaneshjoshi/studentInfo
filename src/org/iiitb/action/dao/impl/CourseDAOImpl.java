@@ -4,16 +4,20 @@
 package org.iiitb.action.dao.impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.text.ParseException;
 
 import org.iiitb.action.dao.CourseDAO;
 import org.iiitb.action.subjects.SubjectInfo;
 import org.iiitb.util.ConnectionPool;
+
 
 /**
  * @author arjun
@@ -90,6 +94,17 @@ public class CourseDAOImpl implements CourseDAO {
 			+ "where result.course_id = course.course_id "
 			+ "and course.semester_id = semester.semester_id "
 			+ "and result.student_id = ? and semester.term = ?";
+	
+	private static final String GET_FACULTY_ID = "SELECT " +
+			"user_id " +
+			"FROM user " +
+			"WHERE name = ? " +
+			"AND user_type = 'F'";
+		
+	private static final String SET_COURSE = "INSERT INTO course" +
+			"(course_id, code, name, credits, lastdate, faculty_id, semester_id) " +
+			"VALUES " +
+			"(course_id, ?, ?, ?, ?, ?, ?)";
 	
   private void createSubjectInfoListFromResultSet(ResultSet rs,
       List<SubjectInfo> subjectInfoList) throws SQLException {
@@ -242,5 +257,71 @@ public class CourseDAOImpl implements CourseDAO {
 		}
 		
 		return courseList;
+	}
+
+	@Override
+	public boolean setCourse(Connection connection, String code, String courseName, String credits, String lastDate,
+								String semester, String facultyName) {
+
+		int index, is;
+		String faculty_id = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Date lastDateForEnrollnment = null;
+		
+		try {
+			ps = connection.prepareStatement(GET_FACULTY_ID);
+	    	
+	    	index = 1;
+	    	ps.setString(index, facultyName);
+	    	rs = ps.executeQuery();
+	    	
+	    	while (rs.next()) {
+		    	faculty_id = rs.getString("user_id");
+		    	System.out.println("faculty_id::" + faculty_id);
+	    	}
+	    	
+	    	// Insert Course Details
+	    	ps = connection.prepareStatement(SET_COURSE);
+	    	
+	    	index = 1;
+	    	ps.setString(index, code);
+	    	index = 2;
+	    	ps.setString(index, courseName);
+	    	index = 3;
+	    	ps.setInt(index, Integer.parseInt(credits));
+	    	
+	    	index = 4;
+	    	if (lastDate == null) lastDate = "31-12-2014";
+	    	SimpleDateFormat format = new SimpleDateFormat("dd/mm/yyyy");
+	    	try {
+				lastDateForEnrollnment = new Date( format.parse(lastDate).getTime() );
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	ps.setDate(index, lastDateForEnrollnment);
+	    	
+	    	index = 5;
+	    	ps.setInt(index, Integer.parseInt(faculty_id));
+	    	index = 6;
+	    	ps.setInt(index, Integer.parseInt(semester));
+	    	is = ps.executeUpdate();
+	    	
+	    	if (is != 1) return false; 
+		} 
+		catch (SQLException e) {
+    		e.printStackTrace();
+		} 	
+		finally {
+    		if (null != ps) {
+    			try {
+    				ps.close();
+    			} catch (SQLException e) {
+    				e.printStackTrace();
+    			}
+    		}
+		}
+		return true;
 	}
 }

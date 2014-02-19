@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div>
-		<h2 style="color:#412066;">Subjects</h2>
+		<h2 style="color: #412066;">Subjects</h2>
 		<div style="width: 60%; float: left;">
 			<form action="subjectsAction" method="post" id="subjectsForm">
 				<div style="text-align: center">
@@ -31,13 +31,11 @@
 						<tbody>
 							<s:iterator value="subjectInfoList" status="subject">
 								<tr>
-									<td>
-									<s:url
-											action="syllabusAction" var="syllabusURL">
+									<td><s:url action="syllabusAction" var="syllabusURL">
 											<s:param name="subjectCode" value="subjectCode" />
-									</s:url>
-									<s:a href="%{syllabusURL}"><s:property value="subjectCode" /></s:a> 
-										</td>
+										</s:url> <s:a href="%{syllabusURL}">
+											<s:property value="subjectCode" />
+										</s:a></td>
 									<td><s:property value="subjectName" /></td>
 									<td><s:property value="facultyName" /></td>
 									<td><s:property value="semester" /></td>
@@ -51,6 +49,16 @@
 			</form>
 		</div>
 		<div style="width: 20%; float: left;"></div>
+
+		<form action="Index">
+			<select name="semester">
+				<option value="1">semester 1</option>
+				<option value="2">semester 2</option>
+				<option value="3">semester 3</option>
+				<option value="4">semester 4</option>
+			</select> <input type="submit" value="registration" />
+
+		</form>
 	</div>
 </body>
 

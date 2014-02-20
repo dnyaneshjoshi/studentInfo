@@ -20,12 +20,12 @@
 					<table border="1" style="margin: 0px auto">
 						<thead>
 							<tr>
-								<td>Subject Code</td>
-								<td>Subject</td>
-								<td>Faculty Name</td>
-								<td>Semester</td>
-								<td>Enrolled</td>
-								<td>Grade</td>
+								<td><b><center>Subject Code</center></b></td>
+								<td><b><center>Subject</b></center></td>
+								<td><b><center>Faculty Name</center></b></td>
+								<td><b><center>Semester</center></b></td>
+								<td><b><center>Enrolled</center></b></td>
+								<td><b><center>Grade</center></b></td>
 							</tr>
 						</thead>
 						<tbody>
@@ -33,14 +33,14 @@
 								<tr>
 									<td><s:url action="syllabusAction" var="syllabusURL">
 											<s:param name="subjectCode" value="subjectCode" />
-										</s:url> <s:a href="%{syllabusURL}">
+										</s:url> <center><s:a href="%{syllabusURL}">
 											<s:property value="subjectCode" />
-										</s:a></td>
-									<td><s:property value="subjectName" /></td>
-									<td><s:property value="facultyName" /></td>
-									<td><s:property value="semester" /></td>
-									<td><s:property value="enrolled" /></td>
-									<td><s:property value="grade" /></td>
+										</s:a></center></td>
+									<td><center><s:property value="subjectName" /></center></td>
+									<td><center><s:property value="facultyName" /></center></td>
+									<td><center><s:property value="semester" /></center></td>
+									<td><center><s:property value="enrolled" /></center></td>
+									<td><center><s:property value="grade" /></center></td>
 								</tr>
 							</s:iterator>
 						</tbody>

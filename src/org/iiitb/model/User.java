@@ -12,7 +12,9 @@ public class User
 	String userId;
 	String emailId;
 	String password;
+
 	List<String> defaultInterests; 
+
 	InputStream photo;
 	private String lastLoggedOn;
 	public User()

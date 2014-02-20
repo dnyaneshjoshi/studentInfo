@@ -82,7 +82,11 @@ public class LayoutDAOImpl implements LayoutDAO
 		String lastLoggedOn = "-";
 		rs.next();
 		if (rs.getDate("last_logged_on") != null)
-			lastLoggedOn = rs.getDate("last_logged_on").toString();
+		{
+			lastLoggedOn = rs.getTimestamp("last_logged_on").toString();
+			lastLoggedOn = lastLoggedOn.substring(0, lastLoggedOn.length() - 5);
+			System.out.println("Last logged on : " + lastLoggedOn);
+		}
 		rs.close();
 		return lastLoggedOn;
 	}

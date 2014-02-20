@@ -129,23 +129,21 @@ public class FriendProfileAction extends ActionSupport implements SessionAware
 		StudentDAO studentDao = new StudentDAOImpl();
 
 		StudentInfo studentInfo = studentDao.getStudentByRollNo(friendNo);
+		
+		User user = (User) session.get("user");
+		
+		Connection connection = ConnectionPool.getConnection();
+		allNews = layoutDAO.getAllNews(connection);
+		announcements = layoutDAO.getAnnouncements(connection, Integer.parseInt(user.getUserId()));
+		setLastLoggedOn((String) this.session.get(Constants.LAST_LOGGED_ON));
+		ConnectionPool.freeConnection(connection);
+
 		if (studentInfo == null)
 		{
 			result = ERROR;
 		}
 		else
 		{
-
-			User user = (User) session.get("user");
-
-			Connection connection = ConnectionPool.getConnection();
-			allNews = layoutDAO.getAllNews(connection);
-			announcements = layoutDAO.getAnnouncements(connection, Integer.parseInt(user.getUserId()));
-
-			setLastLoggedOn((String) this.session.get(Constants.LAST_LOGGED_ON));
-
-			ConnectionPool.freeConnection(connection);
-
 			setFriendProfile(studentInfo);
 
 			if (studentInfo.getStudentId() == Integer.parseInt(user.getUserId()))

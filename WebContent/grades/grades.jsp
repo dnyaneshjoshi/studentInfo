@@ -13,11 +13,11 @@
 			<form action="grades.action" name=termDDL method=post>
 
 				<!-- The semester dropdown list -->
-				<s:select name="termDisplayChoice" onchange="onTermChange()"
+				<s:select id="termDisplayChoice" name="termDisplayChoice" onchange="onTermChange()"
 					list="termList" label="Semester"></s:select>
 
 				<!-- The subject dropdown list -->
-				<s:select name="courseDisplayChoice" onchange="onTermChange()"
+				<s:select id ="courseDisplayChoice" name="courseDisplayChoice" onchange="onCourseChange()"
 					list="courseList" label="Subject"></s:select>
 
 			<!--  The grades table -->
@@ -47,6 +47,11 @@
 
 	<script type="text/javascript">
 		function onTermChange() {
+			document.getElementById("courseDisplayChoice").selectedIndex = 0;
+			document.termDDL.action = 'grades.action';
+			document.termDDL.submit();
+		}
+		function onCourseChange() {			
 			document.termDDL.action = 'grades.action';
 			document.termDDL.submit();
 		}

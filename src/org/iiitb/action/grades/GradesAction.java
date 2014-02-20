@@ -37,6 +37,8 @@ public class GradesAction extends ActionSupport implements SessionAware
 	private final static String DEFAULT_TERM = "All";
 	private final static String DEFAULT_COURSE = "All";
 
+	private static String prevTermDisplayChoice = DEFAULT_TERM;
+	
 	private String termDisplayChoice = DEFAULT_TERM;
 	private List<String> termList;
 
@@ -91,7 +93,7 @@ public class GradesAction extends ActionSupport implements SessionAware
 				resultList.addAll(new ResultDAOImpl().getGrades(
 						Integer.parseInt(loggedInUser.getUserId()),
 						Integer.parseInt(termDisplayChoice)));
-
+	
 			Connection connection = ConnectionPool.getConnection();
 			allNews = layoutDAO.getAllNews(connection);
 			announcements = layoutDAO.getAnnouncements(connection,

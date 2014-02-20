@@ -76,7 +76,24 @@ public class MyProfileAction extends ActionSupport implements SessionAware
 	private LayoutDAO layoutDAO = new LayoutDAOImpl();
 	private String lastLoggedOn = "";
 
-	public String execute() throws Exception
+	
+	public List<NewsItem> getAllNews() {
+    return allNews;
+  }
+
+  public void setAllNews(List<NewsItem> allNews) {
+    this.allNews = allNews;
+  }
+
+  public List<AnnouncementsItem> getAnnouncements() {
+    return announcements;
+  }
+
+  public void setAnnouncements(List<AnnouncementsItem> announcements) {
+    this.announcements = announcements;
+  }
+
+  public String execute() throws Exception
 	{
 		User user = (User) session.get("user");
 		MyProfileDAO prof = new MyProfileDAO(user.getUserId());

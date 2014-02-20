@@ -10,7 +10,7 @@ public class User
 	String userId;
 	String emailId;
 	String password;
-	//InputStream photo;
+	InputStream photo;
 	private String lastLoggedOn;
 	public User()
 	{
@@ -83,15 +83,15 @@ public class User
 		this.userId = userId;
 	}
 	
-//	public InputStream getPhoto()
-//	{
-//		return this.photo;
-//	}
-//	
-//	public void setPhoto(InputStream photo)
-//	{
-//		this.photo=photo;
-//	}
+	public InputStream getPhoto()
+	{
+		return this.photo;
+	}
+	
+	public void setPhoto(InputStream photo)
+	{
+		this.photo=photo;
+	}
 
 	public String getLastLoggedOn()
 	{

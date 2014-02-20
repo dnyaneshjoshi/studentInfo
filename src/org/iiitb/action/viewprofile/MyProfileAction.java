@@ -25,6 +25,8 @@ public class MyProfileAction extends ActionSupport implements SessionAware
 	private String password;
 	private String rollno;
 	private List<String> interests;
+	private List<String> defaultInterests;
+	
 
 	public String getName()
 	{
@@ -83,7 +85,9 @@ public class MyProfileAction extends ActionSupport implements SessionAware
 		if (user != null)
 		{
 			name = user.getName();
-			password = user.getPassword();
+			password = prof.getPassword();
+			defaultInterests=prof.getDefaultInterests();
+			System.out.println(password);
 			// name=prof.getPhoto();
 			rollno = prof.getRollno();
 			interests = prof.getInterests();
@@ -96,6 +100,14 @@ public class MyProfileAction extends ActionSupport implements SessionAware
 			ConnectionPool.freeConnection(connection);
 		}
 		return SUCCESS;
+	}
+
+	public List<String> getDefaultInterests() {
+		return defaultInterests;
+	}
+
+	public void setDefaultInterests(List<String> defaultInterests) {
+		this.defaultInterests = defaultInterests;
 	}
 
 	@Override

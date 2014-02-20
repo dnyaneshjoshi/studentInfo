@@ -16,11 +16,11 @@
 				</br></br>
 				Interests :
 				<ol>
-				<s:iterator value="interests">
+				<s:iterator value="defaultInterests">
   				<li><s:property /></li>
 				</s:iterator>
 				</ol>
-				<s:submit value="Edit" href="EditProfile.jsp"/>
+				<s:submit value="Edit"/>
 				</s:form></td>
 			</tr>
 		</table>

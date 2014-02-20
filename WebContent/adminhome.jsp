@@ -16,7 +16,9 @@
 	<br>
 	<a href="selectSyllabusAction"> Add Syllabus</a>
 	<br>
-	<a href="add_ann.jsp"> Add Announcement</a>
+	<a href="add_interest.jsp"> Add Interest</a>
+	<br>
+	<a href="addAnnouncement"> Add Announcement</a>
 	<br>
 	<a href="add_news.jsp"> Add News</a>
 	<br>

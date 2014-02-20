@@ -10,7 +10,7 @@
 <body background="./layout/resources/images/iiitb.jpg">
 	<h1 align="middle">STUDENT INFORMATION SYSTEM</h1>
 	<div align="center">
-	<s:form action="loginAction">
+	<s:form action="loginAction" autocomplete="off">
 
 		<s:textfield key="username" label="Username" />
 		<s:password key="password" label="Password" />

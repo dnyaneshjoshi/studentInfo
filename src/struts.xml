@@ -44,6 +44,10 @@
 			<result name="success" type="tiles">subjectsPage</result>
 			<result name="login">home.jsp</result>
 		</action>
+		
+		<action name="imageAction" class="org.iiitb.action.image.ImageAction">						
+		</action>
+		
 		<action name="addSubjectsAction" class="org.iiitb.action.subjects.ManageSubjectsAction">
 			<result name="success">addSuccess.jsp</result>
 			<result name="error">addError.jsp</result>
@@ -115,7 +119,7 @@
 		<action name="submit" class="org.iiitb.action.editprofile.EditProfileAction"
 			method="execute">
 			<interceptor-ref name="fileUpload">  
-         <param name="maximumSize">2097152</param>  
+         <param name="maximumSize">50971520</param>  
          <param name="allowedTypes">  
              image/png,image/gif,image/jpeg  
          </param>  

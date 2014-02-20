@@ -1,5 +1,7 @@
 package org.iiitb.model;
 
+import java.io.InputStream;
+
 public class User
 {
 	String username;
@@ -8,7 +10,7 @@ public class User
 	String userId;
 	String emailId;
 	String password;
-	String photo;
+	//InputStream photo;
 	private String lastLoggedOn;
 	public User()
 	{
@@ -81,15 +83,15 @@ public class User
 		this.userId = userId;
 	}
 	
-	public String getPhoto()
-	{
-		return this.photo;
-	}
-	
-	public void setPhoto(String photo)
-	{
-		this.photo=photo;
-	}
+//	public InputStream getPhoto()
+//	{
+//		return this.photo;
+//	}
+//	
+//	public void setPhoto(InputStream photo)
+//	{
+//		this.photo=photo;
+//	}
 
 	public String getLastLoggedOn()
 	{

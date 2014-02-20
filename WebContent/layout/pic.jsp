@@ -9,9 +9,9 @@
 </head>
 <body>
 	<a href='view'>
-		<object width="180px" data='layout/resources/images/<s:property value="#session.user.photo" />'>
-			<img width="180px" src='layout/resources/images/default_photo.png' />
-		</object>
+		
+			<img width="180px" src='imageAction?userId=<s:property value="#session.user.userId" />' />
+		
 	</a>
 	<br>
 	Last logged on: <s:property value="lastLoggedOn" />

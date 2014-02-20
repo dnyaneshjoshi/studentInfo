@@ -17,11 +17,22 @@ public class AddInterestAction extends ActionSupport
 	
 	public String execute() throws SQLException
 	{
-		Connection cn=ConnectionPool.getConnection();
-		InterestDAO interestDAO=new InterestDAOImpl();
-		interestDAO.addInterest(cn, new Interest(name, details));
-		ConnectionPool.freeConnection(cn);
-		return "success";
+		if(!name.trim().equals("") && !details.trim().equals(""))
+		{
+			Connection cn=ConnectionPool.getConnection();
+			InterestDAO interestDAO=new InterestDAOImpl();
+			interestDAO.addInterest(cn, new Interest(name, details));
+			ConnectionPool.freeConnection(cn);
+			return "success";
+		}
+		
+		if(name.trim().equals(""))
+			addFieldError("name", "name cannot be empty");
+			
+		if(details.trim().equals(""))
+			addFieldError("details", "details cannot be empty");
+		
+		return INPUT;
 	}
 
 	public String getName() {

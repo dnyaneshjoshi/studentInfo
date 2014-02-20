@@ -1,5 +1,6 @@
 package org.iiitb.action;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -151,8 +152,10 @@ public class LoginAction extends ActionSupport implements SessionAware
 						preStmt = conn.prepareStatement(Constants.GET_PHOTO_QRY);
 						preStmt.setString(1, user.getUsername());
 						result = preStmt.executeQuery();
-						//if(result.next())
-							//user.setPhoto(result.getBinaryStream("photo"));
+						if(result.next()){
+							InputStream binaryStream = result.getBinaryStream("photo");
+							user.setPhoto(binaryStream);
+						}
 					}
 
 				}

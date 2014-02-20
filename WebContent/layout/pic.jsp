@@ -11,7 +11,6 @@
 	<a href='view'>
 		
 			<img width="180px" src='imageAction?userId=<s:property value="#session.user.userId" />' />
-		
 	</a>
 	<br>
 	Last logged on: <s:property value="lastLoggedOn" />

@@ -6,19 +6,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Add Announcements</title>
+<title>Add Interest</title>
 </head>
 <body>
 
 <h2 align="middle">STUDENT INFORMATION SYSTEM</h2>
 	<br>
-	<h2 align="middle">Add Announcements</h2>
+	<h2>Add Interest</h2>
 	
 	<br>
-	<s:form action="addann">
+	<s:form action="addInterest">
 		<s:textfield key="name" label="name" />
 		<s:textarea key="details" name="details" rows="5" cols="50"/>
-		<s:select key="interest" list="li"></s:select>
+		   	
 		<s:submit label="Add"/>
 	</s:form>
 	<br>

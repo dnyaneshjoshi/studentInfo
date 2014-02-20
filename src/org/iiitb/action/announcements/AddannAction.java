@@ -19,6 +19,7 @@ public class AddannAction extends ActionSupport implements SessionAware
 {
 	private String name;
 	private String details;
+	private String interest;
 
 	public String getName() {
 		return name;
@@ -56,7 +57,15 @@ public class AddannAction extends ActionSupport implements SessionAware
 			preStmt.setString(2, details);
 			
 			if (preStmt.executeUpdate() > 0)
-				ret = SUCCESS;
+			{
+				String q="insert into announcement_interest(interest_id, announcement_id) values(?, (select max(announcement_id) from announcement));";
+				PreparedStatement p=conn.prepareStatement(q);
+				p.setInt(1, Integer.parseInt(interest.split("[.]")[0]));
+				if(p.executeUpdate()>0)
+					ret = SUCCESS;
+				else
+					ret = ERROR;
+			}
 			else
 				ret = ERROR;
 		} catch (SQLException e) {
@@ -86,5 +95,13 @@ public class AddannAction extends ActionSupport implements SessionAware
 	public void setSession(Map<String, Object> session) {
 		this.session=session;
 
+	}
+
+	public String getInterest() {
+		return interest;
+	}
+
+	public void setInterest(String interest) {
+		this.interest = interest;
 	}
 }

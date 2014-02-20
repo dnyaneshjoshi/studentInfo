@@ -16,7 +16,7 @@
 
 		<tr>
 			<td rowspan="3"><img
-				src="layout/resources/images/<s:property value="%{friendProfile.photo}" />" />
+				src="imageAction?userId=<s:property value="%{friendProfile.studentId}" />" />
 
 			</td>
 			<td></td>

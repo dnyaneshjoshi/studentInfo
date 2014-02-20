@@ -1,5 +1,6 @@
 package org.iiitb.model;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,7 +30,7 @@ public class StudentInfo
 
 	String rollNo;
 	String dob;
-	String photo;
+	InputStream photo;
 	String name;
 
 	public String getName()
@@ -62,14 +63,14 @@ public class StudentInfo
 		this.dob = dob;
 	}
 
-	public String getPhoto()
-	{
-		return photo;
-	}
-
-	public void setPhoto(String photo)
-	{
-		this.photo = photo;
-	}
+   public InputStream getPhoto()
+   {
+   return photo;
+   }
+  
+   public void setPhoto(InputStream photo)
+   {
+   this.photo = photo;
+   }
 
 }

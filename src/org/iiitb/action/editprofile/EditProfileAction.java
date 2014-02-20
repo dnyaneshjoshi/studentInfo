@@ -2,6 +2,7 @@ package org.iiitb.action.editprofile;
 import java.sql.Connection;
 import java.util.List;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Map;
 
@@ -119,26 +120,27 @@ public class EditProfileAction extends ActionSupport implements SessionAware,Ser
 		EditProfileDAO edp = new EditProfileDAO(user.getUserId());
 		if(fileUploadFileName!=null)
 		{
-		//String destpath=servletRequest.getSession().getServletContext().getRealPath("/studentInfo/WebContent/layout/resources");
-		String destpath="/home/saikrishna/git/studentInfo/WebContent/layout/resources/images";
+		String destpath=servletRequest.getSession().getServletContext().getRealPath("/");		
 		System.out.println("Server path:" + destpath);
 		File destFile  = new File(destpath, fileUploadFileName);
     	try {
 			FileUtils.copyFile(fileUpload, destFile);
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return ERROR;
-		}  
-    	edp.setPhoto(fileUploadFileName);
+		}      	
+    	FileInputStream inputStream= new FileInputStream(destFile);
+    	edp.setPhoto(inputStream);
+    	//user.setPhoto(inputStream);
 		}
 		edp.setName(name);
 		edp.setPassword(password);
 		if(interests!=null)
 		edp.setInterests(interests);
 		user.setName(name);
-		if(fileUploadFileName!=null)
-		user.setPhoto(fileUploadFileName);
+		if(fileUploadFileName!=null)		
 		user.setPassword(password);
 		
 		Connection connection = ConnectionPool.getConnection();

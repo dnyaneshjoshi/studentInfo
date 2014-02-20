@@ -31,8 +31,9 @@
 				</s:param>
 
 			</s:url>
+			
 			<li><a href='<s:property value="#myurl"/>'><img
-					src="layout/resources/images/<s:property value="#student.photo"/>"
+					src="imageAction?rollNo=<s:property value="#student.rollNo"/>"
 					title='<s:property
 						value="#student.name" />' /></a></li>
 

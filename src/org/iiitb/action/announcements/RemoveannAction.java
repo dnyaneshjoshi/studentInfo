@@ -42,6 +42,10 @@ public class RemoveannAction extends ActionSupport implements SessionAware
 
 		PreparedStatement preStmt = null;
 		try {
+			PreparedStatement p=conn.prepareStatement("delete from announcement_interest where announcement_id in (select announcement_id from announcement where name=?);");
+			p.setString(1, name);
+			p.executeUpdate();
+			
 			String query = "delete from announcement where name=?";
 
 			preStmt = conn.prepareStatement(query);

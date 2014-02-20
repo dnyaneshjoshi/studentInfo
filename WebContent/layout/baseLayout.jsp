@@ -21,11 +21,11 @@
 		</tr>
    </table>
    <br />
-   <div style="width:250px; float:left;">
+   <div style="width:200px; float:left;">
    		<br /><br />
    		<tiles:insertAttribute name="pic" />
    </div>
-   <div style="float:left;">
+   <div style="margin-left:250px;">
    		<tiles:insertAttribute name="body" />
    </div>
    <div style="width:100%; float:left;">

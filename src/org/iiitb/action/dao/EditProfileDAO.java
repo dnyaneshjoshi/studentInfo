@@ -1,4 +1,5 @@
 package org.iiitb.action.dao;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,7 +36,7 @@ public String getPhoto()
 {
 	return photo;
 }
-public void setPhoto(String photo)
+public void setPhoto(InputStream photo)
 {
 	Connection con = ConnectionPool.getConnection();
 	PreparedStatement ps;
@@ -43,7 +44,7 @@ public void setPhoto(String photo)
 	try
 	{
 		ps=con.prepareStatement("update student set photo = ? where student_id = ?");
-		ps.setString(1, photo);
+		ps.setBlob(1, photo);
 		ps.setString(2, userid);
 		int s = ps.executeUpdate();
 	}

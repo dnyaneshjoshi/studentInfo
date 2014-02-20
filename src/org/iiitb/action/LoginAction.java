@@ -151,8 +151,8 @@ public class LoginAction extends ActionSupport implements SessionAware
 						preStmt = conn.prepareStatement(Constants.GET_PHOTO_QRY);
 						preStmt.setString(1, user.getUsername());
 						result = preStmt.executeQuery();
-						if(result.next())
-							user.setPhoto(result.getString("photo"));
+						//if(result.next())
+							//user.setPhoto(result.getBinaryStream("photo"));
 					}
 
 				}

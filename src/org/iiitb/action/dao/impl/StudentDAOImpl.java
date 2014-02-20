@@ -1,5 +1,6 @@
 package org.iiitb.action.dao.impl;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,7 +46,8 @@ public class StudentDAOImpl implements StudentDAO
 				user = new StudentInfo();
 				user.setDob(rs.getString("dob"));
 				user.setName(rs.getString("name"));
-				user.setPhoto(rs.getString("photo"));
+				InputStream binaryStream = rs.getBinaryStream("photo");
+				user.setPhoto(binaryStream);
 				user.setRollNo(rs.getString("roll_no"));
 
 			}
@@ -83,7 +85,8 @@ public class StudentDAOImpl implements StudentDAO
 				user = new StudentInfo();
 				user.setDob(rs.getString("dob"));
 				user.setName(rs.getString("name"));
-				user.setPhoto(rs.getString("photo"));
+				InputStream binaryStream = rs.getBinaryStream("photo");
+        user.setPhoto(binaryStream);
 				user.setRollNo(rs.getString("roll_no"));
 				user.setStudentId(rs.getInt("user_id"));
 				
@@ -132,7 +135,8 @@ public class StudentDAOImpl implements StudentDAO
 				studentDao = new StudentInfo();
 				studentDao.setDob(rs.getString("dob"));
 				studentDao.setName(rs.getString("name"));
-				studentDao.setPhoto(rs.getString("photo"));
+				//InputStream binaryStream = rs.getBinaryStream("photo");
+				//studentDao.setPhoto(binaryStream);
 				studentDao.setRollNo(rs.getString("roll_no"));
 
 				friends.add(studentDao);

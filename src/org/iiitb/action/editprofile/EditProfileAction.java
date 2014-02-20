@@ -32,9 +32,18 @@ public class EditProfileAction extends ActionSupport implements SessionAware,Ser
 	File fileUpload;
 	String fileUploadContentType;
 	String fileUploadFileName;
-	List<String> interests;
+	List<String> defaultInterests;
 	private Map<String, Object> session;
     private HttpServletRequest servletRequest;
+    
+	public List<String> getDefaultInterests() {
+		return defaultInterests;
+	}
+
+	public void setInterests(List<String> interests) {
+		this.defaultInterests = interests;
+	}
+
 	public String getFileUploadContentType() {
 		return fileUploadContentType;
 	}
@@ -88,17 +97,6 @@ public class EditProfileAction extends ActionSupport implements SessionAware,Ser
 	{
 		this.password = password;
 	}
-
-	public List<String> getInterests()
-	{
-		return interests;
-	}
-
-	public void setInterests(List<String> interests)
-	{
-		this.interests = interests;
-	}
-
 	public Map<String, Object> getSession()
 	{
 		return session;
@@ -137,9 +135,10 @@ public class EditProfileAction extends ActionSupport implements SessionAware,Ser
 		}
 		edp.setName(name);
 		edp.setPassword(password);
-		if(interests!=null)
-		edp.setInterests(interests);
+		if(defaultInterests!=null)
+		edp.setDefaultInterests(defaultInterests);
 		user.setName(name);
+		user.setDefaultInterests(defaultInterests);
 		if(fileUploadFileName!=null)		
 		user.setPassword(password);
 		

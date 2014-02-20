@@ -1,6 +1,8 @@
 package org.iiitb.model;
 
 import java.io.InputStream;
+import java.util.List;
+
 
 public class User
 {
@@ -10,6 +12,9 @@ public class User
 	String userId;
 	String emailId;
 	String password;
+
+	List<String> defaultInterests; 
+
 	InputStream photo;
 	private String lastLoggedOn;
 	public User()
@@ -21,8 +26,15 @@ public class User
 		super();
 		this.username = username;
 		this.password = password;
+		
 	}
 
+	public List<String> getDefaultInterests() {
+		return defaultInterests;
+	}
+	public void setDefaultInterests(List<String> interests) {
+		this.defaultInterests = interests;
+	}
 	public String getPassword()
 	{
 		return password;

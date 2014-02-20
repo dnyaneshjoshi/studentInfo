@@ -15,13 +15,13 @@ String name;
 String password;
 String userid;
 String photo;
-List<String> interests;
+List<String> defaultInterests;
 public EditProfileDAO()
 {
 	name=null;
 	password=null;
 	userid=null;
-	interests=null;
+	defaultInterests=null;
 	photo=null;
 }
 public EditProfileDAO(String userid)
@@ -29,7 +29,7 @@ public EditProfileDAO(String userid)
 	this.userid=userid;
 	name=null;
 	password=null;
-	interests=null;
+	defaultInterests=null;
 	photo=null;
 }
 public String getPhoto()
@@ -101,14 +101,14 @@ public String getUserid() {
 public void setUserid(String userid) {
 	this.userid=userid;
 }
-public List<String> getInterests() {
-	return interests;
+public List<String> getDefaultInterests() {
+	return defaultInterests;
 }
-public void setInterests(List<String> interests) {
+public void setDefaultInterests(List<String> defaultInterests) {
 	Connection con = ConnectionPool.getConnection();
 	PreparedStatement ps;
 	ResultSet rs;
-	Iterator<String> iterator = interests.iterator();
+	Iterator<String> iterator = defaultInterests.iterator();
 	try {
 		ps=con.prepareStatement("delete from student_interest where student_id=?");
 		ps.setString(1, userid);	

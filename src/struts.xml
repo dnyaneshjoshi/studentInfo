@@ -152,7 +152,7 @@
 		<action name="addInterest" class="org.iiitb.action.announcements.AddInterestAction">
 			<result name="success">adminhome.jsp</result>
 			<result name="error">adminhome.jsp</result>
-			<result name="input">add_ann.jsp</result>
+			<result name="input">add_interest.jsp</result>
 		</action>
 		<action name="addAnnouncement"
 			class="org.iiitb.action.announcements.AddAnnouncementAction">

@@ -25,19 +25,19 @@
 				<table border="1">
 					<thead>
 						<tr>
-							<td>Subject Code</td>
-							<td>Subject</td>
-							<td>Grade</td>
-							<td>Result</td>
+							<td><b><center>Subject Code</center></b></td>
+							<td><b><center>Subject</center></b></td>
+							<td><b><center>Grade</center></b></td>
+							<td><b><center>Result</center></b></td>
 						</tr>
 					</thead>
 					<tbody>
 						<s:iterator value="resultList" status="subject">
 							<tr>
-								<td><s:property value="subjectName" /></td>
-								<td><s:property value="subjectCode" /></td>
-								<td><s:property value="grade" /></td>
-								<td><s:property value="result" /></td>
+								<td><center><s:property value="subjectName" /></center></td>
+								<td><center><s:property value="subjectCode" /></center></td>
+								<td><center><s:property value="grade" /></center></td>
+								<td><center><s:property value="result" /></center></td>
 							</tr>
 						</s:iterator>
 					</tbody>

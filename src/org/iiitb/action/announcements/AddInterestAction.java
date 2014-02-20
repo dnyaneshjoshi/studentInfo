@@ -23,7 +23,7 @@ public class AddInterestAction extends ActionSupport
 			InterestDAO interestDAO=new InterestDAOImpl();
 			interestDAO.addInterest(cn, new Interest(name, details));
 			ConnectionPool.freeConnection(cn);
-			return "success";
+			return SUCCESS;
 		}
 		
 		if(name.trim().equals(""))

@@ -65,6 +65,8 @@
 	    <definition name="enrollmentErrorPage" extends="baseLayout">
 	      <put-attribute name="body" value="/enrollment/error.jsp"/>
 	   </definition>
-	   
+	   <definition name="enrollmentMenuPage" extends="baseLayout">
+	      <put-attribute name="body" value="/enrollment/enrollmentMenu.jsp"/>
+	   </definition>
 	   
 </tiles-definitions>

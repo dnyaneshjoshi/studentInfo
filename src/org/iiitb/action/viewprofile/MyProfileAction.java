@@ -101,6 +101,7 @@ public class MyProfileAction extends ActionSupport implements SessionAware
 		MyProfileDAO prof = new MyProfileDAO(user.getUserId());
 		if (user != null)
 		{
+		  System.out.println("HETETE");
 			name = user.getName();
 			password = prof.getPassword();
 			defaultInterests=prof.getDefaultInterests();
@@ -115,8 +116,11 @@ public class MyProfileAction extends ActionSupport implements SessionAware
 					Integer.parseInt(user.getUserId()));
 			setLastLoggedOn((String) this.session.get(Constants.LAST_LOGGED_ON));
 			ConnectionPool.freeConnection(connection);
+			return SUCCESS;
+		} else {
+		  return LOGIN;
 		}
-		return SUCCESS;
+		
 	}
 
 	public List<String> getDefaultInterests() {

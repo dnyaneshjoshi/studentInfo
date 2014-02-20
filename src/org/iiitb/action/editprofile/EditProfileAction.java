@@ -1,4 +1,5 @@
 package org.iiitb.action.editprofile;
+
 import java.sql.Connection;
 import java.util.List;
 import java.io.File;
@@ -24,150 +25,160 @@ import org.iiitb.util.ConnectionPool;
 import org.iiitb.util.Constants;
 
 import com.opensymphony.xwork2.ActionSupport;
-public class EditProfileAction extends ActionSupport implements SessionAware,ServletRequestAware
-{
-	String name;
-	String rollno;
-	String password;
-	File fileUpload;
-	String fileUploadContentType;
-	String fileUploadFileName;
-	List<String> defaultInterests;
-	private Map<String, Object> session;
-    private HttpServletRequest servletRequest;
-    
-	public List<String> getDefaultInterests() {
-		return defaultInterests;
-	}
 
-	public void setInterests(List<String> interests) {
-		this.defaultInterests = interests;
-	}
+public class EditProfileAction extends ActionSupport implements SessionAware,
+    ServletRequestAware {
+  String name;
+  String rollno;
+  String password;
+  File fileUpload;
+  String fileUploadContentType;
+  String fileUploadFileName;
+  List<String> defaultInterests;
+  private Map<String, Object> session;
+  private HttpServletRequest servletRequest;
 
-	public String getFileUploadContentType() {
-		return fileUploadContentType;
-	}
- 
-	public void setFileUploadContentType(String fileUploadContentType) {
-		this.fileUploadContentType = fileUploadContentType;
-	}
- 
-	public String getFileUploadFileName() {
-		return fileUploadFileName;
-	}
- 
-	public void setFileUploadFileName(String fileUploadFileName) {
-		this.fileUploadFileName = fileUploadFileName;
-	}
- 
-	public File getFileUpload() {
-		return fileUpload;
-	}
- 
-	public void setFileUpload(File fileUpload) {
-		this.fileUpload = fileUpload;
-	}
-	
-	public String getName()
-	{
-		return name;
-	}
+  public List<String> getDefaultInterests() {
+    return defaultInterests;
+  }
 
-	public void setName(String name)
-	{
-		this.name = name;
-	}
+  public void setInterests(List<String> interests) {
+    this.defaultInterests = interests;
+  }
 
-	public String getRollno()
-	{
-		return rollno;
-	}
+  public String getFileUploadContentType() {
+    return fileUploadContentType;
+  }
 
-	public void setRollno(String rollno)
-	{
-		this.rollno = rollno;
-	}
+  public void setFileUploadContentType(String fileUploadContentType) {
+    this.fileUploadContentType = fileUploadContentType;
+  }
 
-	public String getPassword()
-	{
-		return password;
-	}
+  public String getFileUploadFileName() {
+    return fileUploadFileName;
+  }
 
-	public void setPassword(String password)
-	{
-		this.password = password;
-	}
-	public Map<String, Object> getSession()
-	{
-		return session;
-	}
+  public void setFileUploadFileName(String fileUploadFileName) {
+    this.fileUploadFileName = fileUploadFileName;
+  }
 
-	public void setSession(Map<String, Object> session)
-	{
-		this.session = session;
-	}
+  public File getFileUpload() {
+    return fileUpload;
+  }
 
-	private List<NewsItem> allNews;
-	private List<AnnouncementsItem> announcements;
-	private LayoutDAO layoutDAO = new LayoutDAOImpl();
-	private String lastLoggedOn = "";
+  public void setFileUpload(File fileUpload) {
+    this.fileUpload = fileUpload;
+  }
 
-	public String execute() throws Exception
-	{
-		User user = (User) session.get("user");
-		EditProfileDAO edp = new EditProfileDAO(user.getUserId());
-		if(fileUploadFileName!=null)
-		{
-		String destpath=servletRequest.getSession().getServletContext().getRealPath("/");		
-		System.out.println("Server path:" + destpath);
-		File destFile  = new File(destpath, fileUploadFileName);
-    	try {
-			FileUtils.copyFile(fileUpload, destFile);
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return ERROR;
-		}      	
-    	FileInputStream inputStream= new FileInputStream(destFile);
-    	edp.setPhoto(inputStream);
-    	//user.setPhoto(inputStream);
-		}
-		edp.setName(name);
-		edp.setPassword(password);
-		if(defaultInterests!=null)
-		edp.setDefaultInterests(defaultInterests);
-		user.setName(name);
-		user.setDefaultInterests(defaultInterests);
-		if(fileUploadFileName!=null)		
-		user.setPassword(password);
-		
-		Connection connection = ConnectionPool.getConnection();
-		allNews = layoutDAO.getAllNews(connection);
-		announcements = layoutDAO.getAnnouncements(connection,
-				Integer.parseInt(user.getUserId()));
-		setLastLoggedOn((String) this.session.get(Constants.LAST_LOGGED_ON));
-		ConnectionPool.freeConnection(connection);
-		
-		return SUCCESS;
-	}
+  public String getName() {
+    return name;
+  }
 
-	@Override
-	public void setServletRequest(HttpServletRequest req) {
-		this.servletRequest=req;
-		
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public String getLastLoggedOn()
-	{
-		return lastLoggedOn;
-	}
+  public String getRollno() {
+    return rollno;
+  }
 
-	public void setLastLoggedOn(String lastLoggedOn)
-	{
-		this.lastLoggedOn = lastLoggedOn;
-	}
+  public void setRollno(String rollno) {
+    this.rollno = rollno;
+  }
 
-	
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public Map<String, Object> getSession() {
+    return session;
+  }
+
+  public void setSession(Map<String, Object> session) {
+    this.session = session;
+  }
+
+  private List<NewsItem> allNews;
+  private List<AnnouncementsItem> announcements;
+  private LayoutDAO layoutDAO = new LayoutDAOImpl();
+  private String lastLoggedOn = "";
+
+  
+  public List<NewsItem> getAllNews() {
+    return allNews;
+  }
+
+  public void setAllNews(List<NewsItem> allNews) {
+    this.allNews = allNews;
+  }
+
+  public List<AnnouncementsItem> getAnnouncements() {
+    return announcements;
+  }
+
+  public void setAnnouncements(List<AnnouncementsItem> announcements) {
+    this.announcements = announcements;
+  }
+
+  public String execute() throws Exception {
+    User user = (User) session.get("user");
+    if (null != user) {
+      EditProfileDAO edp = new EditProfileDAO(user.getUserId());
+      if (fileUploadFileName != null) {
+        String destpath = servletRequest.getSession().getServletContext()
+            .getRealPath("/");
+        System.out.println("Server path:" + destpath);
+        File destFile = new File(destpath, fileUploadFileName);
+        try {
+          FileUtils.copyFile(fileUpload, destFile);
+
+        } catch (IOException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+          return ERROR;
+        }
+        FileInputStream inputStream = new FileInputStream(destFile);
+        edp.setPhoto(inputStream);
+        // user.setPhoto(inputStream);
+      }
+      edp.setName(name);
+      edp.setPassword(password);
+      if (defaultInterests != null)
+        edp.setDefaultInterests(defaultInterests);
+      user.setName(name);
+      user.setDefaultInterests(defaultInterests);
+      if (fileUploadFileName != null)
+        user.setPassword(password);
+
+      Connection connection = ConnectionPool.getConnection();
+      allNews = layoutDAO.getAllNews(connection);
+      announcements = layoutDAO.getAnnouncements(connection,
+          Integer.parseInt(user.getUserId()));
+      setLastLoggedOn((String) this.session.get(Constants.LAST_LOGGED_ON));
+      ConnectionPool.freeConnection(connection);
+
+      return SUCCESS;
+    } else {
+      return LOGIN;
+    }
+  }
+
+  @Override
+  public void setServletRequest(HttpServletRequest req) {
+    this.servletRequest = req;
+
+  }
+
+  public String getLastLoggedOn() {
+    return lastLoggedOn;
+  }
+
+  public void setLastLoggedOn(String lastLoggedOn) {
+    this.lastLoggedOn = lastLoggedOn;
+  }
 
 }

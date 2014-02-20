@@ -72,12 +72,12 @@ public class Indexaction implements SessionAware {
 			
 			if (date.after(date2)) {
 				String f = sub.get( entry.getKey())+"  course"+"    enrollment is not allowed"
-						+"and since last is date....."
+						+"and since last is date "
 						+ entry.getValue()+System.getProperty("line.separator")+"\n"+"....,";
 				System.out
-						.println("course enrollment is not allowed for course id"
+						.println(" course enrollment is not allowed for course id"
 								+ entry.getKey()
-								+ "and since last is date"
+								+ " and since last is date "
 								+ entry.getValue());
 				s.append(f);
 				selected.remove(entry.getKey());
@@ -87,15 +87,15 @@ public class Indexaction implements SessionAware {
 				// }
 			}
 			if (date.before(date2)) {
-				String r = sub.get(entry.getKey())+"    course"+"enrollment is done since last date is" + date2+System.getProperty("line.separator");
+				String r = sub.get(entry.getKey())+"    course "+" enrollment is done since last date is " + date2+System.getProperty("line.separator");
 				s.append(r);
-				System.out.println(" enrollment is allowed" + date2);
+				System.out.println(" enrollment is allowed " + date2);
 
 			}
 			if (date.equals(date2)) {
-				String q = "date is equal so enrollment allowed" + date2+"\n";
+				String q = " date is equal so enrollment allowed " + date2+"\n";
 				s.append(q);
-				System.out.println("date is equal so enrollment allowed"
+				System.out.println(" date is equal so enrollment allowed "
 						+ date2);
 
 			}
@@ -105,14 +105,14 @@ public class Indexaction implements SessionAware {
 			}
 		}
 		User user = (User) session.get("user");
-		System.out.println("!!!!!!!!!!"+user.getName()+user.getUserId());
+		//System.out.println("!!!!!!!!!!"+user.getName()+user.getUserId());
 		DataConectivity.CourseUpdate(Integer.parseInt(user.getUserId()),
 				selected);
-		System.out.println("final message"+s);
+		//System.out.println("final message"+s);
 
 		setDisplayString(s.toString());
 	//	System.out.println(displayString);
-		System.out.println("DSFDFSFGS"+getDisplayString());
+		//System.out.println("DSFDFSFGS"+getDisplayString());
 		return "success";
 	}
 

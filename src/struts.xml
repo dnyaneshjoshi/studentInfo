@@ -108,6 +108,7 @@
 			<result name="error">addError.jsp</result>
 		</action>
 
+
 		<action name="view" class="org.iiitb.action.viewprofile.MyProfileAction"
 			method="execute">
 			<result name="success" type="tiles">viewProfilePage</result>
@@ -193,6 +194,11 @@
 			method="Update">
 			<result name="success" type="tiles">enrollmentPage</result>
 			<result name="fail" type="tiles">enrollmentErrorPage</result>
+		</action>
+		
+		<action name="assignGradesAction" class="org.iiitb.action.admin.UpdateGradesAction">
+			<result name="success">addSuccess.jsp</result>
+			<result name="error">addError.jsp</result>
 		</action>
 	</package>
 

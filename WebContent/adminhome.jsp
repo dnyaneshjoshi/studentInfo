@@ -16,6 +16,8 @@
 	<br>
 	<a href="selectSyllabusAction"> Add Syllabus</a>
 	<br>
+	<a href="assignGradesAction"> Assign Grades</a>
+	<br>
 	<a href="add_interest.jsp"> Add Interest</a>
 	<br>
 	<a href="addAnnouncement"> Add Announcement</a>

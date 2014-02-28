@@ -41,6 +41,9 @@ public class UpdateGradesAction extends ActionSupport implements SessionAware
 	private List<String> studentList;
 	private List<SubjectInfo> courseList;
 	private List<String> gradeList;
+	private String studentDisplayChoice;
+	private String courseDisplayChoice;
+	private String gradeDisplayChoice;
 
 	private Map<String, Object> session;
 	private static final String USER = "user";
@@ -49,8 +52,6 @@ public class UpdateGradesAction extends ActionSupport implements SessionAware
 	private List<AnnouncementsItem> announcements;
 	private LayoutDAO layoutDAO = new LayoutDAOImpl();
 	private String lastLoggedOn = "";
-
-	private int studentDisplayChoice;
 
 	public UpdateGradesAction()
 	{
@@ -154,5 +155,21 @@ public class UpdateGradesAction extends ActionSupport implements SessionAware
 
 	public void setGradeList(List<String> gradeList) {
 		this.gradeList = gradeList;
+	}
+
+	public String getCourseDisplayChoice() {
+		return courseDisplayChoice;
+	}
+
+	public void setCourseDisplayChoice(String courseDisplayChoice) {
+		this.courseDisplayChoice = courseDisplayChoice;
+	}
+
+	public String getGradeDisplayChoice() {
+		return gradeDisplayChoice;
+	}
+
+	public void setGradeDisplayChoice(String gradeDisplayChoice) {
+		this.gradeDisplayChoice = gradeDisplayChoice;
 	}
 }

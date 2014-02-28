@@ -12,19 +12,18 @@
 <body>
 	<h1>Add Course</h1>
 	<div style="text-align: left">
-		<form action="updateGradesAction" method="post">
+		<form action="updateGradesAction" method="post" name="studentsGrade">
 			<table width="50%">
 				<tr>
-					<td><s:select name="student" list="studentList" label="Student Name " cssStyle="width:230px;"></s:select>
-					</td>
-					<td><s:select name="course" list="courseList"
-							label="Course Name " cssStyle="width:230px;"></s:select>
-					</td>
+					<td><s:select id="studentDisplayChoice" name="studentDisplayChoice"
+							list="studentList" label="Student Name " cssStyle="width:230px;"
+							onchange="onStudentChange()"></s:select></td>
+					<td><s:select id="courseDisplayChoice" name="courseDisplayChoice" list="courseList"
+							label="Course Name " cssStyle="width:230px;"></s:select></td>
 				</tr>
 				<tr>
-					<td><s:select name="grade" list="gradeList"
-							label="Grade  " cssStyle="width:230px;"></s:select>
-					</td>
+					<td><s:select id="gradeDisplayChoice" name="gradeDisplayChoice" list="gradeList" label="Grade  "
+							cssStyle="width:230px;"></s:select></td>
 				</tr>
 				<tr>
 					<td><s:submit align="left" value="Assign" /></td>
@@ -33,5 +32,13 @@
 
 		</form>
 	</div>
+
+	<script type="text/javascript">
+		function onStudentChange() {
+			document.studentsGrade.action = 'assignGradesAction.action';
+			document.studentsGrade.submit();
+		}
+	</script>
+
 </body>
 </html>

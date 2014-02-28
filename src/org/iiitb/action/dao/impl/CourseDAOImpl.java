@@ -84,6 +84,27 @@ public class CourseDAOImpl implements CourseDAO {
       + "    semester semester ON semester.semester_id = course.semester_id "
       + "WHERE " + "    student.user_id = ?";
 
+  private static final String ENROLLED_COURSE_QUERY_BY_NAME = "SELECT  "
+	      + "    course.course_id as course_id, " + "    student.user_id as student_id, "
+	      + "    student.name as student_name, " + "    grade.name as grade_name, "
+	      + "    course.code as subject_code, "
+	      + "    course.name as subject_name, "
+	      + "    teacher.name as faculty_name, "
+	      + "    semester.term as semester_term " + "FROM " + "    course course "
+	      + "        LEFT OUTER JOIN "
+	      + "    faculty faculty ON course.faculty_id = faculty.faculty_id "
+	      + "        LEFT OUTER JOIN "
+	      + "    user teacher ON faculty.faculty_id = teacher.user_id "
+	      + "        LEFT OUTER JOIN "
+	      + "    result result ON result.course_id = course.course_id "
+	      + "        LEFT OUTER JOIN "
+	      + "    user student ON student.user_id = result.student_id "
+	      + "        LEFT OUTER JOIN "
+	      + "    grade grade ON grade.grade_id = result.grade_id "
+	      + "        LEFT OUTER JOIN "
+	      + "    semester semester ON semester.semester_id = course.semester_id "
+	      + "WHERE " + "    student.name = ?";
+
 	private static final String GET_NAMES_QUERY = "select distinct course.name"
 			+ " from result, course "
 			+ "where result.course_id = course.course_id "
@@ -185,6 +206,31 @@ public class CourseDAOImpl implements CourseDAO {
     }
     return subjectInfoList;
   }
+
+  public List<SubjectInfo> getEnrolledCourses(Connection connection, String student) {
+	    List<SubjectInfo> subjectInfoList = null;
+	    PreparedStatement ps = null;
+	    try {
+	      subjectInfoList = new ArrayList<SubjectInfo>();
+	      ps = connection.prepareStatement(ENROLLED_COURSE_QUERY_BY_NAME);
+	      int index = 1;
+	      ps.setString(index, student);
+	      ResultSet rs = ps.executeQuery();
+	      createSubjectInfoListFromResultSet(rs, subjectInfoList);
+
+	    } catch (SQLException e) {
+	      e.printStackTrace();
+	    } finally {
+	      if (null != ps) {
+	        try {
+	          ps.close();
+	        } catch (SQLException e) {
+	          e.printStackTrace();
+	        }
+	      }
+	    }
+	    return subjectInfoList;
+	  }
 
 	public List<String> getNames(int studentID)
 	{

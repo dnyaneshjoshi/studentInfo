@@ -30,17 +30,17 @@ if((x.options[x.selectedIndex].text)!='S')
 	<br>
 <h3 align="middle">Add the user details</h3>	
 	<br>
-	<s:form action="adduser" method="post" enctype="multipart/form-data" >
+	<s:form action="adduser" method="post" enctype="multipart/form-data" autocomplete="off" >
 
-		<s:textfield key="username" label="username" />
-		<s:textfield key="name" label="name" />
-		<s:select id="myselect" key="userType" label="userType ( A | S | F )" list="{'A','S','F'}" />		
+		<s:textfield key="username" label="Username" />
+		<s:textfield key="name" label="Name" />
+		<s:select id="myselect" key="userType" label="User Type ( A - Admin | S - Student | F - Faculty )" list="{'A','S','F'}" />		
 	   
-	   <s:textfield key="emailId" label="emailId" />
-		<s:textfield key="password" label="password" />
+	   <s:textfield key="emailId" label="Email Id" />
+		<s:password key="password" label="Password" />
 	
-		<s:textfield id="roll_no" key="roll_no" label="roll_no" />
-		<s:textfield id="hostel_addr" key="hostel_addr" label="hostel_addr" />
+		<s:textfield id="roll_no" key="roll_no" label="Roll No" />
+		<s:textfield id="hostel_addr" key="hostel_addr" label="Hostel Addr" />
 		<s:file name="fileUpload" label="Select a File to change photo"/>
 		<s:submit label="Add"/>
 	</s:form>

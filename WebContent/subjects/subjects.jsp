@@ -21,7 +21,8 @@
 						<thead>
 							<tr>
 								<td><b><center>Subject Code</center></b></td>
-								<td><b><center>Subject</b></center></td>
+								<td><b><center>Subject</b>
+									</center></td>
 								<td><b><center>Faculty Name</center></b></td>
 								<td><b><center>Semester</center></b></td>
 								<td><b><center>Enrolled</center></b></td>
@@ -33,14 +34,27 @@
 								<tr>
 									<td><s:url action="syllabusAction" var="syllabusURL">
 											<s:param name="subjectCode" value="subjectCode" />
-										</s:url> <center><s:a href="%{syllabusURL}">
-											<s:property value="subjectCode" />
-										</s:a></center></td>
-									<td><center><s:property value="subjectName" /></center></td>
-									<td><center><s:property value="facultyName" /></center></td>
-									<td><center><s:property value="semester" /></center></td>
-									<td><center><s:property value="enrolled" /></center></td>
-									<td><center><s:property value="grade" /></center></td>
+										</s:url>
+										<center>
+											<s:a href="%{syllabusURL}">
+												<s:property value="subjectCode" />
+											</s:a>
+										</center></td>
+									<td><center>
+											<s:property value="subjectName" />
+										</center></td>
+									<td><center>
+											<s:property value="facultyName" />
+										</center></td>
+									<td><center>
+											<s:property value="semester" />
+										</center></td>
+									<td><center>
+											<s:property value="enrolled" />
+										</center></td>
+									<td><center>
+											<s:property value="grade" />
+										</center></td>
 								</tr>
 							</s:iterator>
 						</tbody>
@@ -50,13 +64,14 @@
 		</div>
 		<div style="width: 20%; float: left;"></div>
 
+
+<b>Register yourself to new courses</b>
 		<form action="Index">
-			<select name="semester">
-				<option value="1">semester 1</option>
-				<option value="2">semester 2</option>
-				<option value="3">semester 3</option>
-				<option value="4">semester 4</option>
-			</select> <input type="submit" value="registration" />
+			<s:select name="semester"
+				list="semester" label="Semester"></s:select>
+
+
+		 <input type="submit" value="Register" />
 
 		</form>
 	</div>

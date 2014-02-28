@@ -28,10 +28,15 @@ public class SemesterDAOImpl implements SemesterDAO
 			+ "and course.course_id = result.course_id "
 			+ "and result.student_id=?";
 	
-	private static final String GET_TERMS = "SELECT DISTINCT " +
-			"term " +
-			"FROM " +
-			"semester";
+	private static final String GET_TERMS = "SELECT  " + 
+			"    semester.term " + 
+			"FROM " + 
+			"    course " + 
+			"        JOIN " + 
+			"    semester ON course.semester_id = semester.semester_id " + 
+			"WHERE " + 
+			"    course.lastdate > CURDATE() " + 
+			"GROUP BY semester.term;";
 	
 	private static final String GET_TERMS_FOR_YEAR = "SELECT DISTINCT " +
 			"term " +

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-    
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,27 +26,28 @@ if((x.options[x.selectedIndex].text)!='S')
 </head>
 <body>
 
-<h3 align="middle">STUDENT INFORMATION SYSTEM</h3>
+	<h3 align="middle">STUDENT INFORMATION SYSTEM</h3>
 	<br>
-<h3 align="middle">Add the user details</h3>	
+	<h3 align="middle">Add the user details</h3>
 	<br>
-	<s:form action="adduser" method="post" enctype="multipart/form-data" autocomplete="off" >
+	<s:form action="adduser" method="post" enctype="multipart/form-data"
+		autocomplete="off">
 
 		<s:textfield key="username" label="Username" />
 		<s:textfield key="name" label="Name" />
-		<s:select id="myselect" key="userType" label="User Type ( A - Admin | S - Student | F - Faculty )" list="{'A','S','F'}" />		
-	   
-	   <s:textfield key="emailId" label="Email Id" />
+
+
+		<s:textfield key="emailId" label="Email Id" />
 		<s:password key="password" label="Password" />
-	
+
 		<s:textfield id="roll_no" key="roll_no" label="Roll No" />
 		<s:textfield id="hostel_addr" key="hostel_addr" label="Hostel Addr" />
-		<s:file name="fileUpload" label="Select a File to change photo"/>
-		<s:submit label="Add"/>
+		<s:file name="fileUpload" label="Select a File to change photo" />
+		<s:submit label="Add" />
 	</s:form>
 	<br>
-<a href="adminhome.jsp"> BACK </a>
-	
+	<a href="adminhome.jsp"> BACK </a>
+
 
 </body>
 </html>

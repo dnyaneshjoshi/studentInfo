@@ -30,8 +30,7 @@ public class AdduserAction extends ActionSupport implements SessionAware,
 {
 
   private String username;
-  private String name;
-  private String userType;
+  private String name;  
   private String emailId;
   private String password;
   private String roll_no;
@@ -91,14 +90,6 @@ public class AdduserAction extends ActionSupport implements SessionAware,
     this.name = name;
   }
 
-  public String getUserType() {
-    return userType;
-  }
-
-  public void setUserType(String userType) {
-    this.userType = userType;
-  }
-
   public String getEmailId() {
     return emailId;
   }
@@ -153,7 +144,7 @@ public class AdduserAction extends ActionSupport implements SessionAware,
       preStmt.setString(2, username);
       preStmt.setString(3, password);
       preStmt.setString(4, emailId);
-      preStmt.setString(5, userType);
+      preStmt.setString(5, "S");
 
       if (preStmt.executeUpdate() > 0)
         ret = SUCCESS;
@@ -220,10 +211,6 @@ public class AdduserAction extends ActionSupport implements SessionAware,
 
     if (StringUtils.isEmpty(emailId)) {
       addFieldError("emailId", "emailId cannot be blank");
-    }
-
-    if (StringUtils.isEmpty(userType)) {
-      addFieldError("userType", "userType cannot be blank");
     }
 
   }

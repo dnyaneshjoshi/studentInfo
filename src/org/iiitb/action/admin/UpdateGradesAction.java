@@ -1,4 +1,4 @@
-package org.iiitb.action.dao;
+package org.iiitb.action.admin;
 
 import java.sql.Connection;
 import java.util.LinkedList;
@@ -15,6 +15,8 @@ import org.iiitb.action.dao.impl.ResultDAOImpl;
 import org.iiitb.action.dao.impl.SemesterDAOImpl;
 import org.iiitb.action.dao.impl.StudentDAOImpl;
 import org.iiitb.action.dao.SemesterDAO;
+import org.iiitb.action.subjects.SubjectInfo;
+import org.iiitb.model.StudentInfo;
 import org.iiitb.model.User;
 import org.iiitb.model.layout.AnnouncementsItem;
 import org.iiitb.model.layout.NewsItem;
@@ -37,7 +39,7 @@ public class UpdateGradesAction extends ActionSupport implements SessionAware
 	private static final long serialVersionUID = -3927650660405287420L;
 
 	private List<String> studentList;
-	private List<String> courseList;
+	private List<SubjectInfo> courseList;
 	private List<String> gradeList;
 
 	private Map<String, Object> session;
@@ -55,7 +57,7 @@ public class UpdateGradesAction extends ActionSupport implements SessionAware
 		studentList = new LinkedList<String>();
 		//studentList.add(DEFAULT_TERM);
 
-		courseList = new LinkedList<String>();
+		courseList = new LinkedList<SubjectInfo>();
 		//courseList.add(DEFAULT_COURSE);
 
 		//setResultList(new LinkedList<GradeInfo>());
@@ -85,12 +87,12 @@ public class UpdateGradesAction extends ActionSupport implements SessionAware
 	}
 
 
-	public List<String> getCourseList()
+	public List<SubjectInfo> getCourseList()
 	{
 		return courseList;
 	}
 
-	public void setCourseList(List<String> courseList)
+	public void setCourseList(List<SubjectInfo> courseList)
 	{
 		this.courseList = courseList;
 	}

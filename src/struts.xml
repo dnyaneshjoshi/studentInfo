@@ -136,7 +136,7 @@
 
 
 		<action name="adduser" class="org.iiitb.action.user.AdduserAction">
-		<interceptor-ref name="fileUpload">
+			<interceptor-ref name="fileUpload">
 				<param name="maximumSize">50971520</param>
 				<param name="allowedTypes">
 					image/png,image/gif,image/jpeg
@@ -195,9 +195,10 @@
 			<result name="success" type="tiles">enrollmentPage</result>
 			<result name="fail" type="tiles">enrollmentErrorPage</result>
 		</action>
-		
-		<action name="assignGradesAction" class="org.iiitb.action.admin.UpdateGradesAction">
-			<result name="success">addSuccess.jsp</result>
+
+		<action name="assignGradesAction" class="org.iiitb.action.admin.UpdateGradesAction"
+			method="execute">
+			<result name="success">updateGrades.jsp</result>
 			<result name="error">addError.jsp</result>
 		</action>
 	</package>

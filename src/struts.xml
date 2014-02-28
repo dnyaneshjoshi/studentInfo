@@ -135,6 +135,13 @@
 
 
 		<action name="adduser" class="org.iiitb.action.user.AdduserAction">
+		<interceptor-ref name="fileUpload">
+				<param name="maximumSize">50971520</param>
+				<param name="allowedTypes">
+					image/png,image/gif,image/jpeg
+				</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="success">adminhome.jsp</result>
 			<result name="error">adminhome.jsp</result>
 			<result name="input">add_user.jsp</result>

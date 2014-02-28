@@ -102,7 +102,7 @@ public List<String> getSubjectDisplayList() {
     Connection connection = ConnectionPool.getConnection();
     User loggedInUser = (User) this.session.get(USER);
     if (null != loggedInUser) {
-    	semester = new SemesterDAOImpl().getTerms(Integer.parseInt(loggedInUser.getUserId()));
+    	semester = new SemesterDAOImpl().getTerms();
       if (null == subjectDisplayChoice
           || subjectDisplayChoice.equals(SHOW_ALL_COURSES)) {
         subjectInfoList = courseDAO.getAllCourses(connection,

@@ -136,11 +136,12 @@ public class DataConectivity {
 			conn = ConnectionPool.getConnection();
 
 			// STEP 4: Execute a query
+			
 			System.out.println("Creating statement...");
 			stmt = conn.createStatement();
 			String sql;
 			sql = "SELECT course_id,code,name,credits,lastdate,faculty_id,semester_id FROM course WHERE semester_id="
-					+ semester + "";// write your query
+					+ semester + " and lastdate > CURDATE()";// write your query
 			ResultSet rs = stmt.executeQuery(sql);
 
 			// STEP 5: Extract data from result set

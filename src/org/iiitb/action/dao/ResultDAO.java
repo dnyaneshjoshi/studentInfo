@@ -18,4 +18,8 @@ public interface ResultDAO
 	public List<GradeInfo> getGrades(int studentID);
 
 	public List<GradeInfo> getGrades(int studentID, int term);
+	
+	public boolean updateGrades(int studentID,int courseID,int gradeID);
+	
+	public List<String> getGrades();
 }

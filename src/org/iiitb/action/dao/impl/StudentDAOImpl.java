@@ -26,7 +26,42 @@ public class StudentDAOImpl implements StudentDAO
 
 	private static final String ADD_FRIENDS_QRY = "insert into friends(student_id1, student_id2)     select s1.student_id, s2.student_id from student s1, student s2 where s1.student_id=? and s2.roll_no=?";
 
+	private static final String GET_STUDENT_NAMES = "select name from user where user_type=?";
 	@Override
+	public List<String> getStudents()
+	{
+		List<String> names = null;
+		Connection conn = ConnectionPool.getConnection();
+
+		try
+		{
+			PreparedStatement stmt = conn.prepareStatement(GET_STUDENT_NAMES);
+			stmt.setString(1, "S");
+			ResultSet rs = stmt.executeQuery();
+
+			if (rs.next())
+			{
+				names = new ArrayList<String>();
+			}
+			do
+			{
+				names.add(rs.getString("name"));
+			}
+			while (rs.next());
+
+		}
+		catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally
+		{
+			ConnectionPool.freeConnection(conn);
+		}
+
+		return names;
+	}
 	public StudentInfo getStudentByUserId(String userId)
 	{
 

@@ -20,4 +20,6 @@ public interface StudentDAO
 	public String findRelationShip(String rollNo, String friendNo);
 
 	public boolean addFriend(String rollNo, String friendNo);
+	
+	public List<String> getStudents();
 }

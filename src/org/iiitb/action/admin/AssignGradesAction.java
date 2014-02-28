@@ -30,7 +30,7 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author Abhijith Madhav (MT2013002)
  * 
  */
-public class UpdateGradesAction extends ActionSupport implements SessionAware
+public class AssignGradesAction extends ActionSupport implements SessionAware
 {
 	/**
 	 * 
@@ -38,6 +38,9 @@ public class UpdateGradesAction extends ActionSupport implements SessionAware
 	 */
 	private static final long serialVersionUID = -3927650660405287420L;
 
+	private List<String> studentList;
+	private List<SubjectInfo> courseList;
+	private List<String> gradeList;
 	private String studentDisplayChoice;
 	private String courseDisplayChoice;
 	private String gradeDisplayChoice;
@@ -45,18 +48,48 @@ public class UpdateGradesAction extends ActionSupport implements SessionAware
 	private Map<String, Object> session;
 	private static final String USER = "user";
 
+	private List<NewsItem> allNews;
+	private List<AnnouncementsItem> announcements;
+	private LayoutDAO layoutDAO = new LayoutDAOImpl();
+	private String lastLoggedOn = "";
+
+	public AssignGradesAction()
+	{
+		studentList = new LinkedList<String>();
+		//studentList.add(DEFAULT_TERM);
+
+		courseList = new LinkedList<SubjectInfo>();
+		//courseList.add(DEFAULT_COURSE);
+
+		//setResultList(new LinkedList<GradeInfo>());
+		gradeList = new LinkedList<String>();
+	}
+
 	public String execute() throws Exception
 	{
 		User loggedInUser = (User) this.session.get(USER);
 		if (loggedInUser != null)
 		{	
 			Connection connection = ConnectionPool.getConnection();
-			new ResultDAOImpl().updateGrades(studentDisplayChoice, courseDisplayChoice, gradeDisplayChoice);
+			studentList.addAll(new StudentDAOImpl().getStudents());
+			if (null == studentDisplayChoice) {
+			  studentDisplayChoice = studentList.get(0);
+			}
+
+			courseList.addAll(new CourseDAOImpl().getEnrolledCourses(connection, studentDisplayChoice));
+			gradeList.addAll(new ResultDAOImpl().getGrades());
+			
+			allNews = layoutDAO.getAllNews(connection);
+			announcements = layoutDAO.getAnnouncements(connection,
+					Integer.parseInt(loggedInUser.getUserId()));
+			setLastLoggedOn((String) this.session.get(Constants.LAST_LOGGED_ON));
+			ConnectionPool.freeConnection(connection);
 			return SUCCESS;
 		}
 		else
 			return LOGIN;
 	}
+
 
 	public String getStudentDisplayChoice() {
     return studentDisplayChoice;
@@ -65,6 +98,36 @@ public class UpdateGradesAction extends ActionSupport implements SessionAware
   public void setStudentDisplayChoice(String studentDisplayChoice) {
     this.studentDisplayChoice = studentDisplayChoice;
   }
+
+  public List<SubjectInfo> getCourseList()
+	{
+		return courseList;
+	}
+
+	public void setCourseList(List<SubjectInfo> courseList)
+	{
+		this.courseList = courseList;
+	}
+
+	public List<NewsItem> getAllNews()
+	{
+		return allNews;
+	}
+
+	public void setAllNews(List<NewsItem> allNews)
+	{
+		this.allNews = allNews;
+	}
+
+	public List<AnnouncementsItem> getAnnouncements()
+	{
+		return announcements;
+	}
+
+	public void setAnnouncements(List<AnnouncementsItem> announcements)
+	{
+		this.announcements = announcements;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -76,6 +139,33 @@ public class UpdateGradesAction extends ActionSupport implements SessionAware
 	public void setSession(Map<String, Object> session)
 	{
 		this.session = session;
+
+	}
+
+	public String getLastLoggedOn()
+	{
+		return lastLoggedOn;
+	}
+
+	public void setLastLoggedOn(String lastLoggedOn)
+	{
+		this.lastLoggedOn = lastLoggedOn;
+	}
+
+	public List<String> getStudentList() {
+		return studentList;
+	}
+
+	public void setStudentList(List<String> studentList) {
+		this.studentList = studentList;
+	}
+
+	public List<String> getGradeList() {
+		return gradeList;
+	}
+
+	public void setGradeList(List<String> gradeList) {
+		this.gradeList = gradeList;
 	}
 
 	public String getCourseDisplayChoice() {

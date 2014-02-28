@@ -19,7 +19,7 @@ public interface ResultDAO
 
 	public List<GradeInfo> getGrades(int studentID, int term);
 	
-	public boolean updateGrades(int studentID,int courseID,int gradeID);
+	public boolean updateGrades(String studentName,String courseName,String gradeName);
 	
 	public List<String> getGrades();
 }

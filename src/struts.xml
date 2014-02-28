@@ -196,9 +196,16 @@
 			<result name="fail" type="tiles">enrollmentErrorPage</result>
 		</action>
 
-		<action name="assignGradesAction" class="org.iiitb.action.admin.UpdateGradesAction"
+		<action name="assignGradesAction" class="org.iiitb.action.admin.AssignGradesAction"
 			method="execute">
 			<result name="success">updateGrades.jsp</result>
+			<result name="error">addError.jsp</result>
+			<result name="login">adminhome.jsp</result>
+		</action>
+		
+		<action name="updateGradesAction" class="org.iiitb.action.admin.UpdateGradesAction"
+			method="execute">
+			<result name="success">addSuccess.jsp</result>
 			<result name="error">addError.jsp</result>
 			<result name="login">adminhome.jsp</result>
 		</action>

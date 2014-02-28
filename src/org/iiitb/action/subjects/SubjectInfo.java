@@ -88,4 +88,8 @@ public class SubjectInfo {
     this.subjectName = subjectName;
   }
 
+  @Override
+  public String toString() {
+    return this.subjectName;
+  }
 }

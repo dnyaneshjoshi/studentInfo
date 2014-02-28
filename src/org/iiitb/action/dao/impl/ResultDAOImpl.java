@@ -64,19 +64,47 @@ public class ResultDAOImpl implements ResultDAO
 			+ "distinct name "
 			+ "from grade";
 	
-	private static final String UPDATE_GRADES = "insert into result values(result_id,?,?,?)";
-			
-	public boolean updateGrades(int studentID,int courseID,int gradeID)
+	private static final String UPDATE_GRADES = "update result  " + 
+			"set  " + 
+			"    grade_id = ? " + 
+			"where " + 
+			"    student_id = ? and course_id = ?";
+
+  public boolean updateGrades(String studentName,String courseName,String gradeName)
 	{
 		Connection con = ConnectionPool.getConnection();
 		PreparedStatement ps = null;
 		boolean result=false;
 		try
 		{
+		  /** Dirty fix **/
+		  final String GET_GRADE_ID = "select grade_id from grade where name = ?";
+		  final String GET_STUDENT_ID = "select student_id from student, user where user.name = ? and student_id = user_id";
+		  final String GET_COURSE_ID = "select course_id from course where name = ?";    
+
+		  ps = con.prepareStatement(GET_GRADE_ID);
+		  ps.setString(1, gradeName);
+		  ResultSet rs = ps.executeQuery();
+		  rs.next();
+		  int gradeId = rs.getInt("grade_id");
+		  
+		  ps = con.prepareStatement(GET_STUDENT_ID);
+		  ps.setString(1, studentName);
+      rs = ps.executeQuery();
+      rs.next();
+      int studentId = rs.getInt("student_id");
+      
+      ps = con.prepareStatement(GET_COURSE_ID);
+      ps.setString(1, courseName);
+      rs = ps.executeQuery();
+      rs.next();
+      int courseId = rs.getInt("course_id");
+      /** End of dirty fix **/
+      
 			ps = con.prepareStatement(UPDATE_GRADES);
-			ps.setInt(1, studentID);
-			ps.setInt(2, courseID);
-			ps.setInt(3, gradeID);
+			ps.setInt(1, gradeId);
+			ps.setInt(2, studentId);
+			ps.setInt(3, courseId);
 			if(ps.executeUpdate()==1)
 			{
 				result=true;

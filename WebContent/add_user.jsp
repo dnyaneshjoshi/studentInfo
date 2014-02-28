@@ -7,6 +7,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add users</title>
+<script type="text/javascript">
+function student()
+{
+	var x=document.getElementById("mySelect");
+	  
+if((x.options[x.selectedIndex].text)!='S')
+	{
+	//document.getElementById("student_id").disabled=true;
+	//document.getElementById("roll_no").disabled=true;
+	//document.getElementById("hostel_addr").disabled=true;
+	//document.getElementById('roll_no').style.visibility = 'visible';        
+    
+	}
+}
+</script>
+
 </head>
 <body>
 
@@ -14,15 +30,18 @@
 	<br>
 <h3 align="middle">Add the user details</h3>	
 	<br>
-	<s:form action="adduser" method="post">
+	<s:form action="adduser" method="post" enctype="multipart/form-data" >
 
 		<s:textfield key="username" label="username" />
 		<s:textfield key="name" label="name" />
-		<s:textfield key="userType" label="userType(only A,S,F)" />
-		<s:textfield key="emailId" label="emailId" />
+		<s:select id="myselect" key="userType" label="userType ( A | S | F )" list="{'A','S','F'}" />		
+	   
+	   <s:textfield key="emailId" label="emailId" />
 		<s:textfield key="password" label="password" />
-		
-		
+	
+		<s:textfield id="roll_no" key="roll_no" label="roll_no" />
+		<s:textfield id="hostel_addr" key="hostel_addr" label="hostel_addr" />
+		<s:file name="fileUpload" label="Select a File to change photo"/>
 		<s:submit label="Add"/>
 	</s:form>
 	<br>

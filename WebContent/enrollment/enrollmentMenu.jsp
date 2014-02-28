@@ -11,7 +11,7 @@
 
 
 <form action="Index1" >
-<s:select name="selected" value="selected"  list="al"  multiple="true"   listValue="{course_id,code,coursename,credits,lastdate,faculty_id,semester_id}" listKey="course_id"  onselect="Indexsuccess" /><br>
-<s:submit align="100" value="enroll"/>
+<s:select name="selected" value="selected"  list="al"  multiple="true"   listValue="{coursename}" listKey="course_id"  onselect="Indexsuccess" /><br>
+<s:submit align="100" value="Enroll"/>
 </form></body>
 </html>

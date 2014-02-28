@@ -108,6 +108,7 @@
 			<result name="error">addError.jsp</result>
 		</action>
 
+
 		<action name="view" class="org.iiitb.action.viewprofile.MyProfileAction"
 			method="execute">
 			<result name="success" type="tiles">viewProfilePage</result>
@@ -135,6 +136,13 @@
 
 
 		<action name="adduser" class="org.iiitb.action.user.AdduserAction">
+		<interceptor-ref name="fileUpload">
+				<param name="maximumSize">50971520</param>
+				<param name="allowedTypes">
+					image/png,image/gif,image/jpeg
+				</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="success">adminhome.jsp</result>
 			<result name="error">adminhome.jsp</result>
 			<result name="input">add_user.jsp</result>
@@ -186,6 +194,11 @@
 			method="Update">
 			<result name="success" type="tiles">enrollmentPage</result>
 			<result name="fail" type="tiles">enrollmentErrorPage</result>
+		</action>
+		
+		<action name="assignGradesAction" class="org.iiitb.action.admin.UpdateGradesAction">
+			<result name="success">addSuccess.jsp</result>
+			<result name="error">addError.jsp</result>
 		</action>
 	</package>
 

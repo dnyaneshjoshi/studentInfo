@@ -11,6 +11,7 @@ import org.iiitb.action.dao.CourseDAO;
 import org.iiitb.action.dao.LayoutDAO;
 import org.iiitb.action.dao.impl.CourseDAOImpl;
 import org.iiitb.action.dao.impl.LayoutDAOImpl;
+import org.iiitb.action.dao.impl.SemesterDAOImpl;
 import org.iiitb.model.User;
 import org.iiitb.model.layout.AnnouncementsItem;
 import org.iiitb.model.layout.NewsItem;
@@ -39,6 +40,16 @@ public class SubjectsAction extends ActionSupport implements SessionAware {
   private CourseDAO courseDAO = new CourseDAOImpl();
   private Map<String, Object> session;
   
+  // Must be moved awayto a seperate enrollment page
+  private List<String> semester;
+  public List<String> getSemester() {
+		return semester;
+	}
+	public void setSemester(List<String> semester) {
+		this.semester = semester;
+	}
+	// Must be moved
+	
   private String lastLoggedOn;
 
   {
@@ -47,7 +58,7 @@ public class SubjectsAction extends ActionSupport implements SessionAware {
     subjectDisplayList.add(SHOW_ENROLLED_COURSES);
   }
 
-  public List<String> getSubjectDisplayList() {
+public List<String> getSubjectDisplayList() {
     return subjectDisplayList;
   }
 
@@ -91,6 +102,7 @@ public class SubjectsAction extends ActionSupport implements SessionAware {
     Connection connection = ConnectionPool.getConnection();
     User loggedInUser = (User) this.session.get(USER);
     if (null != loggedInUser) {
+    	semester = new SemesterDAOImpl().getTerms();
       if (null == subjectDisplayChoice
           || subjectDisplayChoice.equals(SHOW_ALL_COURSES)) {
         subjectInfoList = courseDAO.getAllCourses(connection,

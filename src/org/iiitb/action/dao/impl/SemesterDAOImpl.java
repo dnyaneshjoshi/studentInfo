@@ -28,10 +28,15 @@ public class SemesterDAOImpl implements SemesterDAO
 			+ "and course.course_id = result.course_id "
 			+ "and result.student_id=?";
 	
-	private static final String GET_TERMS = "SELECT DISTINCT " +
-			"term " +
-			"FROM " +
-			"semester";
+	private static final String GET_TERMS = "SELECT  " + 
+			"    semester.term " + 
+			"FROM " + 
+			"    course " + 
+			"        JOIN " + 
+			"    semester ON course.semester_id = semester.semester_id " + 
+			"WHERE " + 
+			"    course.lastdate > CURDATE() " + 
+			"GROUP BY semester.term;";
 	
 	private static final String GET_TERMS_FOR_YEAR = "SELECT DISTINCT " +
 			"term " +
@@ -77,7 +82,40 @@ public class SemesterDAOImpl implements SemesterDAO
 		}
 		return termList;
 	}
-	
+
+	public List<String> getTerms()
+	{
+		Connection con = ConnectionPool.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs;
+		try
+		{
+			ps = con.prepareStatement(GET_TERMS);
+			rs = ps.executeQuery();
+			while(rs.next())
+				termList.add(new Integer((rs.getInt(1))).toString());
+
+			con.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if (ps != null)
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
+		}
+		return termList;
+	}
+
 	public List<String> getSemester(Connection connection, int studentId, String year) {
 		// TODO Auto-generated method stub
 	    PreparedStatement ps = null;

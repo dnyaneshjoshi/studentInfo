@@ -22,6 +22,9 @@ import java.sql.SQLException;
 public class ResultDAOImpl implements ResultDAO
 {
 	private List<GradeInfo> resultList = new LinkedList<GradeInfo>();
+	
+	private List<String> gradeList = new LinkedList<String>();
+	
 	private static final String GET_GRADES_QUERY1 = "select course.code, grade.name, "
 			+ "grade.status "
 			+ "from course, result, grade, semester "
@@ -56,6 +59,11 @@ public class ResultDAOImpl implements ResultDAO
 			+ "and "
 			+ "result.student_id = ? "
 			+ "and semester.term = ? ";
+	
+	private static final String GET_GRADES_QUERY4 = "select "
+			+ "distinct name "
+			+ "from grade";
+	
 	private static final String UPDATE_GRADES = "insert into result values(result_id,?,?,?)";
 			
 	public boolean updateGrades(int studentID,int courseID,int gradeID)
@@ -84,7 +92,6 @@ public class ResultDAOImpl implements ResultDAO
 		{
 			ConnectionPool.freeConnection(con);
 		}
-
 		return result;
 		
 	}
@@ -212,5 +219,34 @@ public class ResultDAOImpl implements ResultDAO
 		}
 
 		return resultList;
+	}
+	
+	public List<String> getGrades() {
+		Connection con = ConnectionPool.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs;
+		try {
+			ps = con.prepareStatement(GET_GRADES_QUERY4);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				String gradeName = rs.getString(1);
+				gradeList.add(gradeName);
+			}
+			con.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (ps != null)
+				try {
+					ps.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return gradeList;
 	}
 }

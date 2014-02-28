@@ -236,8 +236,8 @@ public class DataConectivity {
           continue;
 
         }
-        sql = " INSERT INTO result (student_id,course_id,grade_id) VALUES ("
-            + studentid + "," + i + ",6)";
+        sql = " INSERT INTO result (student_id,course_id) VALUES ("
+            + studentid + "," + i + ")";
         //String t = "updated course as " + studentid + i;
         //Indexaction.s.append(t);
         // System.out.println("updated course as " + studentid + i);

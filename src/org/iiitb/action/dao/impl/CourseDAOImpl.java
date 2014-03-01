@@ -244,9 +244,7 @@ public class CourseDAOImpl implements CourseDAO {
 			rs = ps.executeQuery();
 			ps.setInt(1,  studentID);
 			while(rs.next())
-				courseList.add(rs.getString(1));
-
-			con.close();
+				courseList.add(rs.getString(1));			
 		}
 		catch (SQLException e)
 		{
@@ -263,6 +261,7 @@ public class CourseDAOImpl implements CourseDAO {
 				{
 					e.printStackTrace();
 				}
+			ConnectionPool.freeConnection(con);
 		}
 		
 		return courseList;
@@ -282,8 +281,7 @@ public class CourseDAOImpl implements CourseDAO {
 			rs = ps.executeQuery();
 			while(rs.next())
 				courseList.add(rs.getString(1));
-
-			con.close();
+			
 		}
 		catch (SQLException e)
 		{
@@ -300,6 +298,7 @@ public class CourseDAOImpl implements CourseDAO {
 				{
 					e.printStackTrace();
 				}
+			ConnectionPool.freeConnection(con);
 		}
 		
 		return courseList;

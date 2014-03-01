@@ -17,7 +17,7 @@
 			<ul>
 				<li>Click on your photo to view your profile.</li>
 				<li>Type the roll number of the student you wish to search for in the search textbox in the menu.</li>
-				<li>Use the four hyperlinks (Home, Grades, Subjects and My Friends) to navigate to the respective pages.</li>
+				<li>Use the five hyperlinks (Home, Grades, Subjects, Enrollment and My Friends) to navigate to the respective pages.</li>
 				<li>Announcements matching your interests are displayed below on the left. Hover the mouse pointer over the <br />section to stop auto-scrolling.</li>
 				<li>The news are displayed below on the right. Hover the mouse pointer over the section to stop auto-scrolling.</li>
 			</ul>

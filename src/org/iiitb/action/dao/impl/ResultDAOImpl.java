@@ -142,8 +142,7 @@ public class ResultDAOImpl implements ResultDAO
 				String result = rs.getString(3);
 				resultList.add(new GradeInfo(subjectName, subjectCode, grade,
 						result));
-			}
-			con.close();
+			}			
 		}
 		catch (SQLException e)
 		{
@@ -160,6 +159,7 @@ public class ResultDAOImpl implements ResultDAO
 				{
 					e.printStackTrace();
 				}
+			ConnectionPool.freeConnection(con);
 		}
 
 		return resultList;
@@ -183,8 +183,7 @@ public class ResultDAOImpl implements ResultDAO
 				String result = rs.getString(4);
 				resultList.add(new GradeInfo(subjectName, subjectCode, grade,
 						result));
-			}
-			con.close();
+			}			
 		}
 		catch (SQLException e)
 		{
@@ -201,6 +200,7 @@ public class ResultDAOImpl implements ResultDAO
 				{
 					e.printStackTrace();
 				}
+			ConnectionPool.freeConnection(con);
 		}
 
 		
@@ -226,8 +226,7 @@ public class ResultDAOImpl implements ResultDAO
 				String result = rs.getString(4);
 				resultList.add(new GradeInfo(subjectName, subjectCode, grade,
 						result));
-			}
-			con.close();
+			}			
 		}
 		catch (SQLException e)
 		{
@@ -244,6 +243,7 @@ public class ResultDAOImpl implements ResultDAO
 				{
 					e.printStackTrace();
 				}
+			ConnectionPool.freeConnection(con);
 		}
 
 		return resultList;
@@ -260,7 +260,6 @@ public class ResultDAOImpl implements ResultDAO
 				String gradeName = rs.getString(1);
 				gradeList.add(gradeName);
 			}
-			con.close();
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -273,6 +272,7 @@ public class ResultDAOImpl implements ResultDAO
 				catch (SQLException e) {
 					e.printStackTrace();
 				}
+			ConnectionPool.freeConnection(con);
 		}
 
 		return gradeList;

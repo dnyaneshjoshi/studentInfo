@@ -49,8 +49,7 @@ public class UpdateGradesAction extends ActionSupport implements SessionAware
 	{
 		User loggedInUser = (User) this.session.get(USER);
 		if (loggedInUser != null)
-		{	
-			Connection connection = ConnectionPool.getConnection();
+		{				
 			new ResultDAOImpl().updateGrades(studentDisplayChoice, courseDisplayChoice, gradeDisplayChoice);
 			return SUCCESS;
 		}

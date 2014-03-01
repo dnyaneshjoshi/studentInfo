@@ -62,7 +62,6 @@ public class SemesterDAOImpl implements SemesterDAO
 			while(rs.next())
 				termList.add(new Integer((rs.getInt(1))).toString());
 
-			con.close();
 		}
 		catch (SQLException e)
 		{
@@ -79,6 +78,7 @@ public class SemesterDAOImpl implements SemesterDAO
 				{
 					e.printStackTrace();
 				}
+			ConnectionPool.freeConnection(con);
 		}
 		return termList;
 	}
@@ -93,9 +93,7 @@ public class SemesterDAOImpl implements SemesterDAO
 			ps = con.prepareStatement(GET_TERMS);
 			rs = ps.executeQuery();
 			while(rs.next())
-				termList.add(new Integer((rs.getInt(1))).toString());
-
-			con.close();
+				termList.add(new Integer((rs.getInt(1))).toString());			
 		}
 		catch (SQLException e)
 		{
@@ -112,6 +110,7 @@ public class SemesterDAOImpl implements SemesterDAO
 				{
 					e.printStackTrace();
 				}
+			ConnectionPool.freeConnection(con);
 		}
 		return termList;
 	}

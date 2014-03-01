@@ -53,6 +53,9 @@ public void setPhoto(InputStream photo)
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+	finally {
+	  ConnectionPool.freeConnection(con);
+	}
 }
 public String getName() {
 	return name;
@@ -73,6 +76,9 @@ public void setName(String name) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+	finally {
+	  ConnectionPool.freeConnection(con);
+	}
 	
 }
 public String getPassword() {
@@ -92,6 +98,8 @@ public void setPassword(String password) {
 	{
 		// TODO Auto-generated catch block
 		e.printStackTrace();
+	} finally {
+	  ConnectionPool.freeConnection(con);
 	}
 		
 }
@@ -138,6 +146,8 @@ public void setDefaultInterests(List<String> defaultInterests) {
 	{
 		// TODO Auto-generated catch block
 		e.printStackTrace();
+	} finally {
+	  ConnectionPool.freeConnection(con);
 	}
 	
 	

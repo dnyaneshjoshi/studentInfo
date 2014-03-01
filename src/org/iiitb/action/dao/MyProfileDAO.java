@@ -51,6 +51,8 @@ public class MyProfileDAO {
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+		  ConnectionPool.freeConnection(con);
 		}
 		return defaultInterests;
 		
@@ -74,6 +76,8 @@ public class MyProfileDAO {
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+		  ConnectionPool.freeConnection(con);
 		}
 		return password;
 		
@@ -101,6 +105,8 @@ public class MyProfileDAO {
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+		  ConnectionPool.freeConnection(con);
 		}
 		return rollno;
 		
@@ -135,6 +141,8 @@ public class MyProfileDAO {
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+		  ConnectionPool.freeConnection(con);
 		}
 		return interests;
 			

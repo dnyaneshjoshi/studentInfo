@@ -17,6 +17,7 @@
 			<td><tiles:insertAttribute name="home" /></td>
 			<td><tiles:insertAttribute name="grades" /></td>
 			<td><tiles:insertAttribute name="subjects" /></td>
+			<td><tiles:insertAttribute name="enrollment" /></td>
 			<td><tiles:insertAttribute name="myFriends" /></td>
 		</tr>
    </table>

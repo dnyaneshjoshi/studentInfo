@@ -43,8 +43,8 @@
 			<interceptor-ref name="secureAccess"></interceptor-ref>
 			<result name="success" type="tiles">subjectsPage</result>
 			<result name="login">home.jsp</result>
-		</action>
-
+		</action>		
+		
 		<action name="imageAction" class="org.iiitb.action.image.ImageAction">
 		</action>
 
@@ -190,6 +190,12 @@
 			<result name="fail">/</result>
 		</action>
 
+		<action name="enrollmentAction" class="org.iiitb.action.enrollment.EnrollmentAction">
+			<interceptor-ref name="secureAccess"></interceptor-ref>
+			<result name="success" type="tiles">enrollmentHomePage</result>
+			<result name="login">home.jsp</result>
+		</action>
+		
 		<action name="Index1" class="org.iiitb.action.enrollment.Indexaction"
 			method="Update">
 			<result name="success" type="tiles">enrollmentPage</result>

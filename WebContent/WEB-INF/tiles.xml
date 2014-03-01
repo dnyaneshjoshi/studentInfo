@@ -11,6 +11,7 @@
 	      <put-attribute name="home"   value="/layout/home.jsp"/>
 	      <put-attribute name="grades"   value="/layout/grades.jsp"/>
 	      <put-attribute name="subjects"   value="/layout/subjects.jsp"/>
+	      <put-attribute name="enrollment"   value="/layout/enrollment.jsp"/>
 	      <put-attribute name="myFriends"   value="/layout/myFriends.jsp"/>
 	      <put-attribute name="pic"   value="/layout/pic.jsp"/>
 	      <put-attribute name="body"   value=""/>
@@ -56,6 +57,11 @@
 	   <definition name="syllabusPage" extends="baseLayout">
 	      <put-attribute name="subjects"   value="/layout/subjectsBold.jsp"/>
 	      <put-attribute name="body" value="/syllabus/syllabus.jsp"/>
+	   </definition>
+	   
+	   <definition name="enrollmentHomePage" extends="baseLayout">
+	      <put-attribute name="enrollment"   value="/layout/enrollmentBold.jsp"/>
+	      <put-attribute name="body" value="/enrollment/enrollmentHomePage.jsp"/>
 	   </definition>
 	   
 	    <definition name="enrollmentPage" extends="baseLayout">

@@ -63,17 +63,6 @@
 			</form>
 		</div>
 		<div style="width: 20%; float: left;"></div>
-
-
-<b>Register yourself to new courses</b>
-		<form action="Index">
-			<s:select name="semester"
-				list="semester" label="Semester"></s:select>
-
-
-		 <input type="submit" value="Register" />
-
-		</form>
 	</div>
 </body>
 

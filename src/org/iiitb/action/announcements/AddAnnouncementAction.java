@@ -23,7 +23,7 @@ public class AddAnnouncementAction extends ActionSupport
 		InterestDAO interestDAO=new InterestDAOImpl();
 		int k=0;
 		for(Interest i:interestDAO.getAllInterests(cn))
-			li.add(++k+". "+i.getName());
+			li.add(i.getId()+". "+i.getName());
 		ConnectionPool.freeConnection(cn);
 		return "success";
 	}

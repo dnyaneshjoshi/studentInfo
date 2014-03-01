@@ -7,6 +7,38 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Course</title>
 <a href="adminhome.jsp">Back</a>
+</head>
+<body>
+	<h1>Add Course</h1>
+	<div style="text-align: left">
+		<form action="addSubjectsAction" method="post"
+			onsubmit="return validateForm(this)">
+			<table width="50%">
+				<tr>
+					<td><s:textfield key="code" label="Course Code "></s:textfield>
+					</td>
+					<td><s:textfield key="name" label="Course Name "></s:textfield>
+					</td>
+				</tr>
+				<tr>
+					<td><s:textfield name="semester" label="Semester"></s:textfield></td>
+					<td><s:textfield key="credit" label="Credits "></s:textfield>
+					</td>
+				</tr>
+				<tr>
+					<td><s:select name="faculty" list="facultyList"
+							label="Faculty " cssStyle="width:230px;"></s:select></td>
+					<td><s:textfield id="datepicker" key="lastDate"
+							label="Last Date for Enrollment (dd/mm/yyyy)"></s:textfield></td>
+				</tr>
+				<tr>
+					<td><s:submit align="left" value="Submit" /></td>
+				</tr>
+			</table>
+
+		</form>
+	</div>
+</body>
 <script type="text/javascript">
 	function validateForm(form) {
 		var doc = form.elements;
@@ -41,7 +73,7 @@
 <script type="text/javascript">
 
 	$(function() {
-		StartDate = new Date();
+		StartDate = new Date("January 1, 1900");
 		EndDate = new Date("March 21, 2014");
 		$("#datepicker").datepicker({
 			minDate : StartDate,	
@@ -50,37 +82,4 @@
 
 	});
 </script>
-</head>
-<body>
-	<h1>Add Course</h1>
-	<div style="text-align: left">
-		<form action="addSubjectsAction" method="post"
-			onsubmit="return validateForm(this)">
-			<table width="50%">
-				<tr>
-					<td><s:textfield key="code" label="Course Code "></s:textfield>
-					</td>
-					<td><s:textfield key="name" label="Course Name "></s:textfield>
-					</td>
-				</tr>
-				<tr>
-					<td><s:select name="semester" list="semesterList"
-							label="Semester " cssStyle="width:230px;"></s:select></td>
-					<td><s:textfield key="credit" label="Credits "></s:textfield>
-					</td>
-				</tr>
-				<tr>
-					<td><s:select name="faculty" list="facultyList"
-							label="Faculty " cssStyle="width:230px;"></s:select></td>
-					<td><s:textfield id="datepicker" key="lastDate"
-							label="Last Date for Enrollnment"></s:textfield></td>
-				</tr>
-				<tr>
-					<td><s:submit align="left" value="Submit" /></td>
-				</tr>
-			</table>
-
-		</form>
-	</div>
-</body>
 </html>

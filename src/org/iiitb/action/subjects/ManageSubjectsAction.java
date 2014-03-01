@@ -28,8 +28,7 @@ public class ManageSubjectsAction extends ActionSupport implements SessionAware 
 	private String credit;
 	private String faculty;
 	private String lastDate;
-	
-	private List<String> semesterList;
+		
 	private List<String> facultyList;
 	
 	@Override
@@ -49,15 +48,12 @@ public class ManageSubjectsAction extends ActionSupport implements SessionAware 
 	}
 	
 	public String initSubjects() {
-		
-		SemesterDAO semesterDAO = new SemesterDAOImpl();
+				
 		SyllabusDAO syllabusDAO = new SyllabusDAOImpl();
-		
-		semesterList = new ArrayList<String>();
+				
 		facultyList = new ArrayList<String>();
 
-		Connection connection = ConnectionPool.getConnection();
-		semesterList = semesterDAO.getSemester(connection, 1, null);
+		Connection connection = ConnectionPool.getConnection();		
 		facultyList = syllabusDAO.getFaculty(connection);
 		ConnectionPool.freeConnection(connection);
 		
@@ -103,14 +99,6 @@ public class ManageSubjectsAction extends ActionSupport implements SessionAware 
 
 	public void setLastDate(String lastDate) {
 		this.lastDate = lastDate;
-	}
-	
-	public List<String> getSemesterList() {
-		return semesterList;
-	}
-
-	public void setSemesterList(List<String> semesterList) {
-		this.semesterList = semesterList;
 	}
 
 	public List<String> getFacultyList() {

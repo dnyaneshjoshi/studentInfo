@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -337,10 +338,10 @@ public class CourseDAOImpl implements CourseDAO {
 	    	ps.setInt(index, Integer.parseInt(credits));
 	    	
 	    	index = 4;
-	    	if (lastDate == null) lastDate = "31-12-2014";
-	    	SimpleDateFormat format = new SimpleDateFormat("dd/mm/yyyy");
+	    	if (lastDate == null) lastDate = "31/12/2014";
+	    	DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 	    	try {
-				lastDateForEnrollnment = new Date( format.parse(lastDate).getTime() );
+				lastDateForEnrollnment = new Date( formatter.parse(lastDate).getTime() );
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -42,6 +42,7 @@ if((x.options[x.selectedIndex].text)!='S')
 
 		<s:textfield id="roll_no" key="roll_no" label="Roll No" />
 		<s:textfield id="hostel_addr" key="hostel_addr" label="Hostel Addr" />
+		<s:textfield id="dob" key="dob" label="Date of Birth (dd/mm/yyyy)" />
 		<s:file name="fileUpload" label="Select a File to change photo" />
 		<s:submit label="Add" />
 	</s:form>

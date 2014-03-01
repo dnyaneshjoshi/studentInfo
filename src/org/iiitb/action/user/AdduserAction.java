@@ -9,6 +9,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 
 import javax.naming.NamingException;
@@ -30,17 +33,26 @@ public class AdduserAction extends ActionSupport implements SessionAware,
 {
 
   private String username;
-  private String name;  
+  private String name;
   private String emailId;
   private String password;
   private String roll_no;
   private String hostel_addr;
   private String student_id;
+  private String dob;
   long user_id = -1;
   String fileUploadContentType;
   private String fileUploadFileName;
   File fileUpload;
   private HttpServletRequest servletRequest;
+
+  public String getDob() {
+    return dob;
+  }
+
+  public void setDob(String dob) {
+    this.dob = dob;
+  }
 
   public String getFileUploadContentType() {
     return fileUploadContentType;
@@ -157,8 +169,8 @@ public class AdduserAction extends ActionSupport implements SessionAware,
       } else {
         ret = ERROR;
       }
-      
-      query = "insert into student(student_id,roll_no,hostel_addr, photo) values(?,?,?,?)";
+
+      query = "insert into student(student_id,roll_no,hostel_addr, photo, dob) values(?,?,?,?,?)";
 
       preStmt = conn.prepareStatement(query);
       preStmt.setLong(1, user_id);
@@ -179,6 +191,19 @@ public class AdduserAction extends ActionSupport implements SessionAware,
       }
       FileInputStream inputStream = new FileInputStream(destFile);
       preStmt.setBlob(4, inputStream);
+
+      if (null == dob) {
+        dob = "11/09/1989";
+      }
+      Date dobDate = null;
+      DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+      try {
+        dobDate = new Date(formatter.parse(dob).getTime());
+      } catch (ParseException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      preStmt.setDate(5, dobDate);
 
       if (preStmt.executeUpdate() > 0)
         ret = SUCCESS;

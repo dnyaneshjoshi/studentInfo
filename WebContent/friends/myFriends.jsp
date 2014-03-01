@@ -32,7 +32,7 @@
 
 			</s:url>
 			
-			<li><a href='<s:property value="#myurl"/>'><img
+			<li><a href='<s:property value="#myurl"/>'><img width="120px"
 					src="imageAction?rollNo=<s:property value="#student.rollNo"/>"
 					title='<s:property
 						value="#student.name" />' /></a></li>

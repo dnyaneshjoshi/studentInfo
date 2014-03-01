@@ -15,7 +15,7 @@
 
 
 		<tr>
-			<td rowspan="3"><img
+			<td rowspan="3"><img width="120px"
 				src="imageAction?userId=<s:property value="%{friendProfile.studentId}" />" />
 
 			</td>
